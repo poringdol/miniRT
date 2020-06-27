@@ -1,15 +1,15 @@
-#include <errno.h>
-#include "libft.h"
-#include "minirt.h"
-#include "minirt_struct.h"
+#include "parsing.h"
 
 void	read_rt(int fd)
 {
 	char	*line;
 	char	*tmp;
+	int		l;
 
+	l = 0;
 	while (get_next_line(fd, &line) == 1 && errno == 0)
 	{
+		l++;
 		tmp = line;
 		while (ft_isspace(*line))
 			line++;
@@ -18,17 +18,14 @@ void	read_rt(int fd)
 		else if ((*line == 'R') || (*line == 'A') || (*line == 'c') ||
 		(*line == 'l') || (*line == 'p') || (*line == 's') ||
 		(*line == 's') || (*line == 'c') || (*line == 't'))
-			parsing_rt(line);
+			parsing_rt(line, tmp, l);
 		else
-		{
-			free(tmp);
-			exit(ft_putstr_fd("Invalid .rt file", 2));
-		}
+			exit(freemem_line(tmp) + freemem_struct(INVAL_P, l));
 		free(tmp);
 	}
 }
 
-void	parsing_rt(char *line)
+void	parsing_rt(char *line, char *freeline, int l)
 {
 	float	buf[BUF_S];
 	char	*tmp;
@@ -39,40 +36,40 @@ void	parsing_rt(char *line)
 	tmp = line;
 	while (ft_isalpha(*line))
 		line++;
-	while (*line)
+	while (*line && i < BUF_S)
 	{
 		if (ft_isspace(*line) || *line == ',')
 			line++;
 		else if ((ft_isdigit(*line)) || *line == '+' || *line == '-')
 			buf[i++] = get_fnumber(&line);
 		else
-			exit(ft_putstr_fd("Invalid .rt file", 2));
+			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	}
-	fill_scene(buf, tmp);
+	fill_scene(buf, tmp, freeline, l);
 }
 
-void	fill_scene(float buf[BUF_S], char *line)
+void	fill_scene(float buf[BUF_S], char *line, char *freeline, int l)
 {
 	if (*line == 'R' && *(line + 1) == ' ')
-		fill_r(buf);
+		fill_r(buf, freeline, l);
 	else if (*line == 'A' && *(line + 1) == ' ')
-		fill_a(buf);
+		fill_a(buf, freeline, l);
 	else if (*line == 'c' && *(line + 1) == ' ')
-		fill_c(buf);
+		fill_c(buf, freeline, l);
 	else if (*line == 'l' && *(line + 1) == ' ')
-		fill_l(buf);
+		fill_l(buf, freeline, l);
 	else if (*line == 'p' && *(line + 1) == 'l' && *(line + 2) == ' ')
-		fill_pl(buf);
+		fill_pl(buf, freeline, l);
 	else if (*line == 's' && *(line + 1) == 'p' && *(line + 2) == ' ')
-		fill_sp(buf);
+		fill_sp(buf, freeline, l);
 	else if (*line == 's' && *(line + 1) == 'q' && *(line + 2) == ' ')
-		fill_sq(buf);
+		fill_sq(buf, freeline, l);
 	else if (*line == 'c' && *(line + 1) == 'y' && *(line + 2) == ' ')
-		fill_cy(buf);
+		fill_cy(buf, freeline, l);
 	else if (*line == 't' && *(line + 1) == 'r' && *(line + 2) == ' ')
-		fill_tr(buf);
+		fill_tr(buf, freeline, l);
 	else
-		exit(ft_putstr_fd("Invalid .rt file", 2));
+		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
 
 float	get_fnumber(char **arr)

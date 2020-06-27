@@ -1,51 +1,74 @@
-R   1920  1080
+
+A 0.2 	255,255,255
+
+# c -50,0,20 	0,0,1	70
+c -5,-5,80 	0,0,1	70
+
+l -40,0,30 	0.7 	255,255,255
+
+
+R 800 600
+
+# sp 0.0,0.0,20   20 	10,0,255
+sp 0.0,0.0,10   20 	10,0,255
+
+pl 0.0,0.0,0.0	0.0,1.0,0.0 	255,0,225
+
+sq 0,100,40	 0,0,1	 12.6 	255,0,255
+
+cy 50.0,0.0,20.6 	0.0,0.0,1.0 	14.2 	21.42 	10,0,255
+
+tr 10.0,20.0,10.0	 10.0,10.0,20.0		20.0,10.0,10.0		0,0,255
+
+#R   500  400
 ## Resolution ##
 # identifier: R
 # x render size
 # y render size
 
-A   0.2                                         255, 255, 255
+#A   0.2                                         255, 255, 255
 ## Ambient lightning ##
 # identifier: A
 # ambient lighting ratio in range [0.0,1.0]: 0.2
 # R,G,B colors in range [0-255]:255, 255, 255
 
-c   -50, 0, 20            0, 0, 1       70
+#c   -50, 0, 5           0.2,0,0      70
 ## Camera ##
 # identifier: c
 # x,y,z coordinates of the view point: 0.0,0.0,20.6
 # 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
 # FOV : Horizontal field of view in degrees in range [0,180]
 
-l   -40,0,30                        0.7         255, 255, 255
+#l   -40,0,30                        0.7         255, 255, 255
 ## Light ##
 # identifier: l
 # x,y,z coordinates of the light point: 0.0,0.0,20.6
 # the light brightness ratio in range [0.0,1.0]: 0.6
 # R,G,B colors in range [0-255]: 10, 0, 255
 
-pl  0, 0, 0               0, 1.0, 0                 255, 0, 225
+#pl  100, 10, 10               0, 1.0, 0                 255, 0, 170
+
 ## Plane ##
 # identifier: pl·x,y,z
 # coordinates: 0.0,0.0,-10.0·3d
 # normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
 # R,G,B colors in range [0-255]: 0, 0, 255
 
-sp  0, 0, 20                          20          255, 0, 0
+#sp  0, 0, 1                          5          255, 0, 0
 ## Sphere ##
 # identifier:sp
 # x,y,z coordinates of the sphere center: 0.0,0.0,20.6
 # the sphere diameter: 12.6
 # R,G,B colors in range [0-255]: 10, 0, 255
 
-sq  0, 100, 40            0, 0, 1.0     30          42, 42, 0
+#sq  0, 100, 40            0, 0, 1.0     30          42, 42, 0
 ## Square ##
 # identifier: sq·x,y,z coordinates of the square center: 0.0,0.0,20.6
 # 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 1.0,0.0,0.0
 # side size:12.6
 # R,G,B colors in range [0-255]: 255, 0, 255
 
-cy  50.0, 0.0, 20.6       0, 0, 1.0     14.2 21.42  10, 0, 255
+#cy  50.0, 0.0, 20.6       0, 0, 1.0     14.2 21.42  10, 0, 255
 ## Cylindercy ##
 # identifier: cy
 # x,y,z coordinates: 50.0,0.0,20.6
@@ -54,7 +77,8 @@ cy  50.0, 0.0, 20.6       0, 0, 1.0     14.2 21.42  10, 0, 255
 # the cylinder height: 21.42
 # R,G,B colors in range [0,255]: 10, 0, 255
 
-tr  10, 20, 10            10, 10, 20    20, 10, 10    0, 0, 255
+# tr  10, 20, 10            20, 120, 20    150, 80, 10    255, 255, 255
+
 ## Triangle ##
 # identifier: tr
 # x,y,z coordinates of the first point:10.0,20.0,10.0

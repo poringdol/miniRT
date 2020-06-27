@@ -10,9 +10,21 @@ typedef struct		s_xyz
 
 typedef struct		s_res
 {
-	short			x;
-	short			y;
+	int				x;
+	int				y;
 }					t_res;
+
+typedef struct		s_canv
+{
+	float			x;
+	float			y;
+	t_xyz			o;
+	float			sin_a;
+	float			cos_a;
+	float			sin_b;
+	float			cos_b;
+
+}					t_canv;
 
 typedef struct		s_amb
 {
@@ -83,8 +95,9 @@ typedef struct		s_tri
 
 typedef struct		s_scene
 {
-	t_res			*res;
-	t_amb			*amb;
+	t_res			res;
+	t_amb			amb;
+	t_canv			canvas;
 	t_cam			*cam;
 	t_lht			*lht;
 	t_pln			*pln;
@@ -93,5 +106,16 @@ typedef struct		s_scene
 	t_cyl			*cyl;
 	t_tri			*tri;
 }					t_scene;
+
+typedef struct		s_mlx
+{
+	void			*mlx;
+	void			*win;
+	void			*img;
+	int				*data;
+	int				bpp;
+	int				size_l;
+	int				endian;
+}					t_mlx;
 
 #endif

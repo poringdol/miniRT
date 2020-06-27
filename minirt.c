@@ -1,30 +1,32 @@
-#include <stdio.h>
-#include "mlx.h"
 #include "minirt.h"
 
-int main(int argc, char **argv)
+int		close_exit(t_mlx *g_mlx)
 {
-    int fd;
-    // void *mlx_ptr;
-    // void *win_ptr;
-
-    check_input(argc, argv[1], &fd);
-    read_rt(fd);
-    printf ("x = %i, y = %i\n", g_scene.res->x, g_scene.res->y);
+	mlx_destroy_image(g_mlx->mlx, g_mlx->img);
+	mlx_destroy_window(g_mlx->mlx, g_mlx->win);
+	errno = 0;
+	if (sizeof(g_mlx)) ////////////////////////
+		freemem_struct(NULL, 0);
+	exit(0);
 }
-//     int color = 150;
-//     t_res res;
-//     res.x = 100;
-//     res.y = 50;
 
-//     mlx_ptr = mlx_init();
-//     if (!(win_ptr = mlx_new_window(mlx_ptr, 100, 100, "image")))
-//         return (0);
-
-//     int i = 0, j = 0;
-//     while (j++ < res.y && i++ < res.x)
-//         mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-    // mlx_loop(mlx_ptr);
-    // mlx_destroy_window(mlx_ptr, win_ptr);
-    // mlx_string_put(mlx_ptr, win_ptr, 20, 20, 9109504, "11111111");
+// int		key_released(int keycode, t_mlx *g_mlx)
+// {
+// 	if (keycode == 53)
+// 		return (close_exit(g_mlx));
+// 	return (0);
 // }
+	
+int		main(int argc, char **argv)
+{
+	int fd;
+
+	check_input(argc, argv[1], &fd);
+	read_rt(fd);
+	init();
+	render();
+	// print_triangle(g_scene);
+	// mlx_hook(g_mlx.win, 3, 1L << 1, key_released, &g_mlx);
+	mlx_hook(g_mlx.win, 17, 1 << 17, close_exit, &g_mlx);
+	mlx_loop(g_mlx.mlx);
+}

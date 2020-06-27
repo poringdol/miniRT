@@ -1,39 +1,25 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
-# include <stdio.h>
+# include <math.h>
+# include "mlx.h"
 # include "libft.h"
-# include "minirt_struct.h"
+# include "parsing.h"
+# include "structs.h"
+# include "error.h"
+# include "globals.h"
 
-# define INVARGS "Invalid number of arguments"
-# define DOUBLE_R "Exit with error: Double initialization of Resolution"
-# define DOUBLE_A "Exit with error: Double initialization of Ambient light"
-# define INVAL_P "Exit with error: Invalid params for scene"
-
-# define RESOLUTION_X 1920
-# define RESOLUTION_Y 1024
-
-# define BUF_S 30
-
-t_scene	g_scene;
-
-void	check_input(int argc, char *argv, int *fd);
-
-void	read_rt(int fd);
-void	parsing_rt(char *line);
-void	fill_scene(float buf[BUF_S], char *tmp);
-float	get_fnumber(char **arr);
-void	fill_r(float buf[BUF_S]);
-void	fill_a(float buf[BUF_S]);
-void	fill_c(float buf[BUF_S]);
-void	fill_l(float buf[BUF_S]);
-void	fill_pl(float buf[BUF_S]);
-void	fill_sp(float buf[BUF_S]);
-void	fill_sq(float buf[BUF_S]);
-void	fill_cy(float buf[BUF_S]);
-void	fill_tr(float buf[BUF_S]);
+void	init(void);
+void	print_triangle(t_scene g_scene);
+void	print_line(int x1, int y1, int x2, int y2, int color);
+void	print_circle(t_scene g_scene);
+void	render(void);
+void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
+t_xyz	vect_end(t_canv canv, t_res res, int i, int j);
+t_xyz	normalize(float x, float y, float z);
 
 #endif

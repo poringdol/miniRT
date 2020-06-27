@@ -1,12 +1,13 @@
 SHELL = /bin/sh
 
 B&W = \033[0;0m
-RED =  \033[0;31m
+RED  = \033[0;31m
 GREEN = \033[0;32m
 PURPLE = \033[0;35m
-
+	
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -ggdb -lXext -lX11
+FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
+#-O3 -fsanitize=address
 AR = ar rs
 RM = rm -rf
 
@@ -24,8 +25,13 @@ MINILIBXDIR = ./minilibx/
 SRC = check_input.c\
 	  parsing.c\
 	  fill_r_a_c_l.c\
-	  fill_pl_sp_sq_cy_tr.c
-SRCDIR = ./
+	  fill_pl_sp_sq_cy_tr.c\
+	  freemem.c\
+	  init.c\
+	  line.c\
+	  render.c\
+	  cordinates.c
+SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)
 OBJDIR = ./objects/
@@ -43,9 +49,6 @@ $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 -include $(DEP)
 
 bonus: $(NAME)
-
-#link:
-#	sudo ln -s ~/minirt/minilibx/mlx.h ~/../../usr/local/include/
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@test -d $(OBJDIR) || mkdir $(OBJDIR)
@@ -69,7 +72,7 @@ clean:
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
 	@$(MAKE) clean -C $(MINILIBXDIR)
-	@$(RM) $(OBJDIR) $(NAME) ./tests
+	@$(RM) $(OBJDIR) $(NAME) test
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all
