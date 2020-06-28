@@ -17,6 +17,12 @@ t_xyz	vect_end(t_canv canv, t_res res, int i, int j)
 	return (xyz);
 }
 
+float	vect_len(t_xyz start, t_xyz end)
+{
+	return (sqrt(pow(end.x - start.x, 2) +
+				 pow(end.y - start.y, 2) +
+				 pow(end.z - start.z, 2)));
+}
 
 t_xyz	normalize(float x, float y, float z)
 {
@@ -24,6 +30,9 @@ t_xyz	normalize(float x, float y, float z)
 	t_xyz		ray;
 
 	length = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	// ray.x = round(x / length * pow(10, 4)) / pow(10, 4);
+	// ray.y = round(y / length * pow(10, 4)) / pow(10, 4);
+	// ray.z = round(z / length * pow(10, 4)) / pow(10, 4);
 	ray.x = x / length;
 	ray.y = y / length;
 	ray.z = z / length;

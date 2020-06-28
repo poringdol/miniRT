@@ -30,7 +30,9 @@ SRC = check_input.c\
 	  init.c\
 	  line.c\
 	  render.c\
-	  cordinates.c
+	  vector.c\
+	  intersect.c\
+	  pixel.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

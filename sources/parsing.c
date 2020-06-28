@@ -42,6 +42,8 @@ void	parsing_rt(char *line, char *freeline, int l)
 			line++;
 		else if ((ft_isdigit(*line)) || *line == '+' || *line == '-')
 			buf[i++] = get_fnumber(&line);
+		else if (*line == '#')
+			break;
 		else
 			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	}

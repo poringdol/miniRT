@@ -118,4 +118,11 @@ typedef struct		s_mlx
 	int				endian;
 }					t_mlx;
 
+typedef struct		s_near
+{
+	t_xyz			xyz;
+	int				rgb;
+	int				flag;
+}					t_near;
+
 #endif
