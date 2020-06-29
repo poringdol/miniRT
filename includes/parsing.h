@@ -15,17 +15,17 @@
 
 void	read_rt(int fd);
 void	parsing_rt(char *line, char *freeline, int l);
-void	fill_scene(float buf[BUF_S], char *tmp, char *freeline, int l);
-float	get_fnumber(char **arr);
-void	fill_r(float buf[BUF_S], char *freeline, int l);
-void	fill_a(float buf[BUF_S], char *freeline, int l);
-void	fill_c(float buf[BUF_S], char *freeline, int l);
-void	fill_l(float buf[BUF_S], char *freeline, int l);
-void	fill_pl(float buf[BUF_S], char *freeline, int l);
-void	fill_sp(float buf[BUF_S], char *freeline, int l);
-void	fill_sq(float buf[BUF_S], char *freeline, int l);
-void	fill_cy(float buf[BUF_S], char *freeline, int l);
-void	fill_tr(float buf[BUF_S], char *freeline, int l);
+void	fill_scene(double buf[BUF_S], char *tmp, char *freeline, int l);
+double	get_fnumber(char **arr);
+void	fill_r(double buf[BUF_S], char *freeline, int l);
+void	fill_a(double buf[BUF_S], char *freeline, int l);
+void	fill_c(double buf[BUF_S], char *freeline, int l);
+void	fill_l(double buf[BUF_S], char *freeline, int l);
+void	fill_pl(double buf[BUF_S], char *freeline, int l);
+void	fill_sp(double buf[BUF_S], char *freeline, int l);
+void	fill_sq(double buf[BUF_S], char *freeline, int l);
+void	fill_cy(double buf[BUF_S], char *freeline, int l);
+void	fill_tr(double buf[BUF_S], char *freeline, int l);
 
 int     freemem_struct(char *error, int i);
 int		freemem_line(char *s);

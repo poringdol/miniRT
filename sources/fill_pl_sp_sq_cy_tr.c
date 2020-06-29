@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-void	fill_pl(float buf[BUF_S], char *freeline, int l)
+void	fill_pl(double buf[BUF_S], char *freeline, int l)
 {
 	t_pln	*new;
 
@@ -26,7 +26,7 @@ void	fill_pl(float buf[BUF_S], char *freeline, int l)
 	g_scene.pln->rgb = (int)buf[6] << 16 | (int)buf[7] << 8 | (int)buf[8];
 }
 
-void	fill_sp(float buf[BUF_S], char *freeline, int l)
+void	fill_sp(double buf[BUF_S], char *freeline, int l)
 {
 	t_sph	*new;
 
@@ -49,7 +49,7 @@ void	fill_sp(float buf[BUF_S], char *freeline, int l)
 	g_scene.sph->rgb = (int)buf[4] << 16 | (int)buf[5] << 8 | (int)buf[6];
 }
 
-void	fill_sq(float buf[BUF_S], char *freeline, int l)
+void	fill_sq(double buf[BUF_S], char *freeline, int l)
 {
 	t_sqr	*new;
 
@@ -76,7 +76,7 @@ void	fill_sq(float buf[BUF_S], char *freeline, int l)
 	g_scene.sqr->rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }
 
-void	fill_cy(float buf[BUF_S], char *freeline, int l)
+void	fill_cy(double buf[BUF_S], char *freeline, int l)
 {
 	t_cyl	*new;
 
@@ -104,7 +104,7 @@ void	fill_cy(float buf[BUF_S], char *freeline, int l)
 	g_scene.cyl->rgb = (int)buf[8] << 16 | (int)buf[9] << 8 | (int)buf[10];
 }
 
-void	fill_tr(float buf[BUF_S], char *freeline, int l)
+void	fill_tr(double buf[BUF_S], char *freeline, int l)
 {
 	t_tri	*new;
 

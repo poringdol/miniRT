@@ -1,7 +1,7 @@
 #include <math.h>
 #include "parsing.h"
 
-void	fill_r(float buf[BUF_S], char *freeline, int l)
+void	fill_r(double buf[BUF_S], char *freeline, int l)
 {
 	if (g_scene.res.x || g_scene.res.y)
 		exit(freemem_line(freeline) + freemem_struct(DOUBLE_R, l));
@@ -13,7 +13,7 @@ void	fill_r(float buf[BUF_S], char *freeline, int l)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 }
 
-void	fill_a(float buf[BUF_S], char *freeline, int l)
+void	fill_a(double buf[BUF_S], char *freeline, int l)
 {
 	if (g_scene.amb.lht_rat || g_scene.amb.rgb)
 		exit(freemem_line(freeline) + freemem_struct(DOUBLE_A, l));
@@ -26,7 +26,7 @@ void	fill_a(float buf[BUF_S], char *freeline, int l)
 	g_scene.amb.rgb = (int)buf[1] << 16 | (int)buf[2] << 8 | (int)buf[3];
 }
 
-void	fill_c(float buf[BUF_S], char *freeline, int l)
+void	fill_c(double buf[BUF_S], char *freeline, int l)
 {
 	t_cam	*new;
 
@@ -54,7 +54,7 @@ void	fill_c(float buf[BUF_S], char *freeline, int l)
 	g_scene.cam->fov = buf[6];
 }
 
-void	fill_l(float buf[BUF_S], char *freeline, int l)
+void	fill_l(double buf[BUF_S], char *freeline, int l)
 {
 	t_lht	*new;
 

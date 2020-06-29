@@ -27,12 +27,12 @@ void	render(void)
 
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 {
-	float	orient_len;
+	double	orient_len;
 
 	orient_len = sqrt(pow(cam->orient.x, 2) +
 	pow(cam->orient.y, 2) + pow(cam->orient.z, 2));
 	canvas->x = 2 * CANV_DIST * tan(cam->fov / 2);
-	canvas->y = (float)res.y / (float)res.x * canvas->x;
+	canvas->y = (double)res.y / (double)res.x * canvas->x;
 	canvas->sin_b = cam->orient.z / orient_len;
 	canvas->cos_b = sqrt(1 - pow(canvas->sin_b, 2));
 	canvas->cos_a = cam->orient.x / orient_len;

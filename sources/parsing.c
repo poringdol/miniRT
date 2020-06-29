@@ -27,12 +27,12 @@ void	read_rt(int fd)
 
 void	parsing_rt(char *line, char *freeline, int l)
 {
-	float	buf[BUF_S];
+	double	buf[BUF_S];
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	ft_bzero(buf, BUF_S * sizeof(float));
+	ft_bzero(buf, BUF_S * sizeof(double));
 	tmp = line;
 	while (ft_isalpha(*line))
 		line++;
@@ -50,7 +50,7 @@ void	parsing_rt(char *line, char *freeline, int l)
 	fill_scene(buf, tmp, freeline, l);
 }
 
-void	fill_scene(float buf[BUF_S], char *line, char *freeline, int l)
+void	fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 {
 	if (*line == 'R' && *(line + 1) == ' ')
 		fill_r(buf, freeline, l);
@@ -74,7 +74,7 @@ void	fill_scene(float buf[BUF_S], char *line, char *freeline, int l)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
 
-float	get_fnumber(char **arr)
+double	get_fnumber(char **arr)
 {
 	int		k;
 	char	*tmp;

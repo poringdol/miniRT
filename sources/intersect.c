@@ -1,73 +1,136 @@
 #include "minirt.h"
 
-float	discriminant(float diameter, t_xyz ray, t_xyz cam_sph)
+t_subst	substitution1(t_xyz sph, t_xyz cam, t_xyz ray, double radius)
 {
-	float	a;
-	float	b;
-	float	c;
+	t_subst	res;
 
-	a = pow(ray.x, 2) + pow(ray.y, 2) + pow(ray.z, 2);
-	b = 2 * (ray.x * cam_sph.x + ray.y * cam_sph.y + ray.z * cam_sph.z);
-	c = pow(cam_sph.x, 2) + pow(cam_sph.y, 2) +
-	pow(cam_sph.z, 2) - pow(diameter / 2, 2);
-	return (pow(b, 2) - 4 * a * c);
+	res.ay = ray.y / ray.x;
+	res.by = (-cam.x) * res.ay + cam.y - sph.y;
+	res.az = ray.z / ray.x;
+	res.bz = (-cam.x) * res.az + cam.z - sph.z;
+	res.a = 1 + pow(res.ay, 2) + pow(res.az, 2);
+	res.b = 2 * (res.ay * res.by + res.az * res.bz - sph.x);
+	res.c = pow(sph.x, 2) + pow(res.by, 2) + pow(res.bz, 2) - pow(radius, 2);
+	res.discr = pow(res.b, 2) - 4 * res.a * res.c;
+	return (res);
 }
 
-float	root1(t_xyz ray, t_xyz cam_sph, float discr)
+t_subst	substitution2(t_xyz sph, t_xyz cam, t_xyz ray, double radius)
 {
-	float	a;
-	float	b;
+	t_subst	res;
 
-	a = pow(ray.x, 2) + pow(ray.y, 2) + pow(ray.z, 2);
-	b = 2 * (ray.x * cam_sph.x + ray.y * cam_sph.y + ray.z * cam_sph.z);
-	return ((-b + discr) / (2 * a));
+	res.ay = 0;
+	res.by = 0;
+	res.az = ray.z / ray.y;
+	res.bz = (-cam.y) * res.az + cam.z - sph.z;
+	res.a = 1 + pow(res.az, 2);
+	res.b = -2 * (sph.y - res.az * res.bz);
+	res.c = pow(sph.y, 2) + pow(res.bz, 2) + pow(cam.x - sph.x, 2) -
+		pow(radius, 2);
+	res.discr = pow(res.b, 2) - (4 * res.a * res.c);
+	return (res);
 }
 
-float	root2(t_xyz ray, t_xyz cam_sph, float discr)
+t_near	solution0(t_subst var, t_sph sph, t_xyz cam)
 {
-	float	a;
-	float	b;
+	t_near	res;
 
-	a = pow(ray.x, 2) + pow(ray.y, 2) + pow(ray.z, 2);
-	b = 2 * (ray.x * cam_sph.x + ray.y * cam_sph.y + ray.z * cam_sph.z);
-	return ((-b - discr) / (2 * a));
+	res.xyz.x = (pow(sph.diameter / 2, 2) - pow(var.bz, 2) - pow(var.by, 2) -
+	sph.xyz.x) / (2 * (var.ay * var.by + var.az * var.bz - sph.xyz.x));
+	res.xyz.y = (res.xyz.x - cam.x) * var.ay + cam.y;
+	res.xyz.z = (res.xyz.x - cam.x) * var.az + cam.z;
+	res.flag = 1;
+	res.rgb = sph.rgb;
+	return (res);
 }
 
-t_xyz	find_min(float t1, float t2, t_xyz cam, t_xyz ray)
+t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 {
-	t_xyz		dot1;
-	t_xyz		dot2;
+	t_near	res;
+	t_near	res1;
+	t_near	res2;
 
-	dot1.x = cam.x + t1 * ray.x;
-	dot1.x = cam.y + t1 * ray.y;
-	dot1.x = cam.z + t1 * ray.z;
-	dot2.x = cam.x + t2 * ray.x;
-	dot2.x = cam.y + t2 * ray.y;
-	dot2.x = cam.z + t2 * ray.z;
-	// if ((t1 < 1) ^ (t2 < 1))
-	// 	return (t1 < 1 ? dot2 : dot1);
-	return (vect_len(cam, dot1) < vect_len(cam, dot2) ? dot1 : dot2);
+	ft_bzero(&res, sizeof(t_near));
+	res1.xyz.x = (-var.b + sqrt(var.discr)) / (2 * var.a);
+	res1.xyz.y = (res1.xyz.x - cam.x) * var.ay + cam.y;
+	res1.xyz.z = (res1.xyz.x - cam.x) * var.az + cam.z;
+	res2.xyz.x = (-var.b - sqrt(var.discr)) / (2 * var.a);
+	res2.xyz.y = (res2.xyz.x - cam.x) * var.ay + cam.y;
+	res2.xyz.z = (res2.xyz.x - cam.x) * var.az + cam.z;
+	res.xyz = (vect_len(cam, res1.xyz) < vect_len(cam, res2.xyz) ?
+		res1.xyz : res2.xyz);
+	res.flag = 1;
+	res.rgb = sph.rgb;
+	return (res);
 }
 
-t_near	intersect_sph(t_sph sph, t_xyz cam, t_xyz ray)
+t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 {
-	t_near		intersect;
-	t_xyz		cam_sph;
-	float		discr;
-	float		t1;
-	float		t2;
+	t_near	res;
+	t_near	res1;
+	t_near	res2;
 
-	cam_sph.x = sph.xyz.x - cam.x;
-	cam_sph.y = sph.xyz.y - cam.y;
-	cam_sph.z = sph.xyz.z - cam.z;
-	ft_bzero(&intersect, sizeof(t_near));
-	discr = discriminant(sph.diameter, ray, cam_sph);
+	ft_bzero(&res, sizeof(t_near));
+	res1.xyz.x = cam.x;
+	res1.xyz.y = (-var.b + sqrt(var.discr)) / (2 * var.a);
+	res1.xyz.z = (res1.xyz.y - cam.y) * var.az + cam.z;
+	res2.xyz.x = cam.x;
+	res2.xyz.y = (-var.b - sqrt(var.discr)) / (2 * var.a);
+	res2.xyz.z = (res2.xyz.y - cam.y) * var.az + cam.z;
+	res.xyz = (vect_len(cam, res1.xyz) < vect_len(cam, res2.xyz) ?
+		res1.xyz : res2.xyz);
+	res.flag = 1;
+	res.rgb = sph.rgb;
+	return (res);
+}
+
+t_near	solution3(t_sph sph, t_xyz cam, t_xyz ray)
+{
+	double	discr;
+	t_near	res;
+	t_near	res1;
+	t_near	res2;
+
+	ft_bzero(&res, sizeof(t_near));
+	discr = pow(cam.x - sph.xyz.x, 2) + pow(cam.y - sph.xyz.y, 2) -
+	pow(sph.diameter / 2, 2);
 	if (discr < 0)
-		return (intersect);
-	t1 = root1(ray, cam_sph, discr);
-	t2 = root2(ray, cam_sph, discr);
-	intersect.xyz = find_min(t1, t2, cam, ray);
-	intersect.rgb = sph.rgb;
-	intersect.flag = 1;
-	return (intersect);
+		return (res);
+	res1.xyz = ray;
+	res2.xyz = ray;
+	res1.xyz.z = sph.xyz.z + sqrt(discr);
+	res2.xyz.z = sph.xyz.z - sqrt(discr);
+	res.xyz = (vect_len(cam, res1.xyz) < vect_len(cam, res2.xyz) ?
+	res1.xyz : res2.xyz);
+	res.rgb = sph.rgb;
+	res.flag = 1;
+	return (res);
+}
+
+t_near	intersect_sph2(t_sph sph, t_xyz cam, t_xyz ray)
+{
+	t_near	res;
+	t_subst	var;
+
+	ft_bzero(&res, sizeof(t_near));
+	if (ray.x)
+	{
+		var = substitution1(sph.xyz, cam, ray, sph.diameter / 2);
+		if (var.a == 0)
+			res = solution0(var, sph, cam);
+		else if (var.discr < 0)
+			return (res);
+		else
+			res = solution1(var, sph, cam);
+	}
+	else if (ray.y)
+	{
+		var = substitution2(sph.xyz, cam, ray, sph.diameter / 2);
+		if (var.discr < 0)
+			return (res);
+		res = solution2(var, sph, cam);
+	}
+	else
+		res = solution3(sph, cam, ray);
+	return (res);
 }
