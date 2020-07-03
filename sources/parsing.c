@@ -1,53 +1,37 @@
 #include "parsing.h"
 
-void	read_rt(int fd)
+static void		camera_loop(t_cam **camera)
 {
-	char	*line;
-	char	*tmp;
-	int		l;
+	t_cam	*start;
 
-	l = 0;
-	while (get_next_line(fd, &line) == 1 && errno == 0)
-	{
-		l++;
-		tmp = line;
-		while (ft_isspace(*line))
-			line++;
-		if (*line == '#' || *line == 0)
-			line++;
-		else if ((*line == 'R') || (*line == 'A') || (*line == 'c') ||
-		(*line == 'l') || (*line == 'p') || (*line == 's') ||
-		(*line == 's') || (*line == 'c') || (*line == 't'))
-			parsing_rt(line, tmp, l);
-		else
-			exit(freemem_line(tmp) + freemem_struct(INVAL_P, l));
-		free(tmp);
-	}
+	start = *camera;
+	while ((*camera)->next)
+		*camera = (*camera)->next;
+	(*camera)->next = start;
 }
 
-void	parsing_rt(char *line, char *freeline, int l)
+static double	get_fnumber(char **arr)
 {
-	double	buf[BUF_S];
+	int		k;
 	char	*tmp;
-	int		i;
+	char	str[40];
 
-	i = 0;
-	ft_bzero(buf, BUF_S * sizeof(double));
-	tmp = line;
-	while (ft_isalpha(*line))
-		line++;
-	while (*line && i < BUF_S)
+	k = 0;
+	tmp = *arr;
+	if (*tmp == '-' || *tmp == '+')
 	{
-		if (ft_isspace(*line) || *line == ',')
-			line++;
-		else if ((ft_isdigit(*line)) || *line == '+' || *line == '-')
-			buf[i++] = get_fnumber(&line);
-		else if (*line == '#')
-			break;
-		else
-			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
+		str[k++] = *tmp;
+		tmp++;
 	}
-	fill_scene(buf, tmp, freeline, l);
+	while (*tmp && ft_isdigit(*tmp))
+		str[k++] = *tmp++;
+	if (*tmp == '.')
+		str[k++] = *tmp++;
+	while (*tmp && ft_isdigit(*tmp))
+		str[k++] = *tmp++;
+	str[k] = '\0';
+	*arr = tmp;
+	return (ft_atof(str));
 }
 
 void	fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
@@ -74,26 +58,53 @@ void	fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
 
-double	get_fnumber(char **arr)
+static void		parsing_rt(char *line, char *freeline, int l)
 {
-	int		k;
+	double	buf[BUF_S];
 	char	*tmp;
-	char	str[40];
+	int		i;
 
-	k = 0;
-	tmp = *arr;
-	if (*tmp == '-' || *tmp == '+')
+	i = 0;
+	ft_bzero(buf, BUF_S * sizeof(double));
+	tmp = line;
+	while (ft_isalpha(*line))
+		line++;
+	while (*line && i < BUF_S)
 	{
-		str[k++] = *tmp;
-		tmp++;
+		if (ft_isspace(*line) || *line == ',')
+			line++;
+		else if ((ft_isdigit(*line)) || *line == '+' || *line == '-')
+			buf[i++] = get_fnumber(&line);
+		else if (*line == '#')
+			break;
+		else
+			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	}
-	while (*tmp && ft_isdigit(*tmp))
-		str[k++] = *tmp++;
-	if (*tmp == '.')
-		str[k++] = *tmp++;
-	while (*tmp && ft_isdigit(*tmp))
-		str[k++] = *tmp++;
-	str[k] = '\0';
-	*arr = tmp;
-	return (ft_atof(str));
+	fill_scene(buf, tmp, freeline, l);
+}
+
+void			read_rt(int fd)
+{
+	char	*line;
+	char	*tmp;
+	int		l;
+
+	l = 0;
+	while (get_next_line(fd, &line) == 1 && errno == 0)
+	{
+		l++;
+		tmp = line;
+		while (ft_isspace(*line))
+			line++;
+		if (*line == '#' || *line == 0)
+			line++;
+		else if ((*line == 'R') || (*line == 'A') || (*line == 'c') ||
+		(*line == 'l') || (*line == 'p') || (*line == 's') ||
+		(*line == 's') || (*line == 'c') || (*line == 't'))
+			parsing_rt(line, tmp, l);
+		else
+			exit(freemem_line(tmp) + freemem_struct(INVAL_P, l));
+		free(tmp);
+	}
+	camera_loop(&g_scene.cam);
 }

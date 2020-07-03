@@ -14,9 +14,6 @@
 # define BUF_S 12
 
 void	read_rt(int fd);
-void	parsing_rt(char *line, char *freeline, int l);
-void	fill_scene(double buf[BUF_S], char *tmp, char *freeline, int l);
-double	get_fnumber(char **arr);
 void	fill_r(double buf[BUF_S], char *freeline, int l);
 void	fill_a(double buf[BUF_S], char *freeline, int l);
 void	fill_c(double buf[BUF_S], char *freeline, int l);
@@ -29,5 +26,12 @@ void	fill_tr(double buf[BUF_S], char *freeline, int l);
 
 int     freemem_struct(char *error, int i);
 int		freemem_line(char *s);
+void	lstclear_cam(t_cam **lst, void (*del)(void *));
+void	lstclear_lht(t_lht **lst, void (*del)(void *));
+void	lstclear_pln(t_pln **lst, void (*del)(void *));
+void	lstclear_sph(t_sph **lst, void (*del)(void *));
+void	lstclear_sqr(t_sqr **lst, void (*del)(void *));
+void	lstclear_cyl(t_cyl **lst, void (*del)(void *));
+void	lstclear_tri(t_tri **lst, void (*del)(void *));
 
 #endif

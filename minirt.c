@@ -25,8 +25,8 @@ int		main(int argc, char **argv)
 	read_rt(fd);
 	init();
 	render();
-	// print_triangle(g_scene);
 	// mlx_hook(g_mlx.win, 3, 1L << 1, key_released, &g_mlx);
 	mlx_hook(g_mlx.win, 17, 1 << 17, close_exit, &g_mlx);
+	// close_exit(&g_mlx);
 	mlx_loop(g_mlx.mlx);
 }

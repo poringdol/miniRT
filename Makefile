@@ -27,12 +27,16 @@ SRC = check_input.c\
 	  fill_r_a_c_l.c\
 	  fill_pl_sp_sq_cy_tr.c\
 	  freemem.c\
+	  freemem_struct.c\
 	  init.c\
-	  line.c\
 	  render.c\
 	  vector.c\
-	  intersect.c\
-	  pixel.c
+	  vector2.c\
+	  substitution.c\
+	  sphere.c\
+	  plane.c\
+	  pixel.c\
+	  light.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

@@ -1,57 +1,50 @@
 #include "parsing.h"
 
-static void	lstclear_32(void **lst, void (*del)(void *))
+void	lstclear_cam(t_cam **lst, void (*del)(void *))
 {
-	void	*tmp;
-	t_lht	*type;
-
-	type = *lst;
-	if (lst != NULL && del != NULL)
-	{
-		while (type != NULL)
-		{
-			tmp = type->next;
-			free(type);
-			type = tmp;
-		}
-	}
-}
-
-static void	lstclear_40(void **lst, void (*del)(void *))
-{
-	void	*tmp;
 	t_cam	*type;
-
-	type = *lst;
-	if (lst != NULL && del != NULL)
-	{
-		while (type != NULL)
-		{
-			tmp = type->next;
-			free(type);
-			type = tmp;
-		}
-	}
-}
-
-static void	lstclear_48(void **lst, void (*del)(void *))
-{
 	void	*tmp;
-	t_cyl	*type;
 
-	type = *lst;
 	if (lst != NULL && del != NULL)
 	{
+		type = *lst;
 		while (type != NULL)
 		{
-			tmp = type->next;
-			free(type);
-			type = tmp;
+			tmp = type;
+			if (type && type->next == *lst)
+			{
+				free(tmp);
+				return ;
+			}
+			type = type->next;
+			free(tmp);
 		}
 	}
 }
 
-int			freemem_line(char *s)
+void	lstclear_lht(t_lht **lst, void (*del)(void *))
+{
+	t_lht	*type;
+	void	*tmp;
+
+	if (lst != NULL && del != NULL)
+	{
+		type = *lst;
+		while (type != NULL)
+		{
+			tmp = type;
+			if (type && type->next == *lst)
+			{
+				free(tmp);
+				return ;
+			}
+			type = type->next;
+			free(tmp);
+		}
+	}
+}
+
+int		freemem_line(char *s)
 {
 	if (s)
 	{
@@ -61,27 +54,16 @@ int			freemem_line(char *s)
 	return (0);
 }
 
-
-
-
-
-
-
-
-int 		freemem_struct(char *error, int l)
+int 	freemem_struct(char *error, int l)
 {
 	get_next_line(-1, NULL);
-	// if (g_scene.res)
-	// 	free(g_scene.res);
-	// if (g_scene.amb)
-	// 	free(g_scene.amb);
-	lstclear_40((void *)&g_scene.cam, free);
-	lstclear_32((void *)&g_scene.lht, free);
-	lstclear_40((void *)&g_scene.pln, free);
-	lstclear_32((void *)&g_scene.sph, free);
-	lstclear_40((void *)&g_scene.sqr, free);
-	lstclear_48((void *)&g_scene.cyl, free);
-	lstclear_48((void *)&g_scene.tri, free);
+	lstclear_cam((void *)&g_scene.cam, free);
+	lstclear_lht((void *)&g_scene.lht, free);
+	lstclear_pln((void *)&g_scene.pln, free);
+	lstclear_sph((void *)&g_scene.sph, free);
+	lstclear_sqr((void *)&g_scene.sqr, free);
+	lstclear_cyl((void *)&g_scene.cyl, free);
+	lstclear_tri((void *)&g_scene.tri, free);
 	if (!error && !errno)
 		return (0);
 	else if (error)

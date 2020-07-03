@@ -1,11 +1,11 @@
+#include "minirt.h"
 #include "parsing.h"
-
+///////////////////////////////////нориализовать вектора
 void	fill_pl(double buf[BUF_S], char *freeline, int l)
 {
 	t_pln	*new;
 
-	if (buf[3] < -1 || buf[3] > 1 || buf[4] < -1 || buf[4] > 1 ||
-	buf[5] < -1 || buf[5] > 1 || buf[6] < 0 || buf[6] > 255 ||
+	if (buf[6] < 0 || buf[6] > 255 ||
 	buf[7] < 0 || buf[7] > 255 || buf[8] < 0 || buf[8] > 255)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	if (!(new = (t_pln *)ft_calloc(sizeof(t_pln), 1)))
@@ -23,6 +23,7 @@ void	fill_pl(double buf[BUF_S], char *freeline, int l)
 	g_scene.pln->orient.x = buf[3];
 	g_scene.pln->orient.y = buf[4];
 	g_scene.pln->orient.z = buf[5];
+	g_scene.pln->orient = normalize(g_scene.pln->orient);
 	g_scene.pln->rgb = (int)buf[6] << 16 | (int)buf[7] << 8 | (int)buf[8];
 }
 
@@ -53,8 +54,7 @@ void	fill_sq(double buf[BUF_S], char *freeline, int l)
 {
 	t_sqr	*new;
 
-	if (buf[3] < -1 || buf[3] > 1 || buf[4] < -1 || buf[4] > 1 ||
-	buf[5] < -1 || buf[5] > 1 || buf[7] < 0 || buf[7] > 255 ||
+	if (buf[7] < 0 || buf[7] > 255 ||
 	buf[8] < 0 || buf[8] > 255 || buf[9] < 0 || buf[9] > 255)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	if (!(new = (t_sqr *)ft_calloc(sizeof(t_sqr), 1)))
@@ -72,6 +72,7 @@ void	fill_sq(double buf[BUF_S], char *freeline, int l)
 	g_scene.sqr->orient.x = buf[3];
 	g_scene.sqr->orient.y = buf[4];
 	g_scene.sqr->orient.z = buf[5];
+	g_scene.sqr->orient = normalize(g_scene.sqr->orient);
 	g_scene.sqr->size = buf[6];
 	g_scene.sqr->rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }
@@ -80,8 +81,7 @@ void	fill_cy(double buf[BUF_S], char *freeline, int l)
 {
 	t_cyl	*new;
 
-	if (buf[3] < -1 || buf[3] > 1 || buf[4] < -1 || buf[4] > 1 ||
-	buf[5] < -1 || buf[5] > 1 || buf[8] < 0 || buf[8] > 255 ||
+	if (buf[8] < 0 || buf[8] > 255 ||
 	buf[9] < 0 || buf[9] > 255 || buf[10] < 0 || buf[10] > 255)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	if (!(new = (t_cyl *)ft_calloc(sizeof(t_cyl), 1)))
@@ -99,6 +99,7 @@ void	fill_cy(double buf[BUF_S], char *freeline, int l)
 	g_scene.cyl->orient.x = buf[3];
 	g_scene.cyl->orient.y = buf[4];
 	g_scene.cyl->orient.z = buf[5];
+	g_scene.cyl->orient = normalize(g_scene.cyl->orient);
 	g_scene.cyl->diameter = buf[6];
 	g_scene.cyl->height = buf[7];
 	g_scene.cyl->rgb = (int)buf[8] << 16 | (int)buf[9] << 8 | (int)buf[10];

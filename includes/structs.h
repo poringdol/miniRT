@@ -44,7 +44,7 @@ typedef struct		s_cam
 typedef struct		s_lht
 {
 	t_xyz			xyz;
-	double			lht_bri;
+	double			bri;
 	int				rgb;
 	struct s_lht	*next;
 }					t_lht;
@@ -121,6 +121,7 @@ typedef struct		s_mlx
 typedef struct		s_near
 {
 	t_xyz			xyz;
+	t_xyz			normal;
 	int				rgb;
 	int				flag;
 }					t_near;
@@ -136,5 +137,12 @@ typedef struct		s_subst
 	double			bz;
 	double			discr;
 }					t_subst;
+
+typedef struct		s_rgb
+{
+	int				red;
+	int				green;
+	int				blue;
+}					t_rgb;
 
 #endif
