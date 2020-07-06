@@ -54,6 +54,7 @@ typedef struct		s_pln
 	t_xyz			xyz;
 	t_xyz			orient;
 	int				rgb;
+	t_xyz			normal;
 	struct s_pln	*next;
 }					t_pln;
 

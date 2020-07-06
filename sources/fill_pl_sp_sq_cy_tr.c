@@ -1,6 +1,6 @@
 #include "minirt.h"
 #include "parsing.h"
-///////////////////////////////////нориализовать вектора
+
 void	fill_pl(double buf[BUF_S], char *freeline, int l)
 {
 	t_pln	*new;

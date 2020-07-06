@@ -15,12 +15,13 @@ void	render(void)
 		i = -1;
 		while (++i < g_scene.res.x)
 		{
+			if (i == 400 && j == 300)
+				printf("!");
 			cam1 = vect_end(g_scene.canvas, g_scene.res, i, j);
 			ray = normalize(vect_cord(g_scene.cam->xyz, cam1));
 			nearest = nearest_pix(g_scene.cam->xyz, cam1, ray);
 			nearest.rgb = nearest.flag ? brightness(nearest, g_scene.lht) : nearest.rgb;
 			mlx_pixel_put(g_mlx.mlx, g_mlx.win, i, j, nearest.rgb);
-			// nearest = shadow(nearest, g_scene.lgh);
 			/////////////////////////////////////////////////////////проверка, что объект не за камерой
 		}
 	}
@@ -41,4 +42,10 @@ void	create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 	canvas->o.x = cam->xyz.x + CANV_DIST * canvas->cos_a * canvas->cos_b;
 	canvas->o.y = cam->xyz.y + CANV_DIST * canvas->sin_a * canvas->cos_b;
 	canvas->o.z = cam->xyz.z + CANV_DIST * canvas->sin_b;
+}
+
+float	range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
+{
+	return (ROV * vect_len(vect_cord(cam, cam1)) /
+			vect_len(vect_cord(cam, canvas.o)));
 }

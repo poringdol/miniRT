@@ -33,23 +33,3 @@ t_xyz	vect_cord(t_xyz start, t_xyz end)
 	res.z = end.z - start.z;
 	return (res);
 }
-
-t_xyz	normalize(t_xyz vect)
-{
-	double		length;
-	t_xyz		ray;
-
-	length = sqrt(pow(vect.x, 2) + pow(vect.y, 2) + pow(vect.z, 2));
-	ray.x = vect.x / length;
-	ray.y = vect.y / length;
-	ray.z = vect.z / length;
-	return (ray);
-}
-
-double	scalar(t_xyz vect1, t_xyz vect2)
-{
-	double res;
-
-	res = vect1.x * vect2.x + vect1.y * vect2.y + vect1.z * vect2.z;
-	return (res);
-}

@@ -1,7 +1,7 @@
 #include <math.h>
 #include "minirt.h"
 #include "parsing.h"
-///////////////////////////////////нориализовать вектора
+
 void	fill_r(double buf[BUF_S], char *freeline, int l)
 {
 	if (g_scene.res.x || g_scene.res.y)

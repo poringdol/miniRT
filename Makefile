@@ -36,7 +36,8 @@ SRC = check_input.c\
 	  sphere.c\
 	  plane.c\
 	  pixel.c\
-	  light.c
+	  light.c\
+	  shadows.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

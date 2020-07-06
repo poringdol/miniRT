@@ -17,7 +17,7 @@ static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
 	res.flag = 1;
 	res.rgb = sph.rgb;
-	res.normal = vect_cord(sph.xyz, res.xyz);
+	res.normal = normalize(vect_cord(sph.xyz, res.xyz));
 	return (res);
 }
 
@@ -38,7 +38,7 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
 	res.flag = 1;
 	res.rgb = sph.rgb;
-	res.normal = vect_cord(sph.xyz, res.xyz);
+	res.normal = normalize(vect_cord(sph.xyz, res.xyz));
 	return (res);
 }
 
@@ -62,7 +62,7 @@ static t_near	solution3(t_sph sph, t_xyz cam, t_xyz ray)
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
 	res.rgb = sph.rgb;
 	res.flag = 1;
-	res.normal = vect_cord(sph.xyz, res.xyz);
+	res.normal = normalize(vect_cord(sph.xyz, res.xyz));
 	return (res);
 }
 
@@ -102,8 +102,7 @@ t_near			intersect_sph(t_sph sph, t_xyz cam, t_xyz ray)
 		var = substitution1(sph.xyz, cam, ray, sph.diameter / 2);
 		if (var.discr < 0)
 			return (res);
-		else
-			res = solution1(var, sph, cam);
+		res = solution1(var, sph, cam);
 	}
 	else if (ray.y)
 	{
