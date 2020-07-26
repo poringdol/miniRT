@@ -6,7 +6,8 @@ GREEN = \033[0;32m
 PURPLE = \033[0;35m
 	
 CC = gcc
-FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
+FLAGS = -lXext -lX11 -lm -g
+# FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
 #-O3 -fsanitize=address
 AR = ar rs
 RM = rm -rf
@@ -32,9 +33,15 @@ SRC = check_input.c\
 	  render.c\
 	  vector.c\
 	  vector2.c\
+	  normal.c\
 	  substitution.c\
 	  sphere.c\
 	  plane.c\
+	  triangle.c\
+	  square.c\
+	  cylinder.c\
+	  cylinder_solution.c\
+	  square_tops.c\
 	  pixel.c\
 	  light.c\
 	  shadows.c

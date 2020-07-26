@@ -32,14 +32,14 @@ void		print_triangle(t_scene g_scene)
 {
 	while (g_scene.tri)
 	{
-		print_line(g_scene.tri->xyz1.x, g_scene.tri->xyz1.y,\
-					g_scene.tri->xyz2.x, g_scene.tri->xyz2.y,\
+		print_line(g_scene.tri->top1.x, g_scene.tri->top1.y,\
+					g_scene.tri->top2.x, g_scene.tri->top2.y,\
 					g_scene.tri->rgb);
-		print_line(g_scene.tri->xyz2.x, g_scene.tri->xyz2.y,\
-					g_scene.tri->xyz3.x, g_scene.tri->xyz3.y,\
+		print_line(g_scene.tri->top2.x, g_scene.tri->top2.y,\
+					g_scene.tri->top3.x, g_scene.tri->top3.y,\
 					g_scene.tri->rgb);
-		print_line(g_scene.tri->xyz3.x, g_scene.tri->xyz3.y,\
-					g_scene.tri->xyz1.x, g_scene.tri->xyz1.y,\
+		print_line(g_scene.tri->top3.x, g_scene.tri->top3.y,\
+					g_scene.tri->top1.x, g_scene.tri->top1.y,\
 					g_scene.tri->rgb);
 		g_scene.tri = g_scene.tri->next;
 	}

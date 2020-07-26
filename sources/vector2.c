@@ -1,35 +1,21 @@
 #include "minirt.h"
 
-t_xyz	normal_plane(t_xyz orient, t_xyz cam)
+t_xyz	vect_multipl(t_xyz xyz, float rate)
 {
-	t_xyz	normal1;
-	t_xyz	normal2;
+	t_xyz	res;
 
-	normal1.x = orient.x;
-	normal1.y = orient.y;
-	normal1.z = orient.z;
-	normal2.x = -orient.x;
-	normal2.y = -orient.y;
-	normal2.z = -orient.z;
-	return (scalar(normal1, cam) < 0 ? normal1 : normal2);
+	res.x = xyz.x * rate;
+	res.y = xyz.y * rate;
+	res.z = xyz.z * rate;
+	return (res);
 }
 
-t_xyz	normalize(t_xyz vect)
+t_xyz	vect_addit(t_xyz xyz, t_xyz rate)
 {
-	double		length;
-	t_xyz		ray;
+	t_xyz	res;
 
-	length = sqrt(pow(vect.x, 2) + pow(vect.y, 2) + pow(vect.z, 2));
-	ray.x = vect.x / length;
-	ray.y = vect.y / length;
-	ray.z = vect.z / length;
-	return (ray);
-}
-
-double	scalar(t_xyz vect1, t_xyz vect2)
-{
-	double res;
-
-	res = vect1.x * vect2.x + vect1.y * vect2.y + vect1.z * vect2.z;
+	res.x = xyz.x + rate.x;
+	res.y = xyz.y + rate.y;
+	res.z = xyz.z + rate.z;
 	return (res);
 }

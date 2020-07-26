@@ -1,4 +1,5 @@
 #include "parsing.h"
+#include "structs.h"
 
 static void		camera_loop(t_cam **camera)
 {
@@ -81,6 +82,7 @@ static void		parsing_rt(char *line, char *freeline, int l)
 			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	}
 	fill_scene(buf, tmp, freeline, l);
+	//////////???????????????????????? проверка на наличие камеры ,,,,,,,,,,,,,,,,,,,
 }
 
 void			read_rt(int fd)

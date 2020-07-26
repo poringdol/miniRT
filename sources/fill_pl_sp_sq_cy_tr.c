@@ -43,9 +43,9 @@ void	fill_sp(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.sph;
 		g_scene.sph = new;
 	}
-	g_scene.sph->xyz.x = buf[0];
-	g_scene.sph->xyz.y = buf[1];
-	g_scene.sph->xyz.z = buf[2];
+	g_scene.sph->o.x = buf[0];
+	g_scene.sph->o.y = buf[1];
+	g_scene.sph->o.z = buf[2];
 	g_scene.sph->diameter = buf[3];
 	g_scene.sph->rgb = (int)buf[4] << 16 | (int)buf[5] << 8 | (int)buf[6];
 }
@@ -66,15 +66,17 @@ void	fill_sq(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.sqr;
 		g_scene.sqr = new;
 	}
-	g_scene.sqr->xyz.x = buf[0];
-	g_scene.sqr->xyz.y = buf[1];
-	g_scene.sqr->xyz.z = buf[2];
-	g_scene.sqr->orient.x = buf[3];
-	g_scene.sqr->orient.y = buf[4];
-	g_scene.sqr->orient.z = buf[5];
-	g_scene.sqr->orient = normalize(g_scene.sqr->orient);
-	g_scene.sqr->size = buf[6];
-	g_scene.sqr->rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
+	g_scene.sqr->pln.xyz.x = buf[0];
+	g_scene.sqr->pln.xyz.y = buf[1];
+	g_scene.sqr->pln.xyz.z = buf[2];
+	g_scene.sqr->pln.orient.x = buf[3];
+	g_scene.sqr->pln.orient.y = buf[4];
+	g_scene.sqr->pln.orient.z = buf[5];
+	g_scene.sqr->pln.orient = normalize(g_scene.sqr->pln.orient);
+	g_scene.sqr->side = buf[6];
+	int r,g,b;
+	r = (int)buf[7]; g = (int)buf[8]; b = (int)buf[9];
+	g_scene.sqr->pln.rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }
 
 void	fill_cy(double buf[BUF_S], char *freeline, int l)
@@ -93,9 +95,9 @@ void	fill_cy(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.cyl;
 		g_scene.cyl = new;
 	}
-	g_scene.cyl->xyz.x = buf[0];
-	g_scene.cyl->xyz.y = buf[1];
-	g_scene.cyl->xyz.z = buf[2];
+	g_scene.cyl->o.x = buf[0];
+	g_scene.cyl->o.y = buf[1];
+	g_scene.cyl->o.z = buf[2];
 	g_scene.cyl->orient.x = buf[3];
 	g_scene.cyl->orient.y = buf[4];
 	g_scene.cyl->orient.z = buf[5];
@@ -121,14 +123,14 @@ void	fill_tr(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.tri;
 		g_scene.tri = new;
 	}
-	g_scene.tri->xyz1.x = buf[0];
-	g_scene.tri->xyz1.y = buf[1];
-	g_scene.tri->xyz1.z = buf[2];
-	g_scene.tri->xyz2.x = buf[3];
-	g_scene.tri->xyz2.y = buf[4];
-	g_scene.tri->xyz2.z = buf[5];
-	g_scene.tri->xyz3.x = buf[6];
-	g_scene.tri->xyz3.y = buf[7];
-	g_scene.tri->xyz3.z = buf[8];
+	g_scene.tri->top1.x = buf[0];
+	g_scene.tri->top1.y = buf[1];
+	g_scene.tri->top1.z = buf[2];
+	g_scene.tri->top2.x = buf[3];
+	g_scene.tri->top2.y = buf[4];
+	g_scene.tri->top2.z = buf[5];
+	g_scene.tri->top3.x = buf[6];
+	g_scene.tri->top3.y = buf[7];
+	g_scene.tri->top3.z = buf[8];
 	g_scene.tri->rgb = (int)buf[9] << 16 | (int)buf[10] << 8 | (int)buf[11];
 }

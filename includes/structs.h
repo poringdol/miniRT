@@ -16,8 +16,8 @@ typedef struct		s_res
 
 typedef struct		s_canv
 {
-	double			x;
-	double			y;
+	double			width;
+	double			height;
 	t_xyz			o;
 	double			sin_a;
 	double			cos_a;
@@ -60,24 +60,39 @@ typedef struct		s_pln
 
 typedef struct		s_sph
 {
-	t_xyz			xyz;
+	t_xyz			o;
 	double			diameter;
 	int				rgb;
 	struct s_sph	*next;
 }					t_sph;
 
+typedef struct		s_tri
+{
+	t_xyz			top1;
+	t_xyz			top2;
+	t_xyz			top3;
+	t_pln			pln;
+	int				rgb;
+	struct s_tri	*next;
+}					t_tri;
+
 typedef struct		s_sqr
 {
-	t_xyz			xyz;
-	t_xyz			orient;
-	double			size;
-	int				rgb;
+	t_pln			pln;
+	double			side;
+	t_xyz			top1;
+	t_xyz			top2;
+	t_xyz			top3;
+	t_xyz			top4;
+	t_tri			tri1;
+	t_tri			tri2;
 	struct s_sqr	*next;
 }					t_sqr;
 
 typedef struct		s_cyl
 {
-	t_xyz			xyz;
+	t_xyz			o;
+	t_xyz			o1;
 	t_xyz			orient;
 	double			diameter;
 	double			height;
@@ -85,14 +100,21 @@ typedef struct		s_cyl
 	struct s_cyl	*next;
 }					t_cyl;
 
-typedef struct		s_tri
+typedef struct		s_util
 {
-	t_xyz			xyz1;
-	t_xyz			xyz2;
-	t_xyz			xyz3;
-	int				rgb;
-	struct s_tri	*next;
-}					t_tri;
+	double			ay;
+	double			by;
+	double			az;
+	double			bz;
+	double			n;
+	double			m;
+	double			k;
+	double			l;
+	double			discr;
+	double			a;
+	double			b;
+	double			c;
+}					t_util;
 
 typedef struct		s_scene
 {
@@ -125,6 +147,7 @@ typedef struct		s_near
 	t_xyz			normal;
 	int				rgb;
 	int				flag;
+	int				flag2;
 }					t_near;
 
 typedef struct		s_subst

@@ -16,7 +16,7 @@ int		brightness(t_near dot, t_lht *lht)
 	while (lht)
 	{
 		light_ray = vect_cord(dot.xyz, lht->xyz);
-		n_dot = (scalar(dot.normal, light_ray));
+		n_dot = (scal_product(dot.normal, light_ray));
 		if (n_dot > 0 && !shadow(g_scene, dot, lht->xyz))
 		{
 			bright = lht->bri * (n_dot / (vect_len(dot.normal) *
@@ -55,17 +55,16 @@ int		shadow(t_scene g_scene, t_near dot, t_xyz light)
 {
 	int		shadow;
 	t_xyz	ray;
-	// t_xyz	dot1;
+	t_xyz	dot2;
 
-	dot.xyz.x += dot.normal.x;
-	dot.xyz.y += dot.normal.y;
-	dot.xyz.z += dot.normal.z;
-	ray = normalize(vect_cord(dot.xyz, light));
-	// dot1.x = dot.xyz.x + ray.x;
-	// dot1.y = dot.xyz.y + ray.y;
-	// dot1.z = dot.xyz.z + ray.z;
-	shadow = shadow_pln(g_scene.pln, dot.xyz, light, ray);
+	dot2 = vect_addit(dot.xyz, vect_multipl(dot.normal, 0.1));
+	ray = normalize(vect_cord(dot2, light));
+	shadow = shadow_pln(g_scene.pln, light, dot2, ray);
 	if (!shadow)
-		shadow = shadow_sph(g_scene.sph, dot.xyz, ray, shadow);
+		shadow = shadow_sph(g_scene.sph, light, dot2, ray);
+	if (!shadow)
+		shadow = shadow_tri(g_scene.tri, light, dot2, ray);
+	if (!shadow)
+		shadow = shadow_sqr(g_scene.sqr, light, dot2, ray);
 	return (shadow ? 1 : 0);
 }
