@@ -33,7 +33,7 @@ void	create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 {
 	canvas->width = 2 * CANV_DIST * tan((cam->fov / 2) * PI / 180);
 	canvas->height = ((double)res.y / (double)res.x) * canvas->width;
-	canvas->sin_b = cam->orient.z; / vect_len(cam->orient);
+	canvas->sin_b = cam->orient.z / vect_len(cam->orient);
 	canvas->cos_b = sqrt(fabs(1 - pow(canvas->sin_b, 2)));
 	canvas->cos_a = (canvas->cos_b != 0) ? cam->orient.x / (vect_len(cam->orient) * canvas->cos_b) : 0;
 	canvas->sin_a = sqrt(fabs(1 - pow(canvas->cos_a, 2)));
