@@ -10,8 +10,8 @@ void init(void)
 		g_scene.res.y, "img");
 	if (g_mlx.mlx && g_mlx.mlx)
 	g_mlx.img = mlx_new_image(g_mlx.mlx, g_scene.res.x, g_scene.res.y);
-	// g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img, &g_mlx.bpp,
-	// 	&g_mlx.size_l, &g_mlx.endian);
+	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img, &g_mlx.bpp,
+		&g_mlx.size_l, &g_mlx.endian);
 	if (!g_mlx.mlx || !g_mlx.win || !g_mlx.img)
 		close_exit(&g_mlx);
 }

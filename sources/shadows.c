@@ -29,7 +29,7 @@ int		shadow_sph(t_sph *sph, t_xyz light, t_xyz dot, t_xyz ray)
 	while (sph && !shadow)
 	{
 		intersect = intersect_sph(*sph, dot, ray);
-		if (intersect.flag && 
+		if (intersect.flag2 && 
 		scal_product(vect_cord(dot, intersect.xyz), 
 					vect_cord(light, intersect.xyz)) < 0)
 			shadow++;
@@ -79,6 +79,24 @@ int		shadow_sqr(t_sqr *sqr, t_xyz light, t_xyz dot, t_xyz ray)
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;
 		sqr = sqr->next;
+	}
+	return (shadow);
+}
+
+int		shadow_cyl(t_cyl *cyl, t_xyz light, t_xyz dot, t_xyz ray)
+{
+	t_near	intersect;
+	int		shadow;
+
+	shadow = 0;
+	while (cyl && !shadow)
+	{
+		intersect = intersect_cyl(cyl, light, dot, ray);
+		if (intersect.flag &&
+			scal_product(vect_cord(intersect.xyz, dot),
+						vect_cord(intersect.xyz, light)) < 0)
+			shadow++;
+		cyl = cyl->next;
 	}
 	return (shadow);
 }

@@ -15,15 +15,14 @@ static int	find_normal(t_xyz orient, t_xyz xyz, t_xyz cam)
 			vect_len(vect_cord(cam, xyz2)) ? 1 : 0);
 }
 
-t_xyz		f_normal(t_xyz orient, t_xyz xyz,
-						t_xyz cam_orient, t_xyz cam)
+t_xyz		f_normal(t_xyz orient, t_xyz xyz, t_xyz cam)
 {
 	float		scalar;
 	t_xyz		normal;
 	t_xyz		neg_orient;
 
 	neg_orient = vect_multipl(orient, -1);
-	scalar = scal_product(orient, cam_orient);
+	scalar = scal_product(orient, vect_cord(cam, xyz));
 	if (scalar)
 		normal = (scalar < 0) ? orient : neg_orient;
 	else
@@ -43,11 +42,11 @@ t_xyz		normalize(t_xyz vect)
 	return (ray);
 }
 
-void		plane_normal(t_pln *pln, t_xyz cam_orient, t_xyz cam)
+void		plane_normal(t_pln *pln, t_xyz cam)
 {
 	while (pln)
 	{
-		pln->normal = f_normal(pln->orient, pln->xyz, cam_orient, cam);
+		pln->normal = f_normal(pln->orient, pln->xyz, cam);
 		pln = pln->next;
 	}
 }
@@ -56,11 +55,10 @@ t_xyz		cylinder_normal(t_cyl cyl, t_xyz dot)
 {
 	t_pln		pln;
 	t_near		res;
-	const t_xyz	o1 = vect_addit(cyl.o, cyl.orient);
 
 	ft_bzero(&pln, sizeof(t_pln));
 	pln.orient = cyl.orient;
 	pln.xyz = dot;
-	res = intersect_pln(pln, cyl.o, o1, cyl.orient);
+	res = intersect_pln(pln, cyl.o, cyl.o1, cyl.orient);
 	return (vect_cord(res.xyz, dot));
 }

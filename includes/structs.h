@@ -135,7 +135,7 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*win;
 	void			*img;
-	int				*data;
+	char			*adr;
 	int				bpp;
 	int				size_l;
 	int				endian;

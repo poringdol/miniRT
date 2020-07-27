@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test",
-            "args": ["scenes/test.rt"],
+            "args": ["scenes/cylinder.rt"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

@@ -44,11 +44,7 @@ static t_xyz	top4(double sin_a, double cos_a,\
 	return (res);
 }
 
-
-
-
-
-void			square_tops(t_sqr *sqr, t_xyz cam_orient, t_xyz cam)
+void			square_tops(t_sqr *sqr, t_xyz cam)
 {
 	double	sin_a;
 	double	cos_a;
@@ -57,9 +53,9 @@ void			square_tops(t_sqr *sqr, t_xyz cam_orient, t_xyz cam)
 
 	while (sqr)
 	{
-		sin_b = sqr->pln.orient.z / vect_len(sqr->pln.orient);
+		sin_b = sqr->pln.orient.z;
 		cos_b = sqrt(fabs(1 - pow(sin_b, 2)));
-		cos_a = (cos_b != 0) ? sqr->pln.orient.x / (vect_len(sqr->pln.orient) * cos_b) : 0;
+		cos_a = (cos_b != 0) ? sqr->pln.orient.x / cos_b : 0;
 		sin_a = sqrt(fabs(1 - pow(cos_a, 2)));;
 		sqr->top1 = top1(sin_a, cos_a, sin_b, cos_b, *sqr);
 		sqr->top2 = top2(sin_a, cos_a, sin_b, cos_b, *sqr);
@@ -71,7 +67,7 @@ void			square_tops(t_sqr *sqr, t_xyz cam_orient, t_xyz cam)
 		sqr->tri2.top1 = sqr->top3;
 		sqr->tri2.top2 = sqr->top4;
 		sqr->tri2.top3 = sqr->top1;
-		sqr->pln.normal = f_normal(sqr->pln.orient, sqr->pln.xyz, cam_orient, cam);
+		sqr->pln.normal = f_normal(sqr->pln.orient, sqr->pln.xyz, cam);
 		sqr = sqr->next;
 	}
 }

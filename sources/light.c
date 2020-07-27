@@ -66,5 +66,7 @@ int		shadow(t_scene g_scene, t_near dot, t_xyz light)
 		shadow = shadow_tri(g_scene.tri, light, dot2, ray);
 	if (!shadow)
 		shadow = shadow_sqr(g_scene.sqr, light, dot2, ray);
+	if (!shadow)
+		shadow = shadow_cyl(g_scene.cyl, light, dot2, ray);
 	return (shadow ? 1 : 0);
 }

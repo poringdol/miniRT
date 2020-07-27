@@ -1,12 +1,12 @@
 #include "minirt.h"
 
-void	triangle_plane(t_tri *tri, t_xyz cam_orient, t_xyz cam)
+void	triangle_plane(t_tri *tri, t_xyz cam)
 {
 	while (tri)
 	{
 		tri->pln.orient = vect_product(vect_cord(tri->top1, tri->top2),
 									vect_cord(tri->top1, tri->top3));
-		tri->pln.normal = f_normal(tri->pln.orient, tri->top1, cam_orient, cam);
+		tri->pln.normal = f_normal(tri->pln.orient, tri->top1, cam);
 		tri->pln.xyz = tri->top1;
 		tri->pln.rgb = tri->rgb;
 		tri = tri->next;

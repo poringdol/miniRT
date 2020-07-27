@@ -7,6 +7,17 @@ static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 	t_near	res2;
 
 	ft_bzero(&res, sizeof(t_near));
+	if (var.a == 0)
+	{
+		res.xyz.x = -var.c / var.b;
+		res.xyz.y = res.xyz.x * var.ay + var.by;
+		res.xyz.z = res.xyz.x * var.az + var.bz;
+		return (res);
+	}
+	res.flag = 1;
+	res.flag2 = var.discr == 0 ? 0 : 1;
+	res.rgb = sph.rgb;
+	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	res1.xyz.x = (-var.b + sqrt(var.discr)) / (2 * var.a);
 	res1.xyz.y = (res1.xyz.x - cam.x) * var.ay + cam.y;
 	res1.xyz.z = (res1.xyz.x - cam.x) * var.az + cam.z;
@@ -15,9 +26,6 @@ static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 	res2.xyz.z = (res2.xyz.x - cam.x) * var.az + cam.z;
 	res.xyz = (vect_len(vect_cord(cam, res1.xyz)) <
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
-	res.flag = 1;
-	res.rgb = sph.rgb;
-	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	return (res);
 }
 
@@ -28,6 +36,17 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	t_near	res2;
 
 	ft_bzero(&res, sizeof(t_near));
+	res.flag = 1;
+	res.flag2 = var.discr == 0 ? 0 : 1;
+	res.rgb = sph.rgb;
+	res.normal = normalize(vect_cord(sph.o, res.xyz));
+	if (var.a == 0)
+	{
+		res.xyz.x = -var.c / var.b;
+		res.xyz.y = res.xyz.x * var.ay + var.by;
+		res.xyz.z = res.xyz.x * var.az + var.bz;
+		return (res);
+	}
 	res1.xyz.x = cam.x;
 	res1.xyz.y = (-var.b + sqrt(var.discr)) / (2 * var.a);
 	res1.xyz.z = (res1.xyz.y - cam.y) * var.az + cam.z;
@@ -36,9 +55,6 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	res2.xyz.z = (res2.xyz.y - cam.y) * var.az + cam.z;
 	res.xyz = (vect_len(vect_cord(cam, res1.xyz)) <
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
-	res.flag = 1;
-	res.rgb = sph.rgb;
-	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	return (res);
 }
 
@@ -64,6 +80,7 @@ static t_near	solution3(t_sph sph, t_xyz cam, t_xyz ray)
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
 	res.rgb = sph.rgb;
 	res.flag = 1;
+	res.flag2 = discr == 0 ? 0 : 1;
 	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	return (res);
 }
@@ -80,7 +97,6 @@ t_near			sphere(t_sph *sph, t_xyz cam, t_xyz cam1, t_xyz ray)
 		if (vect_len(vect_cord(sph->o, cam1)) > (sph->diameter / 2))
 		{
 			tmp = intersect_sph(*sph, cam, ray);
-			double a = scal_product(g_scene.cam->orient, vect_cord(cam, tmp.xyz));
 			if ((tmp.flag &&
 			scal_product(g_scene.cam->orient, vect_cord(cam, tmp.xyz)) > 0 &&
 			(!nearest.flag ||
@@ -102,14 +118,14 @@ t_near			intersect_sph(t_sph sph, t_xyz cam, t_xyz ray)
 	ft_bzero(&var, sizeof(t_subst));
 	if (ray.x)
 	{
-		var = substitution1(sph.o, cam, ray, sph.diameter / 2);
+		var = substitution_sph1(sph.o, cam, ray, sph.diameter / 2);
 		if (var.discr < 0)
 			return (res);
 		res = solution1(var, sph, cam);
 	}
 	else if (ray.y)
 	{
-		var = substitution2(sph.o, cam, ray, sph.diameter / 2);
+		var = substitution_sph2(sph.o, cam, ray, sph.diameter / 2);
 		if (var.discr < 0)
 			return (res);
 		res = solution2(var, sph, cam);

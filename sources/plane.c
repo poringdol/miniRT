@@ -89,12 +89,12 @@ t_near			intersect_pln(t_pln pln, t_xyz cam, t_xyz cam1, t_xyz ray)
 	ft_bzero(&var, sizeof(t_subst));
 	if (ray.x)
 	{
-		var = substitution1(res.xyz, cam, ray, 0);
+		var = substitution_sph1(res.xyz, cam, ray, 0);
 		res = solution1(var, pln, ray, cam1);
 	}
 	else if (ray.y)
 	{
-		var = substitution2(res.xyz, cam, ray, 0);
+		var = substitution_sph2(res.xyz, cam, ray, 0);
 		res = solution2(var, pln, cam, cam1, ray);
 	}
 	else
