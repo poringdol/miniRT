@@ -12,7 +12,15 @@
 
 #include "minirt.h"
 
-void	render(char *save)
+static void		save_print(char *save)
+{
+	if (save)
+		image_to_bmp();
+	else
+		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);
+}
+
+void		render(char *save)
 {
 	int		i;
 	int		j;
@@ -38,13 +46,10 @@ void	render(char *save)
 			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
 		}
 	}
-	if (save)
-		image_to_bmp();
-	else
-		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);
+	save_print(save);
 }
 
-void	create_canvas(t_canv *canvas, t_cam *cam, t_res res)
+void		create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 {
 	canvas->width = 2 * CANV_DIST * tan((cam->fov / 2) * PI / 180);
 	canvas->height = ((double)res.height / (double)res.width) * canvas->width;
@@ -58,13 +63,13 @@ void	create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 	canvas->o.z = cam->xyz.z + CANV_DIST * canvas->sin_b;
 }
 
-float	range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
+float		range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
 {
 	return (ROV * vect_len(vect_cord(cam, cam1)) /
 			vect_len(vect_cord(cam, canvas.o)));
 }
 
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	int		offset;
 

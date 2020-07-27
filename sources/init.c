@@ -30,8 +30,8 @@ void	init(void)
 
 int		close_exit(t_mlx *g_mlx)
 {
-	// mlx_destroy_image(g_mlx->mlx, g_mlx->img);
-	// mlx_destroy_window(g_mlx->mlx, g_mlx->win);
+	mlx_destroy_image(g_mlx->mlx, g_mlx->img);
+	mlx_destroy_window(g_mlx->mlx, g_mlx->win);
 	errno = 0;
 	if (sizeof(g_mlx)) ////////////////////////
 		freemem_struct(NULL, 0);
