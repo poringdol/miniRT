@@ -44,7 +44,8 @@ SRC = check_input.c\
 	  square_tops.c\
 	  pixel.c\
 	  light.c\
-	  shadows.c
+	  shadows.c\
+	  bmp.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

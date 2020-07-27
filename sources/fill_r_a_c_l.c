@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_r_a_c_l.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:09:04 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:09:05 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
 #include "minirt.h"
 #include "parsing.h"
 
 void	fill_r(double buf[BUF_S], char *freeline, int l)
 {
-	if (g_scene.res.x || g_scene.res.y)
+	if (g_scene.res.width || g_scene.res.height)
 		exit(freemem_line(freeline) + freemem_struct(DOUBLE_R, l));
-	g_scene.res.x = ((int)buf[0] > RESOLUTION_X) ? RESOLUTION_X : (int)buf[0];
-	g_scene.res.y = ((int)buf[1] > RESOLUTION_Y) ? RESOLUTION_Y : (int)buf[1];
-	if (!g_scene.res.x || !g_scene.res.y)
+	g_scene.res.width = ((int)buf[0] > RESOLUTION_X) ? RESOLUTION_X : (int)buf[0];
+	g_scene.res.height = ((int)buf[1] > RESOLUTION_Y) ? RESOLUTION_Y : (int)buf[1];
+	if (!g_scene.res.width || !g_scene.res.height)
 		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 }
 

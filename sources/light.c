@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   light.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:09:35 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:09:51 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int		brightness(t_near dot, t_lht *lht)
@@ -8,11 +20,6 @@ int		brightness(t_near dot, t_lht *lht)
 	double	bright;
 
 	color = get_color(0, dot.rgb, g_scene.amb.rgb, g_scene.amb.lht_rat);
-	t_rgb rgb;
-	rgb.red = color >> 16;
-	rgb.green = color >> 8 & 0xff;
-	rgb.blue = color & 0xff;
-	if (!sizeof(rgb)) return 0;
 	while (lht)
 	{
 		light_ray = vect_cord(dot.xyz, lht->xyz);

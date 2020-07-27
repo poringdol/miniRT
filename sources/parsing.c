@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:10:08 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:10:08 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 #include "structs.h"
 
@@ -35,7 +47,7 @@ static double	get_fnumber(char **arr)
 	return (ft_atof(str));
 }
 
-void	fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
+void			fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 {
 	if (*line == 'R' && *(line + 1) == ' ')
 		fill_r(buf, freeline, l);
@@ -77,12 +89,11 @@ static void		parsing_rt(char *line, char *freeline, int l)
 		else if ((ft_isdigit(*line)) || *line == '+' || *line == '-')
 			buf[i++] = get_fnumber(&line);
 		else if (*line == '#')
-			break;
+			break ;
 		else
 			exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
 	}
 	fill_scene(buf, tmp, freeline, l);
-	//////////???????????????????????? проверка на наличие камеры ,,,,,,,,,,,,,,,,,,,
 }
 
 void			read_rt(int fd)
@@ -108,5 +119,7 @@ void			read_rt(int fd)
 			exit(freemem_line(tmp) + freemem_struct(INVAL_P, l));
 		free(tmp);
 	}
+	if (!g_scene.cam)
+		exit(freemem_struct(NO_CAMERA, 0));
 	camera_loop(&g_scene.cam);
 }

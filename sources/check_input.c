@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:07:43 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:07:45 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
+#include "bmp.h"
+#include "errors.h"
 
-void	check_input(int argc, char *argv, int *fd)
+void	check_input(int argc, char *rt, char *save, int *fd)
 {
 	if (argc < 2 || argc > 3)
 	{
@@ -12,14 +26,16 @@ void	check_input(int argc, char *argv, int *fd)
 		perror("Exit with error");
 		exit(1);
 	}
-	if (ft_strncmp(&(argv[ft_strlen(argv) - 3]), ".rt", 4) != 0)
+	if (ft_strncmp(&(rt[ft_strlen(rt) - 3]), ".rt", 4))
 	{
 		ft_putstr_fd("Exit with error: Invalid file extension\n", 2);
 		exit(1);
 	}
-	if ((*fd = open(argv, O_RDONLY)) < 0)
+	if (save && ft_strcmp(save, "--save"))
 	{
-		perror("Exit with error");
+		ft_putstr_fd(INV_SECOND, 2);
 		exit(1);
 	}
+	if ((*fd = open(rt, O_RDONLY)) < 0)
+		exit(1);
 }

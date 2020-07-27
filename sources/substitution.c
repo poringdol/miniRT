@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   substitution.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:11:10 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:11:11 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_subst	substitution_sph1(t_xyz sph, t_xyz cam, t_xyz ray, double radius)
@@ -19,7 +31,6 @@ t_subst	substitution_sph1(t_xyz sph, t_xyz cam, t_xyz ray, double radius)
 t_subst	substitution_sph2(t_xyz sph, t_xyz cam, t_xyz ray, double radius)
 {
 	t_subst	res;
-
 
 	ft_bzero(&res, sizeof(t_subst));
 	res.az = ray.z / ray.y;

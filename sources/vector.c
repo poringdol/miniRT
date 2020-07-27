@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:11:29 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:11:30 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_xyz	vect_end(t_canv canv, t_res res, int i, int j)
@@ -6,22 +18,22 @@ t_xyz	vect_end(t_canv canv, t_res res, int i, int j)
 
 	xyz.x = canv.o.x - canv.width / 2 * canv.sin_a -
 		canv.height / 2 * canv.sin_b * canv.cos_a +
-		canv.width * i / res.x * canv.sin_a +
-		canv.height * j / res.y * canv.sin_b * canv.cos_a;
+		canv.width * i / res.width * canv.sin_a +
+		canv.height * j / res.height * canv.sin_b * canv.cos_a;
 	xyz.y = canv.o.y + canv.width / 2 * canv.cos_a -
 		canv.height / 2 * canv.sin_b * canv.sin_a -
-		canv.width * i / res.x * canv.cos_a +
-		canv.height * j / res.y * canv.sin_b * canv.sin_a;
+		canv.width * i / res.width * canv.cos_a +
+		canv.height * j / res.height * canv.sin_b * canv.sin_a;
 	xyz.z = canv.o.z + canv.height / 2 * canv.cos_b -
-		canv.height * j / res.y * canv.cos_b;
+		canv.height * j / res.height * canv.cos_b;
 	return (xyz);
 }
 
 double	vect_len(t_xyz vect)
 {
 	return (sqrt(pow(vect.x, 2) +
-				 pow(vect.y, 2) +
-				 pow(vect.z, 2)));
+				pow(vect.y, 2) +
+				pow(vect.z, 2)));
 }
 
 t_xyz	vect_cord(t_xyz start, t_xyz end)

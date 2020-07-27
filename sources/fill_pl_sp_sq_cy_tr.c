@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_pl_sp_sq_cy_tr.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:08:55 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include "parsing.h"
 
@@ -74,8 +86,6 @@ void	fill_sq(double buf[BUF_S], char *freeline, int l)
 	g_scene.sqr->pln.orient.z = buf[5];
 	g_scene.sqr->pln.orient = normalize(g_scene.sqr->pln.orient);
 	g_scene.sqr->side = buf[6];
-	int r,g,b;
-	r = (int)buf[7]; g = (int)buf[8]; b = (int)buf[9];
 	g_scene.sqr->pln.rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }
 

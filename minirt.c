@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include "bmp.h"
 #include "keys.h"
 
 int		key_pressed(int keycode, t_mlx *g_mlx)
@@ -16,14 +17,14 @@ int		change_camera(t_cam **camera)
 	*camera = (*camera)->next;
 	mlx_destroy_image(g_mlx.mlx, g_mlx.img);
 	mlx_clear_window(g_mlx.mlx, g_mlx.win);
-	minirt();
+	minirt(NULL);
 	return (0);
 }
-	
-void	minirt(void)
+
+void	minirt(char *save)
 {
 	init();
-	render();
+	render(save);
 	mlx_hook(g_mlx.win, 17, 1 << 17, close_exit, &g_mlx);
 	mlx_hook(g_mlx.win, 2, 1 << 0, key_pressed, NULL);
 	mlx_loop(g_mlx.mlx);
@@ -32,8 +33,10 @@ void	minirt(void)
 int		main(int argc, char **argv)
 {
 	int fd;
+	char *save;
 
-	check_input(argc, argv[1], &fd);
+	save = (argc == 3) ? argv[2] : NULL;
+	check_input(argc, argv[1], save, &fd);
 	read_rt(fd);
-	minirt();
+	minirt(argv[2]);
 }

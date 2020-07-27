@@ -1,5 +1,17 @@
-#ifndef MINIRT_STRUCT_H
-# define MINIRT_STRUCT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:16:04 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 typedef struct		s_xyz
 {
@@ -10,8 +22,8 @@ typedef struct		s_xyz
 
 typedef struct		s_res
 {
-	int				x;
-	int				y;
+	int				width;
+	int				height;
 }					t_res;
 
 typedef struct		s_canv
@@ -135,9 +147,9 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*win;
 	void			*img;
-	char			*adr;
-	int				bpp;
-	int				size_l;
+	char			*pix_addr;
+	int				bits_per_pixel;
+	int				line_length;
 	int				endian;
 }					t_mlx;
 
@@ -168,5 +180,13 @@ typedef struct		s_rgb
 	int				green;
 	int				blue;
 }					t_rgb;
+
+typedef struct		s_sc
+{
+	double			sin_a;
+	double			cos_a;
+	double			sin_b;
+	double			cos_b;
+}					t_sc;
 
 #endif

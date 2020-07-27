@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:08:15 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:08:36 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void		check_plane(t_cyl cyl, t_near *res,\
-							t_xyz cam, t_xyz cam1, t_xyz ray)
+							t_xyz cam, t_xyz cam1)
 {
 	t_near	tmp;
 	t_near	tmp1;
@@ -13,8 +25,8 @@ static void		check_plane(t_cyl cyl, t_near *res,\
 	pln.xyz = cyl.o;
 	pln1.orient = cyl.orient;
 	pln1.xyz = cyl.o1;
-	tmp = intersect_pln(pln, cam, cam1, ray);
-	tmp1 = intersect_pln(pln1, cam, cam1, ray);
+	tmp = intersect_pln(pln, cam, cam1, res->normal);
+	tmp1 = intersect_pln(pln1, cam, cam1, res->normal);
 	if (vect_len(vect_cord(tmp.xyz, cyl.o)) <= cyl.diameter / 2)
 		res->normal = f_normal(pln.orient, pln.xyz, cam);
 	else if (vect_len(vect_cord(tmp1.xyz, cyl.o1)) <= cyl.diameter / 2)
@@ -23,13 +35,12 @@ static void		check_plane(t_cyl cyl, t_near *res,\
 		res->flag = 0;
 }
 
-static int		cut_cyl(t_cyl cyl, t_near *res, t_canv canv)
+static int		cut_cyl(t_cyl cyl, t_near *res, t_canv canv, t_xyz ray)
 {
 	t_xyz	xyz1;
 	t_near	tmp;
 
-	double a = scal_product(cyl.orient, vect_cord(cyl.o, res->xyz));
-	double b = scal_product(cyl.orient, vect_cord(cyl.o1, res->xyz));
+	res->normal = ray;
 	if (scal_product(cyl.orient, vect_cord(cyl.o, res->xyz)) < 0)
 		res->flag2 = 1;
 	if (res->flag && scal_product(cyl.orient, vect_cord(cyl.o1, res->xyz)) > 0)
@@ -72,8 +83,8 @@ t_near			intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray)
 	}
 	else
 		res = solution_cyl3(*cyl, var, cam);
-	if (res.flag && cut_cyl(*cyl, &res, canv))
-		check_plane(*cyl, &res, cam, cam1, ray);
+	if (res.flag && cut_cyl(*cyl, &res, canv, ray))
+		check_plane(*cyl, &res, cam, cam1);
 	if (res.flag && !res.flag2)
 		res.normal = cylinder_normal(*cyl, res.xyz);
 	return (res);
@@ -92,8 +103,7 @@ t_near			cylinder(t_cyl *cyl, t_cam cam, t_xyz cam1, t_xyz ray)
 		tmp = intersect_cyl(cyl, cam.xyz, cam1, ray);
 		if (tmp.flag && (!nearest.flag ||
 		(vect_len(vect_cord(cam1, tmp.xyz)) <
-		vect_len(vect_cord(cam1, nearest.xyz)))
-		))
+		vect_len(vect_cord(cam1, nearest.xyz)))))
 			nearest = tmp;
 		cyl = cyl->next;
 	}

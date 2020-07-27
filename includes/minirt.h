@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:13:28 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:13:29 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -19,8 +31,8 @@
 # define PI 3.14159265358
 
 void	init(void);
-void	minirt(void);
-void	render(void);
+void	minirt(char *save);
+void	render(char *save);
 int		close_exit(t_mlx *g_mlx);
 void	camera_loop(t_cam **camera);
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
@@ -37,6 +49,7 @@ t_xyz	f_normal(t_xyz orient, t_xyz xyz, t_xyz cam);
 
 t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray);
 float	range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 t_near	plane(t_pln *pln, t_cam cam, t_xyz cam1, t_xyz ray);
 t_near	intersect_pln(t_pln pln, t_xyz cam, t_xyz cam1, t_xyz ray);

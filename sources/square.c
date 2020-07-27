@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   square.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:10:50 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:10:51 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_near	square(t_sqr *sqr, t_cam cam, t_xyz cam1, t_xyz ray)
 {
 	t_near	nearest;
 	t_near	tmp;
+
 	ft_bzero(&nearest, sizeof(t_near));
 	while (sqr)
 	{

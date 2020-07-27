@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   freemem.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:09:11 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:09:13 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 void	lstclear_cam(t_cam **lst, void (*del)(void *))
@@ -54,7 +66,7 @@ int		freemem_line(char *s)
 	return (0);
 }
 
-int 	freemem_struct(char *error, int l)
+int		freemem_struct(char *error, int l)
 {
 	get_next_line(-1, NULL);
 	lstclear_cam((void *)&g_scene.cam, free);

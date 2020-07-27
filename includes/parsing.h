@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:13:35 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:14:36 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
 # define PARSING_H
 
@@ -24,7 +36,7 @@ void	fill_sq(double buf[BUF_S], char *freeline, int l);
 void	fill_cy(double buf[BUF_S], char *freeline, int l);
 void	fill_tr(double buf[BUF_S], char *freeline, int l);
 
-int     freemem_struct(char *error, int i);
+int		freemem_struct(char *error, int i);
 int		freemem_line(char *s);
 void	lstclear_cam(t_cam **lst, void (*del)(void *));
 void	lstclear_lht(t_lht **lst, void (*del)(void *));

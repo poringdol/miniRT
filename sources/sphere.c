@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:10:42 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:10:43 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
@@ -7,17 +19,16 @@ static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 	t_near	res2;
 
 	ft_bzero(&res, sizeof(t_near));
-	if (var.a == 0)
-	{
-		res.xyz.x = -var.c / var.b;
-		res.xyz.y = res.xyz.x * var.ay + var.by;
-		res.xyz.z = res.xyz.x * var.az + var.bz;
-		return (res);
-	}
+	// if (var.a == 0)
+	// {
+	// 	res.xyz.x = -var.c / var.b;
+	// 	res.xyz.y = res.xyz.x * var.ay + var.by;
+	// 	res.xyz.z = res.xyz.x * var.az + var.bz;
+	// 	return (res);
+	// }
 	res.flag = 1;
 	res.flag2 = var.discr == 0 ? 0 : 1;
 	res.rgb = sph.rgb;
-	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	res1.xyz.x = (-var.b + sqrt(var.discr)) / (2 * var.a);
 	res1.xyz.y = (res1.xyz.x - cam.x) * var.ay + cam.y;
 	res1.xyz.z = (res1.xyz.x - cam.x) * var.az + cam.z;
@@ -26,6 +37,7 @@ static t_near	solution1(t_subst var, t_sph sph, t_xyz cam)
 	res2.xyz.z = (res2.xyz.x - cam.x) * var.az + cam.z;
 	res.xyz = (vect_len(vect_cord(cam, res1.xyz)) <
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
+	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	return (res);
 }
 
@@ -39,14 +51,13 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	res.flag = 1;
 	res.flag2 = var.discr == 0 ? 0 : 1;
 	res.rgb = sph.rgb;
-	res.normal = normalize(vect_cord(sph.o, res.xyz));
-	if (var.a == 0)
-	{
-		res.xyz.x = -var.c / var.b;
-		res.xyz.y = res.xyz.x * var.ay + var.by;
-		res.xyz.z = res.xyz.x * var.az + var.bz;
-		return (res);
-	}
+	// if (var.a == 0)
+	// {
+	// 	res.xyz.x = -var.c / var.b;
+	// 	res.xyz.y = res.xyz.x * var.ay + var.by;
+	// 	res.xyz.z = res.xyz.x * var.az + var.bz;
+	// 	return (res);
+	// }
 	res1.xyz.x = cam.x;
 	res1.xyz.y = (-var.b + sqrt(var.discr)) / (2 * var.a);
 	res1.xyz.z = (res1.xyz.y - cam.y) * var.az + cam.z;
@@ -55,6 +66,7 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	res2.xyz.z = (res2.xyz.y - cam.y) * var.az + cam.z;
 	res.xyz = (vect_len(vect_cord(cam, res1.xyz)) <
 	vect_len(vect_cord(cam, res2.xyz)) ? res1.xyz : res2.xyz);
+	res.normal = normalize(vect_cord(sph.o, res.xyz));
 	return (res);
 }
 

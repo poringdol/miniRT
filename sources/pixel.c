@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pixel.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:10:15 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:10:16 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
@@ -12,10 +24,6 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 	nearest = (tmp.flag && vect_len(vect_cord(cam1, tmp.xyz)) <
 	range_of_view(g_scene.canvas, cam, cam1)) ? tmp : nearest;
 	tmp = sphere(g_scene.sph, g_scene.cam->xyz, cam1, ray);
-	// double a = vect_len(vect_cord(cam, tmp.xyz));
-	// double b = vect_len(vect_cord(cam, nearest.xyz));
-	// if (nearest.flag && tmp.flag && a > b )
-	// 	printf("1");
 	nearest = ((tmp.flag) &&
 	(!nearest.flag || vect_len(vect_cord(cam, tmp.xyz)) <
 	vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
@@ -28,8 +36,7 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 		(!nearest.flag || vect_len(vect_cord(cam, tmp.xyz)) <
 		vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
 	tmp = cylinder(g_scene.cyl, *g_scene.cam, cam1, ray);
-	nearest = ((tmp.flag) &&
-		(!nearest.flag || vect_len(vect_cord(cam, tmp.xyz)) <
-		vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
+	nearest = ((tmp.flag) && (!nearest.flag || vect_len(vect_cord(cam,
+		tmp.xyz)) < vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
 	return (nearest);
 }

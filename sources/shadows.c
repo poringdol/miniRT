@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shadows.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/27 06:10:35 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/07/27 06:10:36 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int		shadow_pln(t_pln *pln, t_xyz light, t_xyz dot, t_xyz ray)
@@ -11,9 +23,9 @@ int		shadow_pln(t_pln *pln, t_xyz light, t_xyz dot, t_xyz ray)
 		intersect = intersect_pln(*pln, light, dot, ray);
 		if (intersect.flag
 			&& vect_len(vect_cord(light, intersect.xyz)) <
-			(vect_len(vect_cord(light, dot)) - 0.01)
+			(vect_len(vect_cord(light, dot)) - 0.1)
 			&& scal_product(vect_cord(light, dot),
-							vect_cord(light, intersect.xyz)) - 0.01 > 0)
+							vect_cord(light, intersect.xyz)) - 0.1 > 0)
 			shadow++;
 		pln = pln->next;
 	}
@@ -29,8 +41,8 @@ int		shadow_sph(t_sph *sph, t_xyz light, t_xyz dot, t_xyz ray)
 	while (sph && !shadow)
 	{
 		intersect = intersect_sph(*sph, dot, ray);
-		if (intersect.flag2 && 
-		scal_product(vect_cord(dot, intersect.xyz), 
+		if (intersect.flag2 &&
+		scal_product(vect_cord(dot, intersect.xyz),
 					vect_cord(light, intersect.xyz)) < 0)
 			shadow++;
 		sph = sph->next;
