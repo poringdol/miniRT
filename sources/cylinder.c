@@ -32,7 +32,8 @@ static void		check_plane(t_cyl cyl, t_near *res,\
 	else if (vect_len(vect_cord(tmp1.xyz, cyl.o1)) <= cyl.diameter / 2)
 		res->normal = f_normal(pln1.orient, pln1.xyz, cam);
 	else
-		res->flag = 0;
+		res->flag2 = 0;
+	res->flag = 0;
 }
 
 static int		cut_cyl(t_cyl cyl, t_near *res, t_canv canv, t_xyz ray)
@@ -101,10 +102,13 @@ t_near			cylinder(t_cyl *cyl, t_cam cam, t_xyz cam1, t_xyz ray)
 	while (cyl)
 	{
 		tmp = intersect_cyl(cyl, cam.xyz, cam1, ray);
-		if (tmp.flag && (!nearest.flag ||
+		if ((tmp.flag || tmp.flag2) && (!nearest.flag ||
 		(vect_len(vect_cord(cam1, tmp.xyz)) <
 		vect_len(vect_cord(cam1, nearest.xyz)))))
+		{
 			nearest = tmp;
+			nearest.flag = 1;
+		}
 		cyl = cyl->next;
 	}
 	return (nearest);

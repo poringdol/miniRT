@@ -36,7 +36,7 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 		(!nearest.flag || vect_len(vect_cord(cam, tmp.xyz)) <
 		vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
 	tmp = cylinder(g_scene.cyl, *g_scene.cam, cam1, ray);
-	nearest = ((tmp.flag) && (!nearest.flag || vect_len(vect_cord(cam,
+	nearest = (tmp.flag && (!nearest.flag || vect_len(vect_cord(cam,
 		tmp.xyz)) < vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
 	return (nearest);
 }

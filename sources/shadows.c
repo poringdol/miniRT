@@ -104,7 +104,13 @@ int		shadow_cyl(t_cyl *cyl, t_xyz light, t_xyz dot, t_xyz ray)
 	while (cyl && !shadow)
 	{
 		intersect = intersect_cyl(cyl, light, dot, ray);
-		if (intersect.flag &&
+		if (intersect.flag2
+			&& vect_len(vect_cord(light, intersect.xyz)) <
+			(vect_len(vect_cord(light, dot)) - 0.1)
+			&& scal_product(vect_cord(light, dot),
+							vect_cord(light, intersect.xyz)) - 0.1 > 0)
+			shadow++;
+		else if (intersect.flag &&
 			scal_product(vect_cord(intersect.xyz, dot),
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;
