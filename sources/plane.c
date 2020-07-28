@@ -33,7 +33,7 @@ static t_near	solution1(t_subst var, t_pln pln, t_xyz ray, t_xyz cam1)
 	return (res);
 }
 
-static t_near	solution2(t_subst var, t_pln pln, t_xyz cam, t_xyz ray)
+static t_near	solution2(t_subst var, t_pln pln, t_xyz cam)
 {
 	t_near	res;
 	float	divisor;
@@ -104,7 +104,7 @@ t_near			intersect_pln(t_pln pln, t_xyz cam, t_xyz cam1, t_xyz ray)
 	else if (ray.y)
 	{
 		var = substitution_sph2(res.xyz, cam, ray, 0);
-		res = solution2(var, pln, cam, ray);
+		res = solution2(var, pln, cam);
 		res.flag = (((res.xyz.y - cam1.y) / ray.y) < -0.01) ? 0 : 1;
 	}
 	else

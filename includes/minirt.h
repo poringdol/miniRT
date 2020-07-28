@@ -74,19 +74,22 @@ t_near	cylinder(t_cyl *cyl, t_cam cam, t_xyz cam1, t_xyz ray);
 t_near	intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray);
 t_util	substitution_cyl1(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv);
 t_util	substitution_cyl2(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv);
-t_util	substitution_cyl3(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv);
+t_util	substitution_cyl3(t_cyl cyl, t_xyz cam, t_canv canv);
 t_near	solution_cyl1(t_cyl cyl, t_util var, t_xyz cam);
 t_near	solution_cyl2(t_cyl cyl, t_util var, t_xyz cam);
 t_near	solution_cyl3(t_cyl cyl, t_util var, t_xyz cam);
 t_xyz	cylinder_normal(t_cyl cyl, t_xyz dot);
 
 int		change_camera(t_cam **camera);
-int		key_pressed(int keycode, t_mlx *g_mlx);
+int		key_pressed(int keycode, t_cam *cam);
 
 int		brightness(t_near dot, t_lht *lht);
 int		shadow(t_scene g_scene, t_near dot, t_xyz light);
 int		shadow_pln(t_pln *pln, t_xyz dot, t_xyz dot1, t_xyz ray);
 int		shadow_sph(t_sph *sph, t_xyz light, t_xyz dot, t_xyz ray);
 int		shadow_tri(t_tri *tri, t_xyz light, t_xyz dot, t_xyz ray);
+int		shadow_sqr(t_sqr *sqr, t_xyz light, t_xyz dot, t_xyz ray);
+int		shadow_cyl(t_cyl *cyl, t_xyz light, t_xyz dot, t_xyz ray);
+
 int		get_color(int color, int rgb, int light_color, double bright);
 #endif

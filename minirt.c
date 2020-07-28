@@ -2,11 +2,11 @@
 #include "bmp.h"
 #include "keys.h"
 
-int		key_pressed(int keycode, t_mlx *g_mlx)
+int		key_pressed(int keycode, t_cam *cam)
 {
 	printf("%i\n", keycode);
 	if (keycode == CAM)
-		return (change_camera(&g_scene.cam));
+		return (change_camera(&cam));
 	if (keycode == EXIT)
 		return (close_exit());
 	return (0);
@@ -26,7 +26,7 @@ void	minirt(char *save)
 	init();
 	render(save);
 	mlx_hook(g_mlx.win, 17, 1 << 17, close_exit, NULL);
-	mlx_hook(g_mlx.win, 2, 1 << 0, key_pressed, NULL);
+	mlx_hook(g_mlx.win, 2, 1 << 0, key_pressed, &g_scene.cam);
 	mlx_loop(g_mlx.mlx);
 }
 

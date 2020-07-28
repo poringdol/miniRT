@@ -56,7 +56,7 @@ static t_near	solution2(t_subst var, t_sph sph, t_xyz cam)
 	return (res);
 }
 
-static t_near	solution3(t_sph sph, t_xyz cam, t_xyz ray)
+static t_near	solution3(t_sph sph, t_xyz cam)
 {
 	double	discr;
 	t_near	res;
@@ -129,6 +129,6 @@ t_near			intersect_sph(t_sph sph, t_xyz cam, t_xyz ray)
 		res = solution2(var, sph, cam);
 	}
 	else
-		res = solution3(sph, cam, ray);
+		res = solution3(sph, cam);
 	return (res);
 }

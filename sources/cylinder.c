@@ -36,11 +36,8 @@ static void		check_plane(t_cyl cyl, t_near *res,\
 	res->flag = 0;
 }
 
-static int		cut_cyl(t_cyl cyl, t_near *res, t_canv canv, t_xyz ray)
+static int		cut_cyl(t_cyl cyl, t_near *res, t_xyz ray)
 {
-	t_xyz	xyz1;
-	t_near	tmp;
-
 	res->normal = ray;
 	if (scal_product(cyl.orient, vect_cord(cyl.o, res->xyz)) < 0)
 		res->flag2 = 1;
@@ -49,7 +46,7 @@ static int		cut_cyl(t_cyl cyl, t_near *res, t_canv canv, t_xyz ray)
 	return ((int)res->flag2);
 }
 
-static t_canv	sin_cos(t_cyl *cyl, t_xyz cam, t_xyz ray)
+static t_canv	sin_cos(t_cyl *cyl)
 {
 	t_canv	canv;
 
@@ -71,7 +68,7 @@ t_near			intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray)
 
 	ft_bzero(&res, sizeof(t_near));
 	ft_bzero(&var, sizeof(t_util));
-	canv = sin_cos(cyl, cam, ray);
+	canv = sin_cos(cyl);
 	if (ray.x)
 	{
 		var = substitution_cyl1(*cyl, cam, ray, canv);
@@ -83,8 +80,11 @@ t_near			intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray)
 		res = solution_cyl2(*cyl, var, cam);
 	}
 	else
+	{
+		var = substitution_cyl3(*cyl, cam, canv);
 		res = solution_cyl3(*cyl, var, cam);
-	if (res.flag && cut_cyl(*cyl, &res, canv, ray))
+	}
+	if (res.flag && cut_cyl(*cyl, &res, ray))
 		check_plane(*cyl, &res, cam, cam1);
 	if (res.flag && !res.flag2)
 		res.normal = cylinder_normal(*cyl, res.xyz);
@@ -95,7 +95,6 @@ t_near			cylinder(t_cyl *cyl, t_cam cam, t_xyz cam1, t_xyz ray)
 {
 	t_near	nearest;
 	t_near	tmp;
-	t_util	util;
 
 	ft_bzero(&nearest, sizeof(t_near));
 	ft_bzero(&tmp, sizeof(t_near));

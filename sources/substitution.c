@@ -81,7 +81,7 @@ t_util	substitution_cyl2(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv)
 	return (util);
 }
 
-t_util	substitution_cyl3(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv)
+t_util	substitution_cyl3(t_cyl cyl, t_xyz cam, t_canv canv)
 {
 	t_util	util;
 

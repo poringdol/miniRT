@@ -78,7 +78,7 @@ int		write_bmppixels(int fd)
 	unsigned char	*buf;
 	int				i;
 
-	buf = g_mlx.pix_addr;
+	buf = (unsigned char *)g_mlx.pix_addr;
 	i = g_scene.res.height;
 	while (--i >= 0)
 		write(fd, &buf[i * g_scene.res.width * 4], g_scene.res.width * 4);

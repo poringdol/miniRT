@@ -21,8 +21,8 @@
 # include "globals.h"
 # include "errors.h"
 
-# define RESOLUTION_X 2560
-# define RESOLUTION_Y 1440
+# define RESOLUTION_X 1920
+# define RESOLUTION_Y 1080
 # define BUF_S 12
 
 void	read_rt(int fd);
