@@ -22,7 +22,7 @@
 # include "libft.h"
 # include "parsing.h"
 # include "structs.h"
-# include "error.h"
+# include "errors.h"
 # include "globals.h"
 
 # define CANV_DIST 1

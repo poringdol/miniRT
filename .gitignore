@@ -1,5 +1,4 @@
+/minilibx
 /libft
 /objects
-/minilibx
-libminirt.a
-test
+.gitignore
