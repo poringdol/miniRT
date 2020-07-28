@@ -13,7 +13,15 @@
 #ifndef KEYS_H
 # define KEYS_H
 
+# define EXIT 53
+# define CAM 49
+
+
+/*
+for Ubuntu
+
 # define EXIT 65307
 # define CAM 32
+*/
 
 #endif

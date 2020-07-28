@@ -24,6 +24,7 @@
 # include "structs.h"
 # include "errors.h"
 # include "globals.h"
+# include "bmp.h"
 
 # define CANV_DIST 1
 # define BACKGROUND 0x000000

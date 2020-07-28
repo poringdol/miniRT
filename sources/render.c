@@ -14,10 +14,32 @@
 
 static void	save_print(char *save)
 {
+	char *str;
+
 	if (save)
 		image_to_bmp();
 	else
+	{
 		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 20, 0xffffff, "cam.x = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 20, 0xffffff, str = ft_itoa(g_scene.cam->xyz.x));
+		free(str);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 35, 0xffffff, "cam.y = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 35, 0xffffff, str = ft_itoa(g_scene.cam->xyz.y));
+		free(str);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 50, 0xffffff, "cam.z = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 50, 0xffffff, str = ft_itoa(g_scene.cam->xyz.z));
+		free(str);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 65, 0xffffff, "orient.x = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 65, 0xffffff, str = ft_itoa(g_scene.cam->orient.x));
+		free(str);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 80, 0xffffff, "orient.y = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 80, 0xffffff, str = ft_itoa(g_scene.cam->orient.y));
+		free(str);
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 95, 0xffffff, "orient.z = ");
+		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 95, 0xffffff, str = ft_itoa(g_scene.cam->orient.z));
+		free(str);
+	}
 }
 
 void		render(char *save)

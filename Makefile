@@ -6,7 +6,7 @@ GREEN = \033[0;32m
 PURPLE = \033[0;35m
 	
 CC = gcc
-FLAGS = -lXext -lX11 -lm -g
+FLAGS = -framework OpenGL -framework AppKit -lm -g
 # FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
 #-O3 -fsanitize=address
 AR = ar rs

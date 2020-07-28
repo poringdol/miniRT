@@ -103,6 +103,7 @@ void			read_rt(int fd)
 	int		l;
 
 	l = 0;
+	errno = 0;
 	while (get_next_line(fd, &line) == 1 && errno == 0)
 	{
 		l++;
