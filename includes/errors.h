@@ -23,6 +23,7 @@
 # define NO_CAMERA "Invalid .rt file. Need at least one camera"
 # define CREATE_BMP "Failed to write bmp file"
 # define WRITE_BMP "Failed to write bmp file"
+
 void	check_input(int argc, char *rt, char *save, int *fd);
 
 #endif

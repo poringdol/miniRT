@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static void		save_print(char *save)
+static void	save_print(char *save)
 {
 	if (save)
 		image_to_bmp();

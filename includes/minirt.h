@@ -33,7 +33,7 @@
 void	init(void);
 void	minirt(char *save);
 void	render(char *save);
-int		close_exit(t_mlx *g_mlx);
+int		close_exit(void);
 void	camera_loop(t_cam **camera);
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
 
