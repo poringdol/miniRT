@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_r_a_c_l.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:09:04 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:09:05 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:12:24 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,29 @@ void	fill_l(double buf[BUF_S], char *freeline, int l)
 	g_scene.lht->xyz.z = buf[2];
 	g_scene.lht->bri = buf[3];
 	g_scene.lht->rgb = (int)buf[4] << 16 | (int)buf[5] << 8 | (int)buf[6];
+}
+
+void	fill_ld(double buf[BUF_S], char *freeline, int l)
+{
+	t_lht_d	*new;
+
+	if ((buf[0] == 0 && buf[1] == 0 && buf[2] == 0) ||
+			buf[3] < 0 || buf[3] > 1 || buf[4] < 0 || buf[4] > 255 ||
+			buf[5] < 0 || buf[5] > 255 || buf[6] < 0 || buf[6] > 255)
+		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
+	if (!(new = (t_lht_d *)ft_calloc(sizeof(t_lht_d), 1)))
+		exit(freemem_line(freeline) + freemem_struct(NULL, 0));
+	if (!g_scene.lht_d)
+		g_scene.lht_d = new;
+	else
+	{
+		new->next = g_scene.lht_d;
+		g_scene.lht_d = new;
+	}
+	g_scene.lht_d->direct.x = buf[0];
+	g_scene.lht_d->direct.y = buf[1];
+	g_scene.lht_d->direct.z = buf[2];
+	g_scene.lht_d->bri = buf[3];
+	g_scene.lht_d->rgb = (int)buf[4] << 16 | (int)buf[5] << 8 | (int)buf[6];
+	normalize(g_scene.lht_d->direct);
 }

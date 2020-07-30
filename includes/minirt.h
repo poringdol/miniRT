@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:28 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:13:29 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:22:47 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "errors.h"
 # include "globals.h"
 # include "bmp.h"
+# include "bonus.h"
 
 # define CANV_DIST 1
 # define BACKGROUND 0x000000
@@ -34,7 +35,9 @@
 void	init(void);
 void	minirt(char *save);
 void	render(char *save);
+void	render_utils(void);
 int		close_exit(void);
+void	save_print(char *save);
 void	camera_loop(t_cam **camera);
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
 
@@ -42,14 +45,14 @@ t_xyz	vect_end(t_canv canv, t_res res, int i, int j);
 double	vect_len(t_xyz vect);
 t_xyz	vect_cord(t_xyz start, t_xyz end);
 t_xyz	normalize(t_xyz vect);
-t_xyz	vect_multipl(t_xyz xyz, float rate);
+t_xyz	vect_multipl(t_xyz xyz, double rate);
 t_xyz	vect_addit(t_xyz xyz, t_xyz rate);
 double	scal_product(t_xyz vect1, t_xyz vect2);
 t_xyz	vect_product(t_xyz xyz1, t_xyz xyz2);
 t_xyz	f_normal(t_xyz orient, t_xyz xyz, t_xyz cam);
 
 t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray);
-float	range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1);
+double	range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 
 t_near	plane(t_pln *pln, t_cam cam, t_xyz cam1, t_xyz ray);
@@ -69,6 +72,10 @@ int		check_side(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3);
 
 t_near	square(t_sqr *sqr, t_cam cam, t_xyz cam1, t_xyz ray);
 void	square_tops(t_sqr *sqr, t_xyz cam);
+t_xyz	square_top1(t_sc sc, t_sqr sqr);
+t_xyz	square_top2(t_sc sc, t_sqr sqr);
+t_xyz	square_top3(t_sc sc, t_sqr sqr);
+t_xyz	square_top4(t_sc sc, t_sqr sqr);
 
 t_near	cylinder(t_cyl *cyl, t_cam cam, t_xyz cam1, t_xyz ray);
 t_near	intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray);
@@ -80,10 +87,10 @@ t_near	solution_cyl2(t_cyl cyl, t_util var, t_xyz cam);
 t_near	solution_cyl3(t_cyl cyl, t_util var, t_xyz cam);
 t_xyz	cylinder_normal(t_cyl cyl, t_xyz dot);
 
-int		change_camera(t_cam **camera);
-int		key_pressed(int keycode, t_cam *cam);
+int		change_camera(t_scene **scene);
+int		key_pressed(int keycode, t_scene *scene);
 
-int		brightness(t_near dot, t_lht *lht);
+int		brightness(t_near dot, t_lht *lht, t_lht_d *lht_d);
 int		shadow(t_scene g_scene, t_near dot, t_xyz light);
 int		shadow_pln(t_pln *pln, t_xyz dot, t_xyz dot1, t_xyz ray);
 int		shadow_sph(t_sph *sph, t_xyz light, t_xyz dot, t_xyz ray);
@@ -92,4 +99,5 @@ int		shadow_sqr(t_sqr *sqr, t_xyz light, t_xyz dot, t_xyz ray);
 int		shadow_cyl(t_cyl *cyl, t_xyz light, t_xyz dot, t_xyz ray);
 
 int		get_color(int color, int rgb, int light_color, double bright);
+
 #endif

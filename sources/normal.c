@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:01 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:10:03 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:44:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	find_normal(t_xyz orient, t_xyz xyz, t_xyz cam)
 
 t_xyz		f_normal(t_xyz orient, t_xyz xyz, t_xyz cam)
 {
-	float		scalar;
+	double		scalar;
 	t_xyz		normal;
 	t_xyz		neg_orient;
 
@@ -72,5 +72,5 @@ t_xyz		cylinder_normal(t_cyl cyl, t_xyz dot)
 	pln.orient = cyl.orient;
 	pln.xyz = dot;
 	res = intersect_pln(pln, cyl.o, cyl.o1, cyl.orient);
-	return (vect_cord(res.xyz, dot));
+	return (normalize(vect_cord(res.xyz, dot)));
 }

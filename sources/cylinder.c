@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:15 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:08:36 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:12:09 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void		check_plane(t_cyl cyl, t_near *res,\
+static int		check_plane(t_cyl cyl, t_near *res,\
 							t_xyz cam, t_xyz cam1)
 {
 	t_near	tmp;
@@ -34,6 +34,7 @@ static void		check_plane(t_cyl cyl, t_near *res,\
 	else
 		res->flag2 = 0;
 	res->flag = 0;
+	return (res->flag2);
 }
 
 static int		cut_cyl(t_cyl cyl, t_near *res, t_xyz ray)
@@ -62,13 +63,11 @@ static t_canv	sin_cos(t_cyl *cyl)
 
 t_near			intersect_cyl(t_cyl *cyl, t_xyz cam, t_xyz cam1, t_xyz ray)
 {
-	t_near	res;
-	t_util	var;
-	t_canv	canv;
+	t_near			res;
+	t_util			var;
+	const t_canv	canv = sin_cos(cyl);
 
 	ft_bzero(&res, sizeof(t_near));
-	ft_bzero(&var, sizeof(t_util));
-	canv = sin_cos(cyl);
 	if (ray.x)
 	{
 		var = substitution_cyl1(*cyl, cam, ray, canv);

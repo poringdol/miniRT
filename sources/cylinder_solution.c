@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_solution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:43 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:08:45 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:12:17 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ t_near	solution_cyl2(t_cyl cyl, t_util var, t_xyz cam)
 	}
 	tmp1.xyz.x = cam.x;
 	tmp1.xyz.y = (-var.b + sqrt(var.discr)) / (2 * var.a);
-	tmp1.xyz.z = tmp1.xyz.y * var.az + var.bz;
+	tmp1.xyz.z = tmp1.xyz.y * var.az + cam.z;
 	tmp2.xyz.x = cam.x;
 	tmp2.xyz.y = (-var.b - sqrt(var.discr)) / (2 * var.a);
-	tmp2.xyz.z = tmp2.xyz.y * var.az + var.bz;
+	tmp2.xyz.z = tmp2.xyz.y * var.az + cam.z;
 	res.xyz = vect_len(vect_cord(cam, tmp1.xyz)) <
 				vect_len(vect_cord(cam, tmp2.xyz)) ? tmp1.xyz : tmp2.xyz;
 	return (res);

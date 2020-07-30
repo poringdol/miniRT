@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:35 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:14:36 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:25:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	fill_sp(double buf[BUF_S], char *freeline, int l);
 void	fill_sq(double buf[BUF_S], char *freeline, int l);
 void	fill_cy(double buf[BUF_S], char *freeline, int l);
 void	fill_tr(double buf[BUF_S], char *freeline, int l);
+void	fill_ld(double buf[BUF_S], char *freeline, int l);
 
 int		freemem_struct(char *error, int i);
 int		freemem_line(char *s);

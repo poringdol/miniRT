@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:37 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:11:38 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:44:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_xyz	vect_multipl(t_xyz xyz, float rate)
+t_xyz	vect_multipl(t_xyz xyz, double rate)
 {
 	t_xyz	res;
 

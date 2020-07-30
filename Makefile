@@ -8,6 +8,7 @@ PURPLE = \033[0;35m
 CC = gcc
 # FLAGS = -framework OpenGL -framework AppKit -lm -g
 FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
+# FLAGS = -lXext -lX11 -lm -g
 #-O3 -fsanitize=address
 AR = ar rs
 RM = rm -rf
@@ -31,6 +32,7 @@ SRC = check_input.c\
 	  freemem_struct.c\
 	  init.c\
 	  render.c\
+	  render_utils.c\
 	  vector.c\
 	  vector2.c\
 	  normal.c\
@@ -45,7 +47,14 @@ SRC = check_input.c\
 	  pixel.c\
 	  light.c\
 	  shadows.c\
-	  bmp.c
+	  bmp.c\
+	  sepia.c\
+	  fill_cub.c\
+	  light_directional.c\
+	  render_bonus.c
+	#   pixel_bonus.c\
+	#   cub.c\
+	#   cub_util1.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:16:04 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:24:29 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ typedef struct		s_lht
 	struct s_lht	*next;
 }					t_lht;
 
+typedef struct		s_lht_d
+{
+	t_xyz			direct;
+	double			bri;
+	int				rgb;
+	struct s_lht_d	*next;
+}					t_lht_d;
+
 typedef struct		s_pln
 {
 	t_xyz			xyz;
@@ -90,8 +98,8 @@ typedef struct		s_tri
 
 typedef struct		s_sqr
 {
-	t_pln			pln;
 	double			side;
+	t_pln			pln;
 	t_xyz			top1;
 	t_xyz			top2;
 	t_xyz			top3;
@@ -111,6 +119,18 @@ typedef struct		s_cyl
 	int				rgb;
 	struct s_cyl	*next;
 }					t_cyl;
+
+typedef struct		s_cub
+{
+	t_sqr			sqr1;
+	t_sqr			sqr2;
+	t_sqr			sqr3;
+	t_sqr			sqr4;
+	t_sqr			sqr5;
+	t_sqr			sqr6;
+	t_xyz			o;
+	struct s_cub	*next;
+}					t_cub;
 
 typedef struct		s_util
 {
@@ -140,6 +160,8 @@ typedef struct		s_scene
 	t_sqr			*sqr;
 	t_cyl			*cyl;
 	t_tri			*tri;
+	t_cub			*cub;
+	t_lht_d			*lht_d;
 }					t_scene;
 
 typedef struct		s_mlx
@@ -176,9 +198,9 @@ typedef struct		s_subst
 
 typedef struct		s_rgb
 {
-	int				red;
-	int				green;
-	int				blue;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
 }					t_rgb;
 
 typedef struct		s_sc

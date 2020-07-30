@@ -22,7 +22,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test",
-            "args": ["scenes/test.rt"],
+            "args": ["scenes/sphere.rt"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:12:02 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:12:02 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:44:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_near	solution1(t_subst var, t_pln pln, t_xyz ray, t_xyz cam1)
 {
 	t_near	res;
-	float	divisor;
+	double	divisor;
 
 	ft_bzero(&res, sizeof(t_near));
 	if (!(divisor = pln.orient.x + pln.orient.y * var.ay +
@@ -36,7 +36,7 @@ static t_near	solution1(t_subst var, t_pln pln, t_xyz ray, t_xyz cam1)
 static t_near	solution2(t_subst var, t_pln pln, t_xyz cam)
 {
 	t_near	res;
-	float	divisor;
+	double	divisor;
 
 	ft_bzero(&res, sizeof(t_near));
 	if (!(divisor = pln.orient.y + pln.orient.z * var.az))

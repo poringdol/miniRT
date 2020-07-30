@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:10 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:11:11 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:13:05 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ t_util	substitution_cyl2(t_cyl cyl, t_xyz cam, t_xyz ray, t_canv canv)
 	util.az = ray.z / ray.y;
 	util.bz = -cam.y * util.az + cam.z;
 	util.k = canv.sin_a * canv.sin_b - util.az * canv.cos_b;
-	util.l = -cyl.o.y * canv.sin_a * canv.sin_b -
-			canv.cos_b * (util.bz - cyl.o.z);
-	util.m = cyl.o.y * pow(canv.cos_a, 2);
-	util.a = pow(util.k, 2) + pow(canv.cos_a, 2);
-	util.b = 2 * (util.k * util.l - util.m);
+	util.l = ((cam.x - cyl.o.x) * canv.cos_a - cyl.o.y * canv.sin_a) *
+			canv.sin_b - (util.bz - cyl.o.z) * canv.cos_b;
+	util.n = canv.cos_a;
+	util.m = (-cam.x - cyl.o.x) * canv.sin_a - cyl.o.y * canv.cos_a;
+	util.a = pow(util.k, 2) + pow(util.n, 2);
+	util.b = 2 * (util.k * util.l + util.n * util.m);
 	util.c = pow(util.l, 2) + cyl.o.y * util.m - pow(cyl.diameter / 2, 2);
 	util.discr = pow(util.b, 2) - 4 * util.a * util.c;
 	return (util);
@@ -85,12 +86,14 @@ t_util	substitution_cyl3(t_cyl cyl, t_xyz cam, t_canv canv)
 {
 	t_util	util;
 
-	util.k = cyl.o.z * canv.cos_b + ((cam.x - cyl.o.x) * canv.cos_a +
+	util.k = canv.cos_b;
+	util.l = cyl.o.z * canv.cos_b + ((cam.x - cyl.o.x) * canv.cos_a +
 			(cam.y - cyl.o.y) * canv.sin_a) * canv.sin_b;
-	util.a = pow(canv.cos_b, 2);
-	util.b = -2 * canv.cos_b * util.k;
-	util.c = pow(util.k, 2) + pow(-(cam.x - cyl.o.x) * canv.sin_a +
-			(cam.y - cyl.o.y) * canv.cos_a, 2) - pow(cyl.diameter / 2, 2);
+	util.m = pow((-cam.x - cyl.o.x) * canv.sin_a + (cam.y - cyl.o.y) *
+			canv.cos_a, 2) - pow(cyl.diameter / 2, 2);
+	util.a = pow(util.k, 2);
+	util.b = -2 * util.k * util.l;
+	util.c = pow(util.l, 2) + util.m;
 	util.discr = pow(util.b, 2) - 4 * util.a * util.c;
 	return (util);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   square_tops.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:11:53 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:13:03 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "minirt.h"
 
-static t_xyz	top1(t_sc sc, t_sqr sqr)
+t_xyz	square_top1(t_sc sc, t_sqr sqr)
 {
 	t_xyz	res;
 
@@ -25,7 +25,7 @@ static t_xyz	top1(t_sc sc, t_sqr sqr)
 	return (res);
 }
 
-static t_xyz	top2(t_sc sc, t_sqr sqr)
+t_xyz	square_top2(t_sc sc, t_sqr sqr)
 {
 	t_xyz	res;
 
@@ -37,7 +37,7 @@ static t_xyz	top2(t_sc sc, t_sqr sqr)
 	return (res);
 }
 
-static t_xyz	top3(t_sc sc, t_sqr sqr)
+t_xyz	square_top3(t_sc sc, t_sqr sqr)
 {
 	t_xyz	res;
 
@@ -49,7 +49,7 @@ static t_xyz	top3(t_sc sc, t_sqr sqr)
 	return (res);
 }
 
-static t_xyz	top4(t_sc sc, t_sqr sqr)
+t_xyz	square_top4(t_sc sc, t_sqr sqr)
 {
 	t_xyz	res;
 
@@ -61,7 +61,7 @@ static t_xyz	top4(t_sc sc, t_sqr sqr)
 	return (res);
 }
 
-void			square_tops(t_sqr *sqr, t_xyz cam)
+void	square_tops(t_sqr *sqr, t_xyz cam)
 {
 	t_sc	sc;
 
@@ -71,10 +71,10 @@ void			square_tops(t_sqr *sqr, t_xyz cam)
 		sc.cos_b = sqrt(fabs(1 - pow(sc.sin_b, 2)));
 		sc.cos_a = (sc.cos_b != 0) ? sqr->pln.orient.x / sc.cos_b : 0;
 		sc.sin_a = (sc.cos_b != 0) ? sqr->pln.orient.y / sc.cos_b : sc.sin_b;
-		sqr->top1 = top1(sc, *sqr);
-		sqr->top2 = top2(sc, *sqr);
-		sqr->top3 = top3(sc, *sqr);
-		sqr->top4 = top4(sc, *sqr);
+		sqr->top1 = square_top1(sc, *sqr);
+		sqr->top2 = square_top2(sc, *sqr);
+		sqr->top3 = square_top3(sc, *sqr);
+		sqr->top4 = square_top4(sc, *sqr);
 		sqr->tri1.top1 = sqr->top1;
 		sqr->tri1.top2 = sqr->top2;
 		sqr->tri1.top3 = sqr->top3;

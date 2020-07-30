@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:09:35 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:09:51 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:44:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int		brightness(t_near dot, t_lht *lht)
+int		brightness(t_near dot, t_lht *lht, t_lht_d *lht_d)
 {
 	t_xyz	light_ray;
 	int		color;
-	double	n_dot;
+	double	cos_dot_light;
 	double	bright;
 
 	color = get_color(0, dot.rgb, g_scene.amb.rgb, g_scene.amb.lht_rat);
 	while (lht)
 	{
-		light_ray = vect_cord(dot.xyz, lht->xyz);
-		n_dot = (scal_product(dot.normal, light_ray));
-		if (n_dot > 0 && !shadow(g_scene, dot, lht->xyz))
+		light_ray = normalize(vect_cord(dot.xyz, lht->xyz));
+		cos_dot_light = scal_product(dot.normal, light_ray);
+		if (cos_dot_light > 0 && !shadow(g_scene, dot, lht->xyz))
 		{
-			bright = lht->bri * (n_dot / (vect_len(dot.normal) *
-				vect_len(light_ray)));
+			bright = lht->bri * cos_dot_light;
 			color = get_color(color, dot.rgb, lht->rgb, bright);
 		}
 		lht = lht->next;
 	}
+	color = directional_light(color, dot, lht_d);
 	return (color);
 }
 
@@ -46,13 +46,13 @@ int		get_color(int color, int rgb, int light_color, double bright)
 	lht_rgb.red = light_color >> 16;
 	lht_rgb.green = light_color >> 8 & 0xff;
 	lht_rgb.blue = light_color & 0xff;
-	res.red = (float)res.red * bright * ((float)lht_rgb.red / 255) +
+	res.red = (double)res.red * bright * ((double)lht_rgb.red / 255) +
 		(color >> 16);
 	res.red = res.red < 255 ? res.red : 255;
-	res.green = (float)res.green * bright * ((float)lht_rgb.green / 255) +
+	res.green = (double)res.green * bright * ((double)lht_rgb.green / 255) +
 		(color >> 8 & 0xff);
 	res.green = res.green < 255 ? res.green : 255;
-	res.blue = (float)res.blue * bright * ((float)lht_rgb.blue / 255) +
+	res.blue = (double)res.blue * bright * ((double)lht_rgb.blue / 255) +
 		(color & 0xff);
 	res.blue = res.blue < 255 ? res.blue : 255;
 	return ((res.red << 16) | (res.green << 8) | (res.blue));

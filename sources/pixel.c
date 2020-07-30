@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:15 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:10:16 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 06:12:40 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 	t_near		tmp;
 
 	bzero(&nearest, sizeof(t_near));
-	nearest.rgb = BACKGROUND;
 	bzero(&tmp, sizeof(t_near));
 	tmp = plane(g_scene.pln, *g_scene.cam, cam1, ray);
 	nearest = (tmp.flag && vect_len(vect_cord(cam1, tmp.xyz)) <
@@ -40,3 +39,6 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 		tmp.xyz)) < vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
 	return (nearest);
 }
+/*
+**	nearest = nearest_pix_bonus(cam, cam1, ray, nearest);
+*/

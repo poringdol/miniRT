@@ -3,43 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdemocri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:29 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/27 06:10:29 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 07:19:17 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	save_print(char *save)
+void		save_print(char *save)
 {
-	char *str;
-
 	if (save)
 		image_to_bmp();
 	else
-	{
 		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 20, 0xffffff, "cam.x = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 20, 0xffffff, str = ft_itoa(g_scene.cam->xyz.x));
-		free(str);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 35, 0xffffff, "cam.y = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 35, 0xffffff, str = ft_itoa(g_scene.cam->xyz.y));
-		free(str);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 50, 0xffffff, "cam.z = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 70, 50, 0xffffff, str = ft_itoa(g_scene.cam->xyz.z));
-		free(str);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 65, 0xffffff, "orient.x = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 65, 0xffffff, str = ft_itoa(g_scene.cam->orient.x));
-		free(str);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 80, 0xffffff, "orient.y = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 80, 0xffffff, str = ft_itoa(g_scene.cam->orient.y));
-		free(str);
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 10, 95, 0xffffff, "orient.z = ");
-		mlx_string_put(g_mlx.mlx, g_mlx.win, 100, 95, 0xffffff, str = ft_itoa(g_scene.cam->orient.z));
-		free(str);
-	}
 }
 
 void		render(char *save)
@@ -50,10 +28,7 @@ void		render(char *save)
 	t_xyz	ray;
 	t_near	nearest;
 
-	create_canvas(&g_scene.canvas, g_scene.cam, g_scene.res);
-	square_tops(g_scene.sqr, g_scene.cam->xyz);
-	triangle_plane(g_scene.tri, g_scene.cam->xyz);
-	plane_normal(g_scene.pln, g_scene.cam->xyz);
+	render_utils();
 	j = -1;
 	while (++j < g_scene.res.height)
 	{
@@ -63,8 +38,9 @@ void		render(char *save)
 			cam1 = vect_end(g_scene.canvas, g_scene.res, i, j);
 			ray = normalize(vect_cord(g_scene.cam->xyz, cam1));
 			nearest = nearest_pix(g_scene.cam->xyz, cam1, ray);
-			nearest.rgb = nearest.flag ? brightness(nearest, g_scene.lht) :
-						nearest.rgb;
+			nearest.rgb = nearest.flag ?
+						brightness(nearest, g_scene.lht, g_scene.lht_d) :
+						BACKGROUND;
 			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
 		}
 	}
@@ -85,7 +61,7 @@ void		create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 	canvas->o.z = cam->xyz.z + CANV_DIST * canvas->sin_b;
 }
 
-float		range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
+double		range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
 {
 	return (ROV * vect_len(vect_cord(cam, cam1)) /
 			vect_len(vect_cord(cam, canvas.o)));
