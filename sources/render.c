@@ -6,15 +6,15 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:29 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:19:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 01:31:21 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void		save_print(char *save)
+void		save_print(char *param)
 {
-	if (save)
+	if (param && !ft_strcmp(param, "save"))
 		image_to_bmp();
 	else
 		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);

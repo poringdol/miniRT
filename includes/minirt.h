@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:28 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:22:47 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 00:11:20 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # define PI 3.14159265358
 
 void	init(void);
-void	minirt(char *save);
-void	render(char *save);
+void	minirt(char *param);
+void	render(char *param);
 void	render_utils(void);
 int		close_exit(void);
-void	save_print(char *save);
+void	save_print(char *param);
 void	camera_loop(t_cam **camera);
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
 

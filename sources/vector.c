@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:29 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:13:09 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 16:54:23 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ t_xyz	vect_product(t_xyz xyz1, t_xyz xyz2)
 {
 	t_xyz	res;
 
-	res.x = xyz1.y * xyz2.z - xyz2.y * xyz1.z;
-	res.y = xyz1.x * xyz2.z - xyz2.x * xyz1.z;
-	res.z = xyz1.x * xyz2.y - xyz2.x * xyz1.y;
+	res.x = xyz1.y * xyz2.z - xyz1.z * xyz2.y;
+	res.y = xyz1.z * xyz2.x - xyz1.x * xyz2.z;
+	res.z = xyz1.x * xyz2.y - xyz1.y * xyz2.x;
 	return (res);
 }

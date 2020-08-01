@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:08:04 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:10:29 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:54:08 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		write_bmppixels(int fd)
 	buf = (unsigned char *)g_mlx.pix_addr;
 	i = g_scene.res.height;
 	while (--i >= 0)
-		write(fd, &buf[i * g_scene.res.width * 4], g_scene.res.width * 4);
+		if (!write(fd, &buf[i * g_scene.res.width * 4], g_scene.res.width * 4))
+			return (1);
 	return (0);
 }

@@ -1,14 +1,21 @@
 SHELL = /bin/sh
+UNAME := $(shell uname)
 
 B&W = \033[0;0m
 RED  = \033[0;31m
 GREEN = \033[0;32m
 PURPLE = \033[0;35m
 	
+FLAGS = -Wall -Werror -Wextra
 CC = gcc
-# FLAGS = -framework OpenGL -framework AppKit -lm -g
-FLAGS = -Wall -Werror -Wextra -lXext -lX11 -lm -g
-# FLAGS = -lXext -lX11 -lm -g
+ifeq ($(UNAME), Linux)
+	FLAGS += -lXext -lX11 -lm -g
+	MINILIBXDIR = ./minilibx_linux/
+endif
+ifeq ($(UNAME), Darwin)
+	FLAGS += -framework OpenGL -framework AppKit -lm -g
+	MINILIBXDIR = ./minilibx_macos/
+endif
 #-O3 -fsanitize=address
 AR = ar rs
 RM = rm -rf
@@ -22,7 +29,6 @@ LIBFTHEADER = libft.h
 LIBFTHEADERDIR = ./libft/includes/
 
 MINILIBX = libmlx_Linux.a
-MINILIBXDIR = ./minilibx/
 
 SRC = check_input.c\
 	  parsing.c\
@@ -46,15 +52,18 @@ SRC = check_input.c\
 	  square_tops.c\
 	  pixel.c\
 	  light.c\
+	  minirt_bonus.c\
 	  shadows.c\
 	  bmp.c\
 	  sepia.c\
 	  fill_cub.c\
 	  light_directional.c\
-	  render_bonus.c
-	#   pixel_bonus.c\
-	#   cub.c\
-	#   cub_util1.c
+	  render_antialising.c\
+	  render_rainbow.c\
+	  pixel_bonus.c\
+	  cub.c\
+	  cub_util1.c\
+	  cub_util2.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)
@@ -69,6 +78,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
+	$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o miniRT $(FLAGS)
 
 -include $(DEP)
 
@@ -84,10 +94,6 @@ $(LIBFT):
 
 $(MINILIBX):
 	@$(MAKE) -C $(MINILIBXDIR)
-
-test: $(NAME)
-	$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o $@ $(FLAGS)
-
 clean:
 	@$(MAKE) clean -C $(LIBFTDIR)
 	@$(MAKE) clean -C $(MINILIBXDIR)

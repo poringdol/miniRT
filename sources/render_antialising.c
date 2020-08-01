@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_bonus.c                                     :+:      :+:    :+:   */
+/*   render_antialising.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:50 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:27:10 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 01:08:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	render_shine(char *save)
+void	render_antialiasing(char *save)
 {
 	int		i;
 	int		j;
@@ -20,7 +20,6 @@ void	render_shine(char *save)
 	t_xyz	ray;
 	t_near	nearest;
 
-	render_utils();
 	j = -1;
 	while (++j < g_scene.res.height)
 	{
@@ -84,11 +83,3 @@ int		reflect_light(int color, t_near dot, t_xyz light, t_xyz cam)
 	return ((res.red << 16) | (res.green << 8) | (res.blue));
 }
 
-void	minirt_shine(char *save)
-{
-	init();
-	render_shine(save);
-	mlx_hook(g_mlx.win, 17, 1 << 17, close_exit, NULL);
-	mlx_hook(g_mlx.win, 2, 1 << 0, key_pressed, &g_scene);
-	mlx_loop(g_mlx.mlx);
-}

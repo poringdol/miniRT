@@ -7,17 +7,16 @@ int		key_pressed(int keycode, t_scene *scene)
 	printf("%i\n", keycode);///////////////////////
 	if (keycode == CAM)
 		return (change_camera(&scene));
-	if (keycode == EXIT)
+	else if (keycode == EXIT)
 		return (close_exit());
-	if (keycode == SEPIA)
+	else if (keycode == SAVE)
+		save_print("save");
+	else if (keycode == SEPIA)
 		return (sepia());
-	if (keycode == REFLECT)
-	{
-		mlx_destroy_image(g_mlx.mlx, g_mlx.img);
-		mlx_clear_window(g_mlx.mlx, g_mlx.win);
-		minirt_shine(NULL);
-		return (0);
-	}
+	else if (keycode == REFLECT)
+		minirt_bonus("reflect");
+	else if (keycode == RAINBOW)
+		minirt_bonus("rainbow");
 	return (0);
 }
 

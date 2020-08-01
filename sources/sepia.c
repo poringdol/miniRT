@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:20:18 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/30 23:43:16 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int	sepia(void)
 {
 	int				i;
-	unsigned int	tmp;
+	int				tmp;
 	t_rgb			rgb;
 
 	i = 0;

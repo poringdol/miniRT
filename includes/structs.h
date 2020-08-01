@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:24:29 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 03:16:38 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,9 @@ typedef struct		s_subst
 
 typedef struct		s_rgb
 {
-	unsigned int	red;
-	unsigned int	green;
-	unsigned int	blue;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
 }					t_rgb;
 
 typedef struct		s_sc

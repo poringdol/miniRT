@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:15 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:12:40 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 03:52:11 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 	tmp = cylinder(g_scene.cyl, *g_scene.cam, cam1, ray);
 	nearest = (tmp.flag && (!nearest.flag || vect_len(vect_cord(cam,
 		tmp.xyz)) < vect_len(vect_cord(cam, nearest.xyz)))) ? tmp : nearest;
+	nearest = nearest_pix_bonus(cam, cam1, ray, nearest);
 	return (nearest);
 }
-/*
-**	nearest = nearest_pix_bonus(cam, cam1, ray, nearest);
-*/

@@ -6,97 +6,67 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:11:57 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 03:32:09 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_xyz	side_orient(t_xyz xyz, double x, double y, double z)
+static t_sc		sin_cos(t_xyz orient)
 {
-	t_xyz			normal;
+	t_sc		sc;
 
-	normal.x = xyz.x + x;
-	normal.y = xyz.y + y;
-	normal.z = xyz.z + z;
-	return (normal);
-}
-
-static t_sqr	side(t_sqr sqr, t_xyz orient, t_xyz dot)
-{
-	t_sqr			side;
-	t_sc			sc;
-
-	side.pln.xyz = dot;
-	side.pln.orient = orient;
-	side.pln.normal = vect_multipl(side.pln.orient, -1);
-	sc.sin_b = side.pln.orient.z;
+	sc.sin_b = orient.z;
 	sc.cos_b = sqrt(fabs(1 - pow(sc.sin_b, 2)));
-	sc.cos_a = (sc.cos_b != 0) ? side.pln.orient.x / sc.cos_b : 0;
-	sc.sin_a = (sc.cos_b != 0) ? side.pln.orient.y / sc.cos_b : sc.sin_b;
-	side.side = sqr.side;
-	side.pln.rgb = sqr.pln.rgb;
-	square_top1(sc, side);
-	square_top2(sc, side);
-	square_top3(sc, side);
-	square_top4(sc, side);
-	return (side);
+	sc.cos_a = (sc.cos_b != 0) ? orient.x / sc.cos_b : 0;
+	sc.sin_a = (sc.cos_b != 0) ? orient.y / sc.cos_b : sc.sin_b;
+	return (sc);
 }
 
-void			cub_sides(t_cub *cub, t_sc sc)
+static t_sqr	cub_tops(t_sc sc, t_sqr sqr)
 {
-	const double	x = cub->sqr1.pln.orient.x;
-	const double	y = cub->sqr1.pln.orient.y;
-	const double	z = cub->sqr1.pln.orient.z;
-	t_xyz			orient;
-
-	orient = side_orient(cub->sqr1.pln.orient, x, y + 0, z + 0);
-	cub->sqr2 = side(cub->sqr1, orient,
-				vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(orient, -1 * cub->sqr1.side)));
-	orient = side_orient(cub->sqr1.pln.orient, x + 0, y + 0, z + 0);
-	cub->sqr3 = side(cub->sqr1, orient,
-				vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(orient, -1 * cub->sqr1.side)));
-	orient = side_orient(cub->sqr1.pln.orient, x + 0, y + 0, z + 0);
-	cub->sqr4 = side(cub->sqr1, orient,
-				vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(orient, -1 * cub->sqr1.side)));
-	orient = side_orient(cub->sqr1.pln.orient, x + 0, y + 0, z + 0);
-	cub->sqr5 = side(cub->sqr1, orient,
-				vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(orient, -1 * cub->sqr1.side)));
-	orient = side_orient(cub->sqr1.pln.orient, x + 0, y + 0, z + 0);
-	cub->sqr6 = side(cub->sqr1, orient,
-				vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(orient, -1 * cub->sqr1.side)));
+	sqr.top1 = square_top1(sc, sqr);
+	sqr.top2 = square_top2(sc, sqr);
+	sqr.top3 = square_top3(sc, sqr);
+	sqr.top4 = square_top4(sc, sqr);
+	return (sqr);
 }
 
-void			cub_tops(t_cub *cub, t_xyz cam)
+static t_sqr	cub_tops2(t_sqr sqr1)
 {
-	t_sc			sc;
+	t_sqr sqr2;
+
+	sqr2 = sqr1;
+	sqr2.pln.orient = sqr1.pln.normal;
+	sqr2.pln.normal = sqr1.pln.orient;
+	sqr2.top1 = vect_addit(sqr1.top1,
+							vect_multipl(sqr1.pln.orient, sqr1.side));
+	sqr2.top2 = vect_addit(sqr1.top2,
+							vect_multipl(sqr1.pln.orient, sqr1.side));
+	sqr2.top3 = vect_addit(sqr1.top3,
+							vect_multipl(sqr1.pln.orient, sqr1.side));
+	sqr2.top4 = vect_addit(sqr1.top4,
+							vect_multipl(sqr1.pln.orient, sqr1.side));
+	sqr2.pln.xyz = sqr2.top1;
+	cub_triangle(&sqr2);
+	return (sqr2);
+}
+
+void			cub_planes(t_cub *cub)
+{
+	t_sc 		sc;
 
 	while (cub)
 	{
-		sc.sin_b = cub->sqr1.pln.orient.z;
-		sc.cos_b = sqrt(fabs(1 - pow(sc.sin_b, 2)));
-		sc.cos_a = (sc.cos_b != 0) ? cub->sqr1.pln.orient.x / sc.cos_b : 0;
-		sc.sin_a = (sc.cos_b != 0) ?
-					cub->sqr1.pln.orient.y / sc.cos_b : sc.sin_b;
-		cub->sqr1.top1 = square_top1(sc, cub->sqr1);
-		cub->sqr1.top2 = square_top2(sc, cub->sqr1);
-		cub->sqr1.top3 = square_top3(sc, cub->sqr1);
-		cub->sqr1.top4 = square_top4(sc, cub->sqr1);
-		cub->sqr1.tri1.top1 = cub->sqr1.top1;
-		cub->sqr1.tri1.top2 = cub->sqr1.top2;
-		cub->sqr1.tri1.top3 = cub->sqr1.top3;
-		cub->sqr1.tri2.top1 = cub->sqr1.top3;
-		cub->sqr1.tri2.top2 = cub->sqr1.top4;
-		cub->sqr1.tri2.top3 = cub->sqr1.top1;
+		sc = sin_cos(cub->sqr1.pln.orient);
+		cub->sqr1 = cub_tops(sc, cub->sqr1);
 		cub->sqr1.pln.normal = vect_multipl(cub->sqr1.pln.orient, -1);
-		cub->o = vect_addit(cub->sqr1.pln.xyz,
-				vect_multipl(cub->sqr1.pln.normal, cub->sqr1.side / 2));
-		cub_sides(cub, sc);
+		cub_triangle(&cub->sqr1);
+		cub->sqr2 = cub_tops2(cub->sqr1);
+		cub_plane3(cub);
+		cub_plane4(cub);
+		cub_plane5(cub);
+		cub_plane6(cub);
 		cub = cub->next;
 	}
 }

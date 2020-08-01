@@ -6,11 +6,12 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:08 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:14:46 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/07/31 05:04:57 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "bonus.h"
 
 static void		camera_loop(t_cam **camera)
 {
@@ -68,14 +69,11 @@ void			fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 		fill_tr(buf, freeline, l);
 	else if (*line == 'l' && *(line + 1) == 'd' && *(line + 2) == ' ')
 		fill_ld(buf, freeline, l);
+	else if (*line == 'c' && *(line + 1) == 'u' && *(line + 2) == ' ')
+		fill_cub(buf, freeline, l);
 	else
 		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
-
-/*
-**	else if (*line == 'c' && *(line + 1) == 'u' && *(line + 2) == ' ')
-**		fill_cub(buf, freeline, l);
-*/
 
 static void		parsing_rt(char *line, char *freeline, int l)
 {
