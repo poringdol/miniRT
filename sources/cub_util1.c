@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 03:32:09 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:44:47 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_sc		sin_cos(t_xyz orient)
 {
-	t_sc		sc;
+	t_sc	sc;
 
 	sc.sin_b = orient.z;
 	sc.cos_b = sqrt(fabs(1 - pow(sc.sin_b, 2)));
@@ -34,7 +34,7 @@ static t_sqr	cub_tops(t_sc sc, t_sqr sqr)
 
 static t_sqr	cub_tops2(t_sqr sqr1)
 {
-	t_sqr sqr2;
+	t_sqr	sqr2;
 
 	sqr2 = sqr1;
 	sqr2.pln.orient = sqr1.pln.normal;
@@ -54,7 +54,7 @@ static t_sqr	cub_tops2(t_sqr sqr1)
 
 void			cub_planes(t_cub *cub)
 {
-	t_sc 		sc;
+	t_sc	sc;
 
 	while (cub)
 	{

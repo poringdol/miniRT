@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:50 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/31 01:08:51 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:42:38 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ int		reflect_light(int color, t_near dot, t_xyz light, t_xyz cam)
 	res.blue = tmp < 255 ? tmp : 255;
 	return ((res.red << 16) | (res.green << 8) | (res.blue));
 }
-

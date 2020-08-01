@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:30 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 03:59:02 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 04:44:10 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_near			cub(t_cub *cub, t_cam cam, t_xyz cam1, t_xyz ray)
 		if (scal_product(ray, cub->sqr4.pln.normal) <= 0)
 			tmp[3] = intersect_pln(cub->sqr4.pln, cam.xyz, cam1, ray);
 		if (scal_product(ray, cub->sqr5.pln.normal) <= 0)
-			tmp[4] = intersect_pln(cub->sqr5.pln, cam.xyz, cam1, ray);	
+			tmp[4] = intersect_pln(cub->sqr5.pln, cam.xyz, cam1, ray);
 		if (scal_product(ray, cub->sqr6.pln.normal) <= 0)
 			tmp[5] = intersect_pln(cub->sqr6.pln, cam.xyz, cam1, ray);
 		nearest = check_cub(cub, nearest, tmp, cam1);
