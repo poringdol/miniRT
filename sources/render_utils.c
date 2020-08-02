@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 05:38:35 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:51:50 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	render_utils(void)
 	triangle_plane(g_scene.tri, g_scene.cam->xyz);
 	plane_normal(g_scene.pln, g_scene.cam->xyz);
 	cub_planes(g_scene.cub);
+	pyramid_planes(g_scene.pyr);
 	color_table();
 }

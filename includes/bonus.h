@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 07:22:33 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 04:15:58 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 08:30:15 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define LIGHT 1000
 # define SHINE 64
 
+int	fill_scene_bonus(double buf[BUF_S],
+							char *line, char *freeline, int l);
 int		sepia(void);
 int		directional_light(int color, t_near dot, t_lht_d *lht);
 int		shadow_direct(t_scene g_scene, t_near dot, t_xyz ray);
@@ -27,6 +29,7 @@ void	color_table(void);
 void	render_rainbow(char *save);
 t_near	cub(t_cub *cub, t_cam cam, t_xyz cam1, t_xyz ray);
 void	fill_cub(double buf[BUF_S], char *freeline, int l);
+void	fill_pyramid(double buf[BUF_S], char *freeline, int l);
 t_near	nearest_pix_bonus(t_xyz cam, t_xyz cam1, t_xyz ray, t_near nearest);
 void	cub_triangle(t_sqr *sqr);
 void	cub_planes(t_cub *cub);
@@ -34,5 +37,11 @@ void	cub_plane3(t_cub *cub);
 void	cub_plane4(t_cub *cub);
 void	cub_plane5(t_cub *cub);
 void	cub_plane6(t_cub *cub);
+t_near	pyramid(t_pyr *pyr, t_cam cam, t_xyz cam1, t_xyz ray);
+void	pyramid_planes(t_pyr *pyr);
+void	pyr_plane1(t_pyr *pyr);
+void	pyr_plane2(t_pyr *pyr);
+void	pyr_plane3(t_pyr *pyr);
+void	pyr_plane4(t_pyr *pyr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:43 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:12:17 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 03:04:59 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_near	solution_cyl1(t_cyl cyl, t_util var, t_xyz cam)
 		return (res);
 	res.flag = 1;
 	res.rgb = cyl.rgb;
-	if (var.a == 0)
+	if (var.a < 1e-08)
 	{
 		res.xyz.x = -var.c / var.b;
 		res.xyz.y = res.xyz.x * var.ay + var.by;
@@ -52,7 +52,7 @@ t_near	solution_cyl2(t_cyl cyl, t_util var, t_xyz cam)
 		return (res);
 	res.flag = 1;
 	res.rgb = cyl.rgb;
-	if (var.a == 0)
+	if (var.a < 1e-08)
 	{
 		res.xyz.x = cam.x;
 		res.xyz.y = -var.c / var.b;
@@ -83,7 +83,7 @@ t_near	solution_cyl3(t_cyl cyl, t_util var, t_xyz cam)
 	res.rgb = cyl.rgb;
 	tmp1.xyz = cam;
 	tmp2.xyz = cam;
-	if (var.a == 0)
+	if (var.a < 1e-08)
 	{
 		res.xyz = cam;
 		res.xyz.z = -var.c / var.b;

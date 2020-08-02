@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:12:02 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:44:15 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 03:18:41 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static t_near	solution1(t_subst var, t_pln pln, t_xyz ray, t_xyz cam1)
 	double	divisor;
 
 	ft_bzero(&res, sizeof(t_near));
-	if (!(divisor = pln.orient.x + pln.orient.y * var.ay +
-			pln.orient.z * var.az))
+	if ((divisor = pln.orient.x + pln.orient.y * var.ay +
+			pln.orient.z * var.az) < 1e-12)
 		return (res);
 	res.xyz.x = (pln.orient.x * pln.xyz.x + pln.orient.y * pln.xyz.y +
 			pln.orient.z * pln.xyz.z -
@@ -39,7 +39,7 @@ static t_near	solution2(t_subst var, t_pln pln, t_xyz cam)
 	double	divisor;
 
 	ft_bzero(&res, sizeof(t_near));
-	if (!(divisor = pln.orient.y + pln.orient.z * var.az))
+	if ((divisor = pln.orient.y + pln.orient.z * var.az) < 1e-12)
 		return (res);
 	res.xyz.x = cam.x;
 	res.xyz.y = -(pln.orient.x * (cam.x - pln.xyz.x) - pln.orient.y *

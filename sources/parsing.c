@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:08 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/31 05:04:57 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:52:54 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,28 @@ static double	get_fnumber(char **arr)
 
 void			fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 {
-	if (*line == 'R' && *(line + 1) == ' ')
+	if (!ft_strncmp(line, "R ", 2))
 		fill_r(buf, freeline, l);
-	else if (*line == 'A' && *(line + 1) == ' ')
+	else if (!ft_strncmp(line, "A ", 2))
 		fill_a(buf, freeline, l);
-	else if (*line == 'c' && *(line + 1) == ' ')
+	else if (!ft_strncmp(line, "c ", 2))
 		fill_c(buf, freeline, l);
-	else if (*line == 'l' && *(line + 1) == ' ')
+	else if (!ft_strncmp(line, "l ", 2))
 		fill_l(buf, freeline, l);
-	else if (*line == 'p' && *(line + 1) == 'l' && *(line + 2) == ' ')
+	else if (!ft_strncmp(line, "pl ", 3))
 		fill_pl(buf, freeline, l);
-	else if (*line == 's' && *(line + 1) == 'p' && *(line + 2) == ' ')
+	else if (!ft_strncmp(line, "sp ", 3))
 		fill_sp(buf, freeline, l);
-	else if (*line == 's' && *(line + 1) == 'q' && *(line + 2) == ' ')
+	else if (!ft_strncmp(line, "sq ", 3))
 		fill_sq(buf, freeline, l);
-	else if (*line == 'c' && *(line + 1) == 'y' && *(line + 2) == ' ')
+	else if (!ft_strncmp(line, "cy ", 3))
 		fill_cy(buf, freeline, l);
-	else if (*line == 't' && *(line + 1) == 'r' && *(line + 2) == ' ')
+	else if (!ft_strncmp(line, "tr ", 3))
 		fill_tr(buf, freeline, l);
-	else if (*line == 'l' && *(line + 1) == 'd' && *(line + 2) == ' ')
-		fill_ld(buf, freeline, l);
-	else if (*line == 'c' && *(line + 1) == 'u' && *(line + 2) == ' ')
-		fill_cub(buf, freeline, l);
-	else
+	else if ((fill_scene_bonus(buf, line, freeline, l)))
 		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
+	// else
+	// 	exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
 
 static void		parsing_rt(char *line, char *freeline, int l)
