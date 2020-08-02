@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 08:12:14 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 04:58:59 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct		s_cub
 	struct s_cub	*next;
 }					t_cub;
 
-typedef struct 		s_pyr
+typedef struct		s_pyr
 {
 	t_sqr			sqr;
 	t_xyz			top;

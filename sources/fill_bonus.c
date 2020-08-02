@@ -6,14 +6,14 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 08:31:27 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 04:56:27 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parsing.h"
 
-void	fill_ld(double buf[BUF_S], char *freeline, int l)
+void		fill_ld(double buf[BUF_S], char *freeline, int l)
 {
 	t_lht_d	*new;
 

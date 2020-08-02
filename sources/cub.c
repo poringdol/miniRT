@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:30 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 04:44:10 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 04:20:55 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_near			cub(t_cub *cub, t_cam cam, t_xyz cam1, t_xyz ray)
 	t_near	tmp[6];
 
 	ft_bzero(&nearest, sizeof(t_near));
+	ft_bzero(&tmp, sizeof(t_near) * 6);
 	while (cub)
 	{
 		if (scal_product(ray, cub->sqr1.pln.normal) <= 0)

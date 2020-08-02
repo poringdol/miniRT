@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:08 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 06:52:54 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 04:54:34 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void			fill_scene(double buf[BUF_S], char *line, char *freeline, int l)
 		fill_tr(buf, freeline, l);
 	else if ((fill_scene_bonus(buf, line, freeline, l)))
 		exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
-	// else
-	// 	exit(freemem_line(freeline) + freemem_struct(INVAL_P, l));
 }
 
 static void		parsing_rt(char *line, char *freeline, int l)

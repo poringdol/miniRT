@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 07:22:33 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 08:30:15 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 04:59:12 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define LIGHT 1000
 # define SHINE 64
 
-int	fill_scene_bonus(double buf[BUF_S],
+int		fill_scene_bonus(double buf[BUF_S],
 							char *line, char *freeline, int l);
 int		sepia(void);
 int		directional_light(int color, t_near dot, t_lht_d *lht);
