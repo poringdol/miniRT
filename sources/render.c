@@ -6,45 +6,50 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:29 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:19:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 23:49:54 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "keys.h"
 
-void		save_print(char *param)
+void		save_print(int param)
 {
-	if (param && !ft_strcmp(param, "save"))
+	if (param == SAVE)
 		image_to_bmp();
 	else
 		mlx_put_image_to_window(g_mlx.mlx, g_mlx.win, g_mlx.img, 0, 0);
 }
 
-void		render(char *save)
+void		render(int param)
 {
-	int		i;
-	int		j;
-	t_xyz	cam1;
-	t_xyz	ray;
-	t_near	nearest;
+	// int			j[4];
+	// pthread_t	tread1;
+	// pthread_t	tread2;
+	// pthread_t	tread3;
+	// pthread_t	tread4;
+
+	// g_scene.param = param;
+	// render_utils();
+	// j[0] = 0;
+	// j[1] = 1;
+	// j[2] = 2;
+	// j[3] = 3;
+	// pthread_create(&tread1, NULL, pixel_table, &j[0]);
+	// pthread_create(&tread2, NULL, pixel_table, &j[1]);
+	// pthread_create(&tread3, NULL, pixel_table, &j[2]);
+	// pthread_create(&tread4, NULL, pixel_table, &j[3]);
+	// pthread_join(tread1, NULL);
+	// pthread_join(tread2, NULL);
+	// pthread_join(tread3, NULL);
+	// pthread_join(tread4, NULL);
 
 	render_utils();
-	j = -1;
-	while (++j < g_scene.res.height)
-	{
-		i = -1;
-		while (++i < g_scene.res.width)
-		{
-			cam1 = vect_end(g_scene.canvas, g_scene.res, i, j);
-			ray = normalize(vect_cord(g_scene.cam->xyz, cam1));
-			nearest = nearest_pix(g_scene.cam->xyz, cam1, ray);
-			nearest.rgb = nearest.flag ?
-						brightness(nearest, g_scene.lht, g_scene.lht_d) :
-						BACKGROUND;
-			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
-		}
-	}
-	save_print(save);
+	int i = 0;
+	g_scene.param = param;
+	pixel_table(&i);
+
+	save_print(param);
 }
 
 void		create_canvas(t_canv *canvas, t_cam *cam, t_res res)
@@ -69,7 +74,7 @@ double		range_of_view(t_canv canvas, t_xyz cam, t_xyz cam1)
 
 void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-	int		offset;
+	int			offset;
 
 	offset = (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
 	*(unsigned int *)(mlx->pix_addr + offset) = color;

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:22:57 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 17:51:45 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ void	color_table(void)
 
 void	render_utils(void)
 {
+	static int	i;
+
 	create_canvas(&g_scene.canvas, g_scene.cam, g_scene.res);
+	if (i)
+		return ;
 	square_tops(g_scene.sqr, g_scene.cam->xyz);
 	triangle_plane(g_scene.tri, g_scene.cam->xyz);
 	plane_normal(g_scene.pln, g_scene.cam->xyz);
 	cub_planes(g_scene.cub);
 	pyramid_planes(g_scene.pyr);
 	color_table();
+	i = 1;
 }

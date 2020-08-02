@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:28 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/31 00:11:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 17:29:51 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# include <pthread.h>
 # include "mlx.h"
 # include "libft.h"
 # include "parsing.h"
@@ -33,11 +34,13 @@
 # define PI 3.14159265358
 
 void	init(void);
-void	minirt(char *param);
-void	render(char *param);
+void	minirt(int param);
+void	render(int param);
 void	render_utils(void);
+void	*pixel_table(void *arg);
+int		color(t_scene scene, t_near near, int param, int i);
 int		close_exit(void);
-void	save_print(char *param);
+void	save_print(int param);
 void	camera_loop(t_cam **camera);
 void	create_canvas(t_canv *canvas, t_cam *cam, t_res res);
 

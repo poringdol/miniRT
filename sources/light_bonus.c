@@ -6,37 +6,11 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:50 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 04:42:38 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 06:38:59 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	render_antialiasing(char *save)
-{
-	int		i;
-	int		j;
-	t_xyz	cam1;
-	t_xyz	ray;
-	t_near	nearest;
-
-	j = -1;
-	while (++j < g_scene.res.height)
-	{
-		i = -1;
-		while (++i < g_scene.res.width)
-		{
-			cam1 = vect_end(g_scene.canvas, g_scene.res, i, j);
-			ray = normalize(vect_cord(g_scene.cam->xyz, cam1));
-			nearest = nearest_pix(g_scene.cam->xyz, cam1, ray);
-			nearest.rgb = nearest.flag ?
-						brightness_bonus(nearest, g_scene.lht,
-							g_scene.lht_d, g_scene.cam->xyz) : BACKGROUND;
-			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
-		}
-	}
-	save_print(save);
-}
 
 int		brightness_bonus(t_near dot, t_lht *lht, t_lht_d *lht_d, t_xyz cam)
 {

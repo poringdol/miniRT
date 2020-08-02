@@ -6,11 +6,37 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:15 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/31 03:52:11 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 23:51:18 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	*pixel_table(void *arg)
+{
+	int		i;
+	int		j;
+	t_xyz	cam1;
+	t_xyz	ray;
+	t_near	nearest;
+
+	j = *(int *)arg;
+	while (j < g_scene.res.height)
+	{
+		i = -1;
+		while (++i < g_scene.res.width)
+		{
+			cam1 = vect_end(g_scene.canvas, g_scene.res, i, j);
+			ray = normalize(vect_cord(g_scene.cam->xyz, cam1));
+			nearest = nearest_pix(g_scene.cam->xyz, cam1, ray);
+			nearest.rgb = color(g_scene, nearest, g_scene.param, i);
+			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
+		}
+		j += 1;
+	}
+	// pthread_exit(NULL);
+	return (NULL);
+}
 
 t_near	nearest_pix(t_xyz cam, t_xyz cam1, t_xyz ray)
 {

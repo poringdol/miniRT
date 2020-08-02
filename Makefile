@@ -6,7 +6,7 @@ RED  = \033[0;31m
 GREEN = \033[0;32m
 PURPLE = \033[0;35m
 	
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -pthread
 CC = gcc
 ifeq ($(UNAME), Linux)
 	FLAGS += -lXext -lX11 -lm -g
@@ -39,6 +39,7 @@ SRC = check_input.c\
 	  init.c\
 	  render.c\
 	  render_utils.c\
+	  color.c\
 	  vector.c\
 	  vector2.c\
 	  normal.c\
@@ -58,8 +59,7 @@ SRC = check_input.c\
 	  sepia.c\
 	  fill_bonus.c\
 	  light_directional.c\
-	  render_antialising.c\
-	  render_rainbow.c\
+	  light_bonus.c\
 	  pixel_bonus.c\
 	  cub.c\
 	  cub_util1.c\
@@ -67,7 +67,10 @@ SRC = check_input.c\
 	  parsing_bonus.c\
 	  pyramid.c\
 	  pyramid_util1.c\
-	  pyramid_util2.c
+	  pyramid_util2.c\
+	  cone.c\
+	  cone_solution.c\
+	  substitution2.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:56:27 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 20:19:50 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,31 @@ void		fill_pyramid(double buf[BUF_S], char *freeline, int l)
 	g_scene.pyr->height = buf[7];
 	g_scene.pyr->sqr.pln.rgb =
 			(int)buf[8] << 16 | (int)buf[9] << 8 | (int)buf[10];
+}
+
+void	fill_cone(double buf[BUF_S], char *freeline, int l)
+{
+	t_con	*new;
+
+	if (buf[7] < 0 || buf[7] > 255 ||
+	buf[8] < 0 || buf[8] > 255 || buf[9] < 0 || buf[9] > 255)
+		exit(freemem_line(freeline) + freemem_struct(INVAL_V, l));
+	if (!(new = (t_con *)ft_calloc(sizeof(t_con), 1)))
+		exit(freemem_line(freeline) + freemem_struct(NULL, 0));
+	if (!g_scene.con)
+		g_scene.con = new;
+	else
+	{
+		new->next = g_scene.con;
+		g_scene.con = new;
+	}
+	g_scene.cyl->o.x = buf[0];
+	g_scene.cyl->o.y = buf[1];
+	g_scene.cyl->o.z = buf[2];
+	g_scene.cyl->orient.x = buf[3];
+	g_scene.cyl->orient.y = buf[4];
+	g_scene.cyl->orient.z = buf[5];
+	g_scene.cyl->orient = normalize(g_scene.cyl->orient);
+	g_scene.cyl->height = buf[6];
+	g_scene.cyl->rgb = (int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }

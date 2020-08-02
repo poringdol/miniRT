@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:58:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 21:11:34 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,15 @@ typedef struct		s_pyr
 	struct s_pyr	*next;
 }					t_pyr;
 
+typedef struct		s_con
+{
+	t_xyz			o;
+	t_xyz			orient;
+	double			height;
+	int				rgb;
+	struct s_con	*next;
+}					t_con;
+
 typedef struct		s_util
 {
 	double			ay;
@@ -154,6 +163,8 @@ typedef struct		s_util
 	double			m;
 	double			k;
 	double			l;
+	double			i;
+	double			j;
 	double			discr;
 	double			a;
 	double			b;
@@ -162,6 +173,7 @@ typedef struct		s_util
 
 typedef struct		s_scene
 {
+	int				param;
 	t_res			res;
 	t_amb			amb;
 	t_canv			canvas;
@@ -174,6 +186,7 @@ typedef struct		s_scene
 	t_tri			*tri;
 	t_cub			*cub;
 	t_pyr			*pyr;
+	t_con			*con;
 	t_lht_d			*lht_d;
 }					t_scene;
 

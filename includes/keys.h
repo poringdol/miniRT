@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:21 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 04:45:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 07:04:12 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 **	Change camera	SPACE
 **	Save			S
 **	Sepia filter	F
-**	Anti			A
+**	Anti aliasing	A
 **	Rainbow			R
+**	Ripples			G
 */
 
 #ifndef KEYS_H
@@ -49,5 +50,5 @@
 # define SEPIA 102
 # define REFLECT 97
 # define RAINBOW 114
-
+# define RIPPLES 103
 #endif

@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/02 04:58:03 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:58:04 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/02 19:54:58 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	fill_scene_bonus(double buf[BUF_S],
 		fill_cub(buf, freeline, l);
 	else if (!ft_strncmp(line, "py ", 3))
 		fill_pyramid(buf, freeline, l);
+	else if (!ft_strncmp(line, "co ", 3))
+		fill_cone(buf, freeline, l);
 	else
 		return (1);
 	return (0);
