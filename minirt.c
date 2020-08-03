@@ -4,6 +4,7 @@
 
 int		key_pressed(int keycode, t_scene *scene)
 {
+	printf("%i\n", keycode);
 	if (keycode == CAM)
 		return (change_camera(&scene));
 	else if (keycode == EXIT)

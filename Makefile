@@ -13,7 +13,7 @@ ifeq ($(UNAME), Linux)
 	MINILIBXDIR = ./minilibx_linux/
 endif
 ifeq ($(UNAME), Darwin)
-	FLAGS += -framework OpenGL -framework AppKit -lm -g
+	FLAGS = -framework OpenGL -framework AppKit -lm -g
 	MINILIBXDIR = ./minilibx_macos/
 endif
 #-O3 -fsanitize=address
@@ -86,7 +86,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
-	$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o miniRT $(FLAGS)
+	$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx $(FLAGS) -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o miniRT 
 
 -include $(DEP)
 
