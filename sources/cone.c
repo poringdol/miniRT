@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:15 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 21:18:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:43:56 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_canv	sin_cos(t_con *con)
 {
-	t_canv	canv;
+	t_canv			canv;
 
 	canv.sin_b = con->orient.z;
 	canv.cos_b = sqrt(fabs(1 - pow(canv.sin_b, 2)));
@@ -23,11 +23,11 @@ static t_canv	sin_cos(t_con *con)
 	return (canv);
 }
 
-t_near	solution_con1(t_con con, t_util var, t_xyz cam)
+t_near			solution_con1(t_con con, t_util var, t_xyz cam)
 {
-	t_near	tmp1;
-	t_near	tmp2;
-	t_near	res;
+	t_near			tmp1;
+	t_near			tmp2;
+	t_near			res;
 
 	ft_bzero(&res, sizeof(t_near));
 	if (var.discr < 0)
@@ -64,27 +64,13 @@ t_near			intersect_con(t_con *con, t_xyz cam, t_xyz ray)
 		var = substitution_con1(*con, cam, ray, canv);
 		res = solution_con1(*con, var, cam);
 	}
-	// else if (ray.y)
-	// {
-	// 	var = substitution_cyl2(*con, cam, ray, canv);
-	// 	res = solution_cyl2(*con, var, cam);
-	// }
-	// else
-	// {
-	// 	var = substitution_cyl3(*cyl, cam, canv);
-	// 	res = solution_cyl3(*cyl, var, cam);
-	// }
-	// if (res.flag && cut_cyl(*cyl, &res, ray))
-	// 	check_plane(*cyl, &res, cam, cam1);
-	// if (res.flag && !res.flag2)
-	// 	res.normal = cylinder_normal(*cyl, res.xyz);
 	return (res);
 }
 
 t_near			cone(t_con *con, t_cam cam, t_xyz cam1, t_xyz ray)
 {
-	t_near	nearest;
-	t_near	tmp;
+	t_near			nearest;
+	t_near			tmp;
 
 	ft_bzero(&nearest, sizeof(t_near));
 	ft_bzero(&tmp, sizeof(t_near));

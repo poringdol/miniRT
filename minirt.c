@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/03 17:46:10 by pdemocri          #+#    #+#             */
+/*   Updated: 2020/08/03 17:47:23 by pdemocri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include "bmp.h"
 #include "keys.h"
 
 int		key_pressed(int keycode, t_scene *scene)
 {
-	printf("%i\n", keycode);
 	if (keycode == CAM)
 		return (change_camera(&scene));
 	else if (keycode == EXIT)
@@ -42,8 +53,8 @@ void	minirt(int param)
 
 int		main(int argc, char **argv)
 {
-	int fd;
-	char *save;
+	int		fd;
+	char	*save;
 
 	save = (argc == 3) ? argv[2] : NULL;
 	check_input(argc, argv[1], save, &fd);

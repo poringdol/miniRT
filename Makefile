@@ -9,11 +9,25 @@ PURPLE = \033[0;35m
 FLAGS = -Wall -Werror -Wextra -pthread
 CC = gcc
 ifeq ($(UNAME), Linux)
-	FLAGS += -lXext -lX11 -lm -g
+	FLAGS += -lXext -lX11 -lm -g\
+	-D EXIT=65307\
+	-D CAM=32\
+	-D SAVE=115\
+	-D SEPIA=102\
+	-D REFLECT=122\
+	-D RAINBOW=114\
+	-D RIPPLES=103
 	MINILIBXDIR = ./minilibx_linux/
 endif
 ifeq ($(UNAME), Darwin)
-	FLAGS = -framework OpenGL -framework AppKit -lm -g
+	FLAGS = -framework OpenGL -framework AppKit -lm -g\
+	-D EXIT=53\
+	-D CAM=49\
+	-D SAVE=1\
+	-D SEPIA=3\
+	-D REFLECT=6\
+	-D RAINBOW=15\
+	-D RIPPLES=5
 	MINILIBXDIR = ./minilibx_macos/
 endif
 #-O3 -fsanitize=address
@@ -110,7 +124,7 @@ clean:
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
 	@$(MAKE) clean -C $(MINILIBXDIR)
-	@$(RM) $(OBJDIR) $(NAME) test
+	@$(RM) $(OBJDIR) $(NAME) miniRT
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all

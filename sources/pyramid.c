@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:30 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/03 06:04:36 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:41:00 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ static t_near	check_pyramid(t_pyr *pyr, t_near nearest,
 	if (tmp[0].flag2 && (check_triangle(pyr->sqr.tri1, tmp[0].xyz, nearest,
 		cam1) || check_triangle(pyr->sqr.tri2, tmp[0].xyz, nearest, cam1)))
 		nearest = tmp[0];
-	if (tmp[1].flag2 && (check_triangle(pyr->tri[0], tmp[1].xyz, nearest, cam1)))
+	if (tmp[1].flag2 && (check_triangle(pyr->tri[0], tmp[1].xyz,
+										nearest, cam1)))
 		nearest = tmp[1];
-	if (tmp[2].flag2 && (check_triangle(pyr->tri[1], tmp[2].xyz, nearest, cam1)))
+	if (tmp[2].flag2 && (check_triangle(pyr->tri[1],
+										tmp[2].xyz, nearest, cam1)))
 		nearest = tmp[2];
-	if (tmp[3].flag2 && (check_triangle(pyr->tri[2], tmp[3].xyz, nearest, cam1)))
+	if (tmp[3].flag2 && (check_triangle(pyr->tri[2],
+										tmp[3].xyz, nearest, cam1)))
 		nearest = tmp[3];
-	if (tmp[4].flag2 && (check_triangle(pyr->tri[3], tmp[4].xyz, nearest, cam1)))
+	if (tmp[4].flag2 && (check_triangle(pyr->tri[3],
+										tmp[4].xyz, nearest, cam1)))
 		nearest = tmp[4];
 	return (nearest);
 }

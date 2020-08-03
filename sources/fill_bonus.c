@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/03 05:55:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:41:19 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		fill_pyramid(double buf[BUF_S], char *freeline, int l)
 			(int)buf[8] << 16 | (int)buf[9] << 8 | (int)buf[10];
 }
 
-void	fill_cone(double buf[BUF_S], char *freeline, int l)
+void		fill_cone(double buf[BUF_S], char *freeline, int l)
 {
 	t_con	*new;
 

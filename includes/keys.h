@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:21 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 07:04:12 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 17:45:27 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,22 @@
 **	Change camera	SPACE
 **	Save			S
 **	Sepia filter	F
-**	Anti aliasing	A
+**	Anti aliasing	Z
 **	Rainbow			R
 **	Ripples			G
 */
 
 #ifndef KEYS_H
 # define KEYS_H
+
 /*
-**# define EXIT 53
-**# define CAM 49
-**# define SEPIA ??
+**# define EXIT 65307
+**# define CAM 32
+**# define SAVE 115
+**# define SEPIA 102
+**# define REFLECT 122
+**# define RAINBOW 114
+**# define RIPPLES 103
 */
-# define EXIT 65307
-# define CAM 32
-# define SAVE 115
-# define SEPIA 102
-# define REFLECT 97
-# define RAINBOW 114
-# define RIPPLES 103
+
 #endif
