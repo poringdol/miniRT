@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/02 07:02:59 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 07:16:33 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 20:34:59 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	color(t_scene scene, t_near near, int param, int i)
 {
-	if (!param)
+	if (!param || param == SAVE)
 		near.rgb = near.flag ? brightness(near, scene.lht, scene.lht_d) :
 							BACKGROUND;
 	else if (param == REFLECT)
