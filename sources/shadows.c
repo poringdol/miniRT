@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:35 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:12:57 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int		shadow_tri(t_tri *tri, t_xyz light, t_xyz dot, t_xyz ray)
 	{
 		intersect = intersect_pln(tri->pln, light, dot, ray);
 		if (intersect.flag2 &&
-			check_side(intersect.xyz, tri->top1, tri->top2, tri->top3) &&
-			check_side(intersect.xyz, tri->top2, tri->top3, tri->top1) &&
-			check_side(intersect.xyz, tri->top3, tri->top1, tri->top2) &&
+			check_s(intersect.xyz, tri->t1, tri->t2, tri->t3) &&
+			check_s(intersect.xyz, tri->t2, tri->t3, tri->t1) &&
+			check_s(intersect.xyz, tri->t3, tri->t1, tri->t2) &&
 			scal_product(vect_cord(intersect.xyz, dot),
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;
@@ -81,12 +81,12 @@ int		shadow_sqr(t_sqr *sqr, t_xyz light, t_xyz dot, t_xyz ray)
 	{
 		intersect = intersect_pln(sqr->pln, light, dot, ray);
 		if (intersect.flag2 &&
-			((check_side(intersect.xyz, sqr->top1, sqr->top2, sqr->top3) &&
-			check_side(intersect.xyz, sqr->top2, sqr->top3, sqr->top1) &&
-			check_side(intersect.xyz, sqr->top3, sqr->top1, sqr->top2)) ||
-			(check_side(intersect.xyz, sqr->top1, sqr->top3, sqr->top4) &&
-			check_side(intersect.xyz, sqr->top3, sqr->top4, sqr->top1) &&
-			check_side(intersect.xyz, sqr->top4, sqr->top1, sqr->top3))) &&
+			((check_s(intersect.xyz, sqr->t1, sqr->t2, sqr->t3) &&
+			check_s(intersect.xyz, sqr->t2, sqr->t3, sqr->t1) &&
+			check_s(intersect.xyz, sqr->t3, sqr->t1, sqr->t2)) ||
+			(check_s(intersect.xyz, sqr->t1, sqr->t3, sqr->t4) &&
+			check_s(intersect.xyz, sqr->t3, sqr->t4, sqr->t1) &&
+			check_s(intersect.xyz, sqr->t4, sqr->t1, sqr->t3))) &&
 			scal_product(vect_cord(intersect.xyz, dot),
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;

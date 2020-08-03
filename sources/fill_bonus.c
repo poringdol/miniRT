@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 20:19:50 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 05:55:20 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ void		fill_cub(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.cub;
 		g_scene.cub = new;
 	}
-	g_scene.cub->sqr1.pln.xyz.x = buf[0];
-	g_scene.cub->sqr1.pln.xyz.y = buf[1];
-	g_scene.cub->sqr1.pln.xyz.z = buf[2];
-	g_scene.cub->sqr1.pln.orient.x = buf[3];
-	g_scene.cub->sqr1.pln.orient.y = buf[4];
-	g_scene.cub->sqr1.pln.orient.z = buf[5];
-	g_scene.cub->sqr1.pln.orient = normalize(g_scene.cub->sqr1.pln.orient);
-	g_scene.cub->sqr1.side = buf[6];
-	g_scene.cub->sqr1.pln.rgb =
+	g_scene.cub->sqr[0].pln.xyz.x = buf[0];
+	g_scene.cub->sqr[0].pln.xyz.y = buf[1];
+	g_scene.cub->sqr[0].pln.xyz.z = buf[2];
+	g_scene.cub->sqr[0].pln.orient.x = buf[3];
+	g_scene.cub->sqr[0].pln.orient.y = buf[4];
+	g_scene.cub->sqr[0].pln.orient.z = buf[5];
+	g_scene.cub->sqr[0].pln.orient = normalize(g_scene.cub->sqr[0].pln.orient);
+	g_scene.cub->sqr[0].side = buf[6];
+	g_scene.cub->sqr[0].pln.rgb =
 			(int)buf[7] << 16 | (int)buf[8] << 8 | (int)buf[9];
 }
 

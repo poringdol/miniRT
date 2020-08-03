@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:44 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 21:11:34 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ typedef struct		s_sph
 
 typedef struct		s_tri
 {
-	t_xyz			top1;
-	t_xyz			top2;
-	t_xyz			top3;
+	t_xyz			t1;
+	t_xyz			t2;
+	t_xyz			t3;
 	t_pln			pln;
 	int				rgb;
 	struct s_tri	*next;
@@ -100,10 +100,10 @@ typedef struct		s_sqr
 {
 	double			side;
 	t_pln			pln;
-	t_xyz			top1;
-	t_xyz			top2;
-	t_xyz			top3;
-	t_xyz			top4;
+	t_xyz			t1;
+	t_xyz			t2;
+	t_xyz			t3;
+	t_xyz			t4;
 	t_tri			tri1;
 	t_tri			tri2;
 	struct s_sqr	*next;
@@ -122,12 +122,7 @@ typedef struct		s_cyl
 
 typedef struct		s_cub
 {
-	t_sqr			sqr1;
-	t_sqr			sqr2;
-	t_sqr			sqr3;
-	t_sqr			sqr4;
-	t_sqr			sqr5;
-	t_sqr			sqr6;
+	t_sqr			sqr[6];
 	t_xyz			o;
 	struct s_cub	*next;
 }					t_cub;
@@ -137,10 +132,7 @@ typedef struct		s_pyr
 	t_sqr			sqr;
 	t_xyz			top;
 	double			height;
-	t_tri			tri1;
-	t_tri			tri2;
-	t_tri			tri3;
-	t_tri			tri4;
+	t_tri			tri[4];
 	struct s_pyr	*next;
 }					t_pyr;
 

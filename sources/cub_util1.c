@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/01 04:44:47 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,31 @@ static t_sc		sin_cos(t_xyz orient)
 
 static t_sqr	cub_tops(t_sc sc, t_sqr sqr)
 {
-	sqr.top1 = square_top1(sc, sqr);
-	sqr.top2 = square_top2(sc, sqr);
-	sqr.top3 = square_top3(sc, sqr);
-	sqr.top4 = square_top4(sc, sqr);
+	sqr.t1 = square_top1(sc, sqr);
+	sqr.t2 = square_top2(sc, sqr);
+	sqr.t3 = square_top3(sc, sqr);
+	sqr.t4 = square_top4(sc, sqr);
 	return (sqr);
 }
 
-static t_sqr	cub_tops2(t_sqr sqr1)
+static t_sqr	cub_tops2(t_sqr sqr0)
 {
-	t_sqr	sqr2;
+	t_sqr	sqr1;
 
-	sqr2 = sqr1;
-	sqr2.pln.orient = sqr1.pln.normal;
-	sqr2.pln.normal = sqr1.pln.orient;
-	sqr2.top1 = vect_addit(sqr1.top1,
-							vect_multipl(sqr1.pln.orient, sqr1.side));
-	sqr2.top2 = vect_addit(sqr1.top2,
-							vect_multipl(sqr1.pln.orient, sqr1.side));
-	sqr2.top3 = vect_addit(sqr1.top3,
-							vect_multipl(sqr1.pln.orient, sqr1.side));
-	sqr2.top4 = vect_addit(sqr1.top4,
-							vect_multipl(sqr1.pln.orient, sqr1.side));
-	sqr2.pln.xyz = sqr2.top1;
-	cub_triangle(&sqr2);
-	return (sqr2);
+	sqr1 = sqr0;
+	sqr1.pln.orient = sqr0.pln.normal;
+	sqr1.pln.normal = sqr0.pln.orient;
+	sqr1.t1 = vect_addit(sqr0.t1,
+							vect_multipl(sqr0.pln.orient, sqr0.side));
+	sqr1.t2 = vect_addit(sqr0.t2,
+							vect_multipl(sqr0.pln.orient, sqr0.side));
+	sqr1.t3 = vect_addit(sqr0.t3,
+							vect_multipl(sqr0.pln.orient, sqr0.side));
+	sqr1.t4 = vect_addit(sqr0.t4,
+							vect_multipl(sqr0.pln.orient, sqr0.side));
+	sqr1.pln.xyz = sqr1.t1;
+	cub_triangle(&sqr1);
+	return (sqr1);
 }
 
 void			cub_planes(t_cub *cub)
@@ -58,11 +58,11 @@ void			cub_planes(t_cub *cub)
 
 	while (cub)
 	{
-		sc = sin_cos(cub->sqr1.pln.orient);
-		cub->sqr1 = cub_tops(sc, cub->sqr1);
-		cub->sqr1.pln.normal = vect_multipl(cub->sqr1.pln.orient, -1);
-		cub_triangle(&cub->sqr1);
-		cub->sqr2 = cub_tops2(cub->sqr1);
+		sc = sin_cos(cub->sqr[0].pln.orient);
+		cub->sqr[0] = cub_tops(sc, cub->sqr[0]);
+		cub->sqr[0].pln.normal = vect_multipl(cub->sqr[0].pln.orient, -1);
+		cub_triangle(&cub->sqr[0]);
+		cub->sqr[1] = cub_tops2(cub->sqr[0]);
 		cub_plane3(cub);
 		cub_plane4(cub);
 		cub_plane5(cub);

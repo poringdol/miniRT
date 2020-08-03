@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:16 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:13:07 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	triangle_plane(t_tri *tri, t_xyz cam)
 {
 	while (tri)
 	{
-		tri->pln.orient = vect_product(vect_cord(tri->top1, tri->top2),
-									vect_cord(tri->top1, tri->top3));
-		tri->pln.normal = f_normal(tri->pln.orient, tri->top1, cam);
-		tri->pln.xyz = tri->top1;
+		tri->pln.orient = vect_product(vect_cord(tri->t1, tri->t2),
+									vect_cord(tri->t1, tri->t3));
+		tri->pln.normal = f_normal(tri->pln.orient, tri->t1, cam);
+		tri->pln.xyz = tri->t1;
 		tri->pln.rgb = tri->rgb;
 		tri = tri->next;
 	}
 }
 
-int		check_side(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3)
+int		check_s(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3)
 {
 	t_pln		pln1;
 	t_pln		pln2;
@@ -49,9 +49,9 @@ int		check_side(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3)
 
 int		check_triangle(t_tri tri, t_xyz dot, t_near near, t_xyz cam1)
 {
-	if (check_side(dot, tri.top1, tri.top2, tri.top3) &&
-		check_side(dot, tri.top2, tri.top3, tri.top1) &&
-		check_side(dot, tri.top3, tri.top1, tri.top2) &&
+	if (check_s(dot, tri.t1, tri.t2, tri.t3) &&
+		check_s(dot, tri.t2, tri.t3, tri.t1) &&
+		check_s(dot, tri.t3, tri.t1, tri.t2) &&
 		(!near.flag || vect_len(vect_cord(cam1, dot)) <
 		vect_len(vect_cord(cam1, near.xyz))))
 		return (1);

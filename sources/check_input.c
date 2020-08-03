@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:07:43 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:10:41 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 04:55:10 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ void	check_input(int argc, char *rt, char *save, int *fd)
 		exit(1);
 	}
 	if ((*fd = open(rt, O_RDONLY)) < 0)
+	{
+		perror("Exit with error");
 		exit(1);
+	}
 }

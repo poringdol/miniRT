@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:33 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 07:19:55 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:35:38 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		shadow_direct(t_scene g_scene, t_near dot, t_xyz light_ray)
 	t_xyz	dot2;
 
 	dot2 = vect_addit(dot.xyz, vect_multipl(dot.normal, 0.01));
-	light_dot = vect_addit(dot2, vect_multipl(light_ray, -500));
+	light_dot = vect_addit(dot2, vect_multipl(light_ray, -LIGHT));
 	shadow = shadow_pln(g_scene.pln, light_dot, dot2, light_ray);
 	if (!shadow)
 		shadow = shadow_sph(g_scene.sph, light_dot, dot2, light_ray);
@@ -47,5 +47,9 @@ int		shadow_direct(t_scene g_scene, t_near dot, t_xyz light_ray)
 		shadow = shadow_sqr(g_scene.sqr, light_dot, dot2, light_ray);
 	if (!shadow)
 		shadow = shadow_cyl(g_scene.cyl, light_dot, dot2, light_ray);
+	if (!shadow)
+		shadow = shadow_cub(g_scene.cub, light_dot, dot2, light_ray);
+	if (!shadow)
+		shadow = shadow_pyr(g_scene.pyr, light_dot, dot2, light_ray);
 	return (shadow ? 1 : 0);
 }

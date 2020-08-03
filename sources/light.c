@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:09:35 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 23:41:05 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:37:41 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		get_color(int color, int rgb, int light_color, double bright)
 {
 	t_rgb	res;
 	t_rgb	lht_rgb;
+	int		tmp;
 
 	res.red = rgb >> 16;
 	res.green = rgb >> 8 & 0xff;
@@ -46,15 +47,15 @@ int		get_color(int color, int rgb, int light_color, double bright)
 	lht_rgb.red = light_color >> 16;
 	lht_rgb.green = light_color >> 8 & 0xff;
 	lht_rgb.blue = light_color & 0xff;
-	res.red = (double)res.red * bright * ((double)lht_rgb.red / 255) +
+	tmp = (double)res.red * bright * ((double)lht_rgb.red / 255) +
 		(color >> 16);
-	res.red = res.red < 255 ? res.red : 255;
-	res.green = (double)res.green * bright * ((double)lht_rgb.green / 255) +
+	res.red = tmp < 255 ? tmp : 255;
+	tmp = (double)res.green * bright * ((double)lht_rgb.green / 255) +
 		(color >> 8 & 0xff);
-	res.green = res.green < 255 ? res.green : 255;
-	res.blue = (double)res.blue * bright * ((double)lht_rgb.blue / 255) +
+	res.green = tmp < 255 ? tmp : 255;
+	tmp = (double)res.blue * bright * ((double)lht_rgb.blue / 255) +
 		(color & 0xff);
-	res.blue = res.blue < 255 ? res.blue : 255;
+	res.blue = tmp < 255 ? tmp : 255;
 	return ((res.red << 16) | (res.green << 8) | (res.blue));
 }
 
@@ -75,5 +76,9 @@ int		shadow(t_scene g_scene, t_near dot, t_xyz light)
 		shadow = shadow_sqr(g_scene.sqr, light, dot2, ray);
 	if (!shadow)
 		shadow = shadow_cyl(g_scene.cyl, light, dot2, ray);
+	if (!shadow)
+		shadow = shadow_cub(g_scene.cub, light, dot2, ray);
+	if (!shadow)
+		shadow = shadow_pyr(g_scene.pyr, light, dot2, ray);
 	return (shadow ? 1 : 0);
 }

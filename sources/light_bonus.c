@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_antialising.c                               :+:      :+:    :+:   */
+/*   light_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:12:50 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 06:38:59 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 04:28:04 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int		brightness_bonus(t_near dot, t_lht *lht, t_lht_d *lht_d, t_xyz cam)
 		{
 			bright = lht->bri * cos_dot_light;
 			color = get_color(color, dot.rgb, lht->rgb, bright);
+			color = directional_light(color, dot, lht_d);
 			color = reflect_light(color, dot, light_ray, cam);
 		}
 		lht = lht->next;
 	}
-	color = directional_light(color, dot, lht_d);
 	return (color);
 }
 

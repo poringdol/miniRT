@@ -70,7 +70,8 @@ SRC = check_input.c\
 	  pyramid_util2.c\
 	  cone.c\
 	  cone_solution.c\
-	  substitution2.c
+	  substitution2.c\
+	  shadows_bonus.c
 SRCDIR = ./sources/
 
 OBJS = $(SRC:.c=.o)

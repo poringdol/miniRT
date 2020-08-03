@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:11:52 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:13:03 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ void	square_tops(t_sqr *sqr, t_xyz cam)
 		sc.cos_b = sqrt(fabs(1 - pow(sc.sin_b, 2)));
 		sc.cos_a = (sc.cos_b != 0) ? sqr->pln.orient.x / sc.cos_b : 0;
 		sc.sin_a = (sc.cos_b != 0) ? sqr->pln.orient.y / sc.cos_b : sc.sin_b;
-		sqr->top1 = square_top1(sc, *sqr);
-		sqr->top2 = square_top2(sc, *sqr);
-		sqr->top3 = square_top3(sc, *sqr);
-		sqr->top4 = square_top4(sc, *sqr);
-		sqr->tri1.top1 = sqr->top1;
-		sqr->tri1.top2 = sqr->top2;
-		sqr->tri1.top3 = sqr->top3;
-		sqr->tri2.top1 = sqr->top3;
-		sqr->tri2.top2 = sqr->top4;
-		sqr->tri2.top3 = sqr->top1;
+		sqr->t1 = square_top1(sc, *sqr);
+		sqr->t2 = square_top2(sc, *sqr);
+		sqr->t3 = square_top3(sc, *sqr);
+		sqr->t4 = square_top4(sc, *sqr);
+		sqr->tri1.t1 = sqr->t1;
+		sqr->tri1.t2 = sqr->t2;
+		sqr->tri1.t3 = sqr->t3;
+		sqr->tri2.t1 = sqr->t3;
+		sqr->tri2.t2 = sqr->t4;
+		sqr->tri2.t3 = sqr->t1;
 		sqr->pln.normal = f_normal(sqr->pln.orient, sqr->pln.xyz, cam);
 		sqr = sqr->next;
 	}

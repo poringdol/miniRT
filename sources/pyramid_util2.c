@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 06:11:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 04:58:20 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,60 @@
 
 void	pyr_plane1(t_pyr *pyr)
 {
-	pyr->tri1.pln.rgb = pyr->sqr.pln.rgb;
-	pyr->tri1.top1 = pyr->sqr.top1;
-	pyr->tri1.top2 = pyr->sqr.top2;
-	pyr->tri1.top3 = pyr->top;
-	pyr->tri1.pln.xyz = pyr->top;
-	pyr->tri1.pln.orient = vect_product(vect_cord(pyr->tri1.top1,
-													pyr->tri1.top2),
-										vect_cord(pyr->tri1.top1,
+	pyr->tri[0].pln.rgb = pyr->sqr.pln.rgb;
+	pyr->tri[0].t1 = pyr->sqr.t1;
+	pyr->tri[0].t2 = pyr->sqr.t2;
+	pyr->tri[0].t3 = pyr->top;
+	pyr->tri[0].pln.xyz = pyr->top;
+	pyr->tri[0].pln.orient = vect_product(vect_cord(pyr->tri[0].t1,
+													pyr->tri[0].t2),
+										vect_cord(pyr->tri[0].t1,
 													pyr->top));
-	pyr->tri1.pln.orient = normalize(pyr->tri1.pln.orient);
-	pyr->tri1.pln.normal = vect_multipl(pyr->tri1.pln.orient, -1);
+	pyr->tri[0].pln.orient = normalize(pyr->tri[0].pln.orient);
+	pyr->tri[0].pln.normal = vect_multipl(pyr->tri[0].pln.orient, -1);
 }
 
 void	pyr_plane2(t_pyr *pyr)
 {
-	pyr->tri2.pln.rgb = pyr->sqr.pln.rgb;
-	pyr->tri2.top1 = pyr->sqr.top2;
-	pyr->tri2.top2 = pyr->sqr.top3;
-	pyr->tri2.top3 = pyr->top;
-	pyr->tri2.pln.xyz = pyr->top;
-	pyr->tri2.pln.orient = vect_product(vect_cord(pyr->tri2.top1,
-													pyr->tri2.top2),
-										vect_cord(pyr->tri2.top1,
+	pyr->tri[1].pln.rgb = pyr->sqr.pln.rgb;
+	pyr->tri[1].t1 = pyr->sqr.t2;
+	pyr->tri[1].t2 = pyr->sqr.t3;
+	pyr->tri[1].t3 = pyr->top;
+	pyr->tri[1].pln.xyz = pyr->top;
+	pyr->tri[1].pln.orient = vect_product(vect_cord(pyr->tri[1].t1,
+													pyr->tri[1].t2),
+										vect_cord(pyr->tri[1].t1,
 													pyr->top));
-	pyr->tri2.pln.orient = normalize(pyr->tri2.pln.orient);
-	pyr->tri2.pln.normal = vect_multipl(pyr->tri2.pln.orient, -1);
+	pyr->tri[1].pln.orient = normalize(pyr->tri[1].pln.orient);
+	pyr->tri[1].pln.normal = vect_multipl(pyr->tri[1].pln.orient, -1);
 }
 
 void	pyr_plane3(t_pyr *pyr)
 {
-	pyr->tri3.pln.rgb = pyr->sqr.pln.rgb;
-	pyr->tri3.top1 = pyr->sqr.top3;
-	pyr->tri3.top2 = pyr->sqr.top4;
-	pyr->tri3.top3 = pyr->top;
-	pyr->tri3.pln.xyz = pyr->top;
-	pyr->tri3.pln.orient = vect_product(vect_cord(pyr->tri3.top1,
-													pyr->tri3.top2),
-										vect_cord(pyr->tri3.top1,
+	pyr->tri[2].pln.rgb = pyr->sqr.pln.rgb;
+	pyr->tri[2].t1 = pyr->sqr.t3;
+	pyr->tri[2].t2 = pyr->sqr.t4;
+	pyr->tri[2].t3 = pyr->top;
+	pyr->tri[2].pln.xyz = pyr->top;
+	pyr->tri[2].pln.orient = vect_product(vect_cord(pyr->tri[2].t1,
+													pyr->tri[2].t2),
+										vect_cord(pyr->tri[2].t1,
 													pyr->top));
-	pyr->tri3.pln.orient = normalize(pyr->tri3.pln.orient);
-	pyr->tri3.pln.normal = vect_multipl(pyr->tri3.pln.orient, -1);
+	pyr->tri[2].pln.orient = normalize(pyr->tri[2].pln.orient);
+	pyr->tri[2].pln.normal = vect_multipl(pyr->tri[2].pln.orient, -1);
 }
 
 void	pyr_plane4(t_pyr *pyr)
 {
-	pyr->tri4.pln.rgb = pyr->sqr.pln.rgb;
-	pyr->tri4.top1 = pyr->sqr.top4;
-	pyr->tri4.top2 = pyr->sqr.top1;
-	pyr->tri4.top3 = pyr->top;
-	pyr->tri4.pln.xyz = pyr->top;
-	pyr->tri4.pln.orient = vect_product(vect_cord(pyr->tri4.top1,
-													pyr->tri4.top2),
-										vect_cord(pyr->tri4.top1,
+	pyr->tri[3].pln.rgb = pyr->sqr.pln.rgb;
+	pyr->tri[3].t1 = pyr->sqr.t4;
+	pyr->tri[3].t2 = pyr->sqr.t1;
+	pyr->tri[3].t3 = pyr->top;
+	pyr->tri[3].pln.xyz = pyr->top;
+	pyr->tri[3].pln.orient = vect_product(vect_cord(pyr->tri[3].t1,
+													pyr->tri[3].t2),
+										vect_cord(pyr->tri[3].t1,
 													pyr->top));
-	pyr->tri4.pln.orient = normalize(pyr->tri4.pln.orient);
-	pyr->tri4.pln.normal = vect_multipl(pyr->tri4.pln.orient, -1);
+	pyr->tri[3].pln.orient = normalize(pyr->tri[3].pln.orient);
+	pyr->tri[3].pln.normal = vect_multipl(pyr->tri[3].pln.orient, -1);
 }

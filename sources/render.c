@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:10:29 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 23:49:54 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 05:15:24 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,35 @@ void		save_print(int param)
 
 void		render(int param)
 {
-	// int			j[4];
-	// pthread_t	tread1;
-	// pthread_t	tread2;
-	// pthread_t	tread3;
-	// pthread_t	tread4;
+	int			j[4];
+	pthread_t	tread1;
+	pthread_t	tread2;
+	pthread_t	tread3;
+	pthread_t	tread4;
 
-	// g_scene.param = param;
-	// render_utils();
-	// j[0] = 0;
-	// j[1] = 1;
-	// j[2] = 2;
-	// j[3] = 3;
-	// pthread_create(&tread1, NULL, pixel_table, &j[0]);
-	// pthread_create(&tread2, NULL, pixel_table, &j[1]);
-	// pthread_create(&tread3, NULL, pixel_table, &j[2]);
-	// pthread_create(&tread4, NULL, pixel_table, &j[3]);
-	// pthread_join(tread1, NULL);
-	// pthread_join(tread2, NULL);
-	// pthread_join(tread3, NULL);
-	// pthread_join(tread4, NULL);
-
-	render_utils();
-	int i = 0;
 	g_scene.param = param;
-	pixel_table(&i);
-
+	render_utils();
+	j[0] = 0;
+	j[1] = 1;
+	j[2] = 2;
+	j[3] = 3;
+	pthread_create(&tread1, NULL, pixel_table, &j[0]);
+	pthread_create(&tread2, NULL, pixel_table, &j[1]);
+	pthread_create(&tread3, NULL, pixel_table, &j[2]);
+	pthread_create(&tread4, NULL, pixel_table, &j[3]);
+	pthread_join(tread1, NULL);
+	pthread_join(tread2, NULL);
+	pthread_join(tread3, NULL);
+	pthread_join(tread4, NULL);
 	save_print(param);
 }
+
+/*
+**	render_utils();
+**	int i = 0;
+**	g_scene.param = param;
+**	pixel_table(&i);
+*/
 
 void		create_canvas(t_canv *canvas, t_cam *cam, t_res res)
 {

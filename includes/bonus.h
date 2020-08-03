@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 07:22:33 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 21:19:07 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:35:08 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ void	cub_plane3(t_cub *cub);
 void	cub_plane4(t_cub *cub);
 void	cub_plane5(t_cub *cub);
 void	cub_plane6(t_cub *cub);
+int		shadow_cub(t_cub *c, t_xyz light, t_xyz dot, t_xyz ray);
 t_near	pyramid(t_pyr *pyr, t_cam cam, t_xyz cam1, t_xyz ray);
 void	pyramid_planes(t_pyr *pyr);
 void	pyr_plane1(t_pyr *pyr);
 void	pyr_plane2(t_pyr *pyr);
 void	pyr_plane3(t_pyr *pyr);
 void	pyr_plane4(t_pyr *pyr);
+int		shadow_pyr(t_pyr *pyr, t_xyz light, t_xyz dot, t_xyz ray);
 t_near	cone(t_con *con, t_cam cam, t_xyz cam1, t_xyz ray);
 t_util	substitution_con1(t_con con, t_xyz cam, t_xyz ray, t_canv canv);
 #endif

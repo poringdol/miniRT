@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:08:54 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/07/30 06:12:21 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:19:33 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,14 @@ void	fill_tr(double buf[BUF_S], char *freeline, int l)
 		new->next = g_scene.tri;
 		g_scene.tri = new;
 	}
-	g_scene.tri->top1.x = buf[0];
-	g_scene.tri->top1.y = buf[1];
-	g_scene.tri->top1.z = buf[2];
-	g_scene.tri->top2.x = buf[3];
-	g_scene.tri->top2.y = buf[4];
-	g_scene.tri->top2.z = buf[5];
-	g_scene.tri->top3.x = buf[6];
-	g_scene.tri->top3.y = buf[7];
-	g_scene.tri->top3.z = buf[8];
+	g_scene.tri->t1.x = buf[0];
+	g_scene.tri->t1.y = buf[1];
+	g_scene.tri->t1.z = buf[2];
+	g_scene.tri->t2.x = buf[3];
+	g_scene.tri->t2.y = buf[4];
+	g_scene.tri->t2.z = buf[5];
+	g_scene.tri->t3.x = buf[6];
+	g_scene.tri->t3.y = buf[7];
+	g_scene.tri->t3.z = buf[8];
 	g_scene.tri->rgb = (int)buf[9] << 16 | (int)buf[10] << 8 | (int)buf[11];
 }

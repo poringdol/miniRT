@@ -6,7 +6,7 @@
 /*   By: pdemocri <sashe@bk.ru>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 06:13:28 by pdemocri          #+#    #+#             */
-/*   Updated: 2020/08/02 17:29:51 by pdemocri         ###   ########.fr       */
+/*   Updated: 2020/08/03 06:14:09 by pdemocri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_subst	substitution_sph2(t_xyz sph, t_xyz cam, t_xyz ray, double radius);
 t_near	triangle(t_tri *tri, t_xyz cam, t_xyz cam1, t_xyz ray);
 void	triangle_plane(t_tri *tri, t_xyz cam);
 int		check_triangle(t_tri tri, t_xyz dot, t_near near, t_xyz cam1);
-int		check_side(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3);
+int		check_s(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3);
 
 t_near	square(t_sqr *sqr, t_cam cam, t_xyz cam1, t_xyz ray);
 void	square_tops(t_sqr *sqr, t_xyz cam);
