@@ -1,0 +1,10 @@
+nat.rt
+libminirt.a
+miniRT
+minilibx_linux/*.o
+minilibx_linux/*.a
+minilibx_macos/*.o
+minilibx_macos/*.a
+objects/
+libft/objects/
+libft/libft.a

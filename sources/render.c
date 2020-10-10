@@ -47,10 +47,13 @@ void		render(int param)
 }
 
 /*
+**	{
 **	render_utils();
 **	int i = 0;
 **	g_scene.param = param;
 **	pixel_table(&i);
+**	save_print(param);
+**	}
 */
 
 void		create_canvas(t_canv *canvas, t_cam *cam, t_res res)
