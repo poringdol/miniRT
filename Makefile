@@ -100,7 +100,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@cp $(LIBFTDIR)$(LIBFT) $(NAME)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
-	$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx $(FLAGS) -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o miniRT 
+	@$(CC) minirt.c -L. -lminirt -L$(MINILIBXDIR) -lmlx $(FLAGS) -I$(MINILIBXDIR) -I$(LIBFTHEADERDIR) -I$(HEADERDIR) -o miniRT 
 
 -include $(DEP)
 
@@ -124,9 +124,9 @@ clean:
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
 	@$(MAKE) clean -C $(MINILIBXDIR)
-	@$(RM) $(OBJDIR) $(NAME) miniRT
+	@$(RM) $(OBJDIR) $(NAME) miniRT screenshot.bmp
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re test
+.PHONY: all bonus clean fclean re
