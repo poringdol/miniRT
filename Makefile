@@ -6,7 +6,8 @@ RED  = \033[0;31m
 GREEN = \033[0;32m
 PURPLE = \033[0;35m
 	
-FLAGS = -Wall -Werror -Wextra -pthread
+# FLAGS = -Wall -Werror -Wextra -pthread
+FLAGS = -pthread
 CC = gcc
 ifeq ($(UNAME), Linux)
 	FLAGS += -lXext -lX11 -lm -g\
