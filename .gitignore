@@ -8,3 +8,4 @@ minilibx_macos/*.a
 objects/
 libft/objects/
 libft/libft.a
+/.vscode

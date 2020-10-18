@@ -25,6 +25,23 @@ void	triangle_plane(t_tri *tri, t_xyz cam)
 	}
 }
 
+int		is_inside_triangle(t_tri tri, t_xyz dot)
+{
+	t_xyz	a;
+	t_xyz	b;
+	t_xyz	c;
+
+	a = vect_cord(tri.t2, tri.t1);
+	b = vect_cord(tri.t3, tri.t2);
+	c = vect_cord(tri.t1, tri.t3);
+	if (scal_product(vect_product(a, vect_cord(dot, tri.t1)),
+					vect_product(b, vect_cord(dot, tri.t2))) > 0 &&
+		scal_product(vect_product(b, vect_cord(dot, tri.t2)),
+					vect_product(c, vect_cord(dot, tri.t3))) > 0)
+		return (1);
+	return (0);
+}
+
 int		check_s(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3)
 {
 	t_pln		pln1;
@@ -49,11 +66,9 @@ int		check_s(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3)
 
 int		check_triangle(t_tri tri, t_xyz dot, t_near near, t_xyz cam1)
 {
-	if (check_s(dot, tri.t1, tri.t2, tri.t3) &&
-		check_s(dot, tri.t2, tri.t3, tri.t1) &&
-		check_s(dot, tri.t3, tri.t1, tri.t2) &&
+	if (is_inside_triangle(tri, dot) &&
 		(!near.flag || vect_len(vect_cord(cam1, dot)) <
-		vect_len(vect_cord(cam1, near.xyz))))
+			vect_len(vect_cord(cam1, near.xyz))))
 		return (1);
 	return (0);
 }

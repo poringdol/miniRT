@@ -60,9 +60,7 @@ int		shadow_tri(t_tri *tri, t_xyz light, t_xyz dot, t_xyz ray)
 	{
 		intersect = intersect_pln(tri->pln, light, dot, ray);
 		if (intersect.flag2 &&
-			check_s(intersect.xyz, tri->t1, tri->t2, tri->t3) &&
-			check_s(intersect.xyz, tri->t2, tri->t3, tri->t1) &&
-			check_s(intersect.xyz, tri->t3, tri->t1, tri->t2) &&
+			is_inside_triangle(*tri, intersect.xyz) &&
 			scal_product(vect_cord(intersect.xyz, dot),
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;
@@ -81,12 +79,7 @@ int		shadow_sqr(t_sqr *sqr, t_xyz light, t_xyz dot, t_xyz ray)
 	{
 		intersect = intersect_pln(sqr->pln, light, dot, ray);
 		if (intersect.flag2 &&
-			((check_s(intersect.xyz, sqr->t1, sqr->t2, sqr->t3) &&
-			check_s(intersect.xyz, sqr->t2, sqr->t3, sqr->t1) &&
-			check_s(intersect.xyz, sqr->t3, sqr->t1, sqr->t2)) ||
-			(check_s(intersect.xyz, sqr->t1, sqr->t3, sqr->t4) &&
-			check_s(intersect.xyz, sqr->t3, sqr->t4, sqr->t1) &&
-			check_s(intersect.xyz, sqr->t4, sqr->t1, sqr->t3))) &&
+			is_inside_square(*sqr, intersect.xyz) &&
 			scal_product(vect_cord(intersect.xyz, dot),
 						vect_cord(intersect.xyz, light)) < 0)
 			shadow++;

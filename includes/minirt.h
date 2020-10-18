@@ -72,8 +72,11 @@ t_near	triangle(t_tri *tri, t_xyz cam, t_xyz cam1, t_xyz ray);
 void	triangle_plane(t_tri *tri, t_xyz cam);
 int		check_triangle(t_tri tri, t_xyz dot, t_near near, t_xyz cam1);
 int		check_s(t_xyz dot, t_xyz xyz1, t_xyz xyz2, t_xyz xyz3);
+int		is_inside_triangle(t_tri tri, t_xyz dot);
 
 t_near	square(t_sqr *sqr, t_cam cam, t_xyz cam1, t_xyz ray);
+int		check_square(t_sqr sqr, t_xyz dot, t_near near, t_xyz cam1);
+int		is_inside_square(t_sqr sqr, t_xyz dot);
 void	square_tops(t_sqr *sqr, t_xyz cam);
 t_xyz	square_top1(t_sc sc, t_sqr sqr);
 t_xyz	square_top2(t_sc sc, t_sqr sqr);

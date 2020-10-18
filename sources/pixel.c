@@ -33,6 +33,7 @@ void	*pixel_table(void *arg)
 			my_mlx_pixel_put(&g_mlx, i, j, nearest.rgb);
 		}
 		j += 4;
+		// j++;
 	}
 	pthread_exit(NULL);
 	return (NULL);
