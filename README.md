@@ -28,8 +28,7 @@ Execute: `./miniRT scene_name.rt` for showing render image in window or `./miniR
 **R**| Rainbow
 **G**| Strange effect
 
-**How to define object in scene**
-Example
+###Scene example
 ```bash
 R 800 600
 A 0.3 255,255,255
