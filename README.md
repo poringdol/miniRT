@@ -28,7 +28,7 @@ Execute: `./miniRT scene_name.rt` for showing render image in window or `./miniR
 **R**| Rainbow
 **G**| Strange effect
 
-###Scene example
+### Scene example
 ```bash
 R 800 600
 A 0.3 255,255,255
@@ -69,26 +69,33 @@ A 0.2 255,255,255
 ```bash
 c  -50.0,0,200,0,1   70
 ```
-
  - identifier:c
  - x,y,z coordinates of the view point: 0.0,0.0,20.6
  - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
  - FOV: Horizontal field of view in degrees in range [0,180]
 
-#### Light:
+#### Light (spot):
 ```bash
 l   -40.0,50.0,0.0  0.6 10,0,255
 ```
  - identifier: l
- - x,y,z coordinates of the light point: 0.0,0.0,20.6
+ - x,y,z coordinates of the light point: 40.0,50.0,0.0
  - the light brightness ratio in range [0.0,1.0]: 0.6
+ - R,G,B colors in range [0-255]: 10,0,255
+ 
+#### Light (parallel):
+```bash
+ld  1,0,0       0.5      255,255,255
+```
+ - identifier: l
+ - x,y,z coordinates of the light oriental:  1,0,0 
+ - the light brightness ratio in range [0.0,1.0]: 0.5
  - R,G,B colors in range [0-255]: 10,0,255
   
 #### Sphere:
 ```bash
 sp  0.0,0.0,20.6  12.6  10,0,255
 ```
-
  - identifier: sp
  - x,y,z coordinates of the sphere center: 0.0,0.0,20.6
  - the sphere diameter: 12.6
@@ -107,7 +114,6 @@ pl  0.0,0.0,-10.0  0.0,1.0,0.0  0,0,225
 ```bash
 sq  0.0,0.0,20.6   1.0,0.0,0.0  12.6  255,0,255
 ```
-
  - identifier: sq
  - x,y,z coordinates of the square center: 0.0,0.0,20.6
  - 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 1.0,0.0,0.0
@@ -116,7 +122,6 @@ sq  0.0,0.0,20.6   1.0,0.0,0.0  12.6  255,0,255
  
 #### Cylinder:
 ```bash
-
 cy  50.0,0.0,20.6   0.0,0.0,1.0  10,0,255   14.2 21.42
 ```
  - identifier: cy
