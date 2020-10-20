@@ -125,7 +125,7 @@ clean:
 fclean:
 	@$(MAKE) fclean -C $(LIBFTDIR)
 	@$(MAKE) clean -C $(MINILIBXDIR)
-	@$(RM) $(OBJDIR) $(NAME) miniRT screenshot.bmp
+	@$(RM) $(OBJDIR) $(NAME) miniRT
 	@echo "$(RED)  Library $(NAME) deleted  $(B&W)"
 
 re: fclean all
