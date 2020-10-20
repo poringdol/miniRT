@@ -10,7 +10,7 @@
 
 Download and compile (project works with Linux and MacOS)
 ``` bash
-git clone https://github.com/poringdol/miniRT.git && make
+git clone https://github.com/poringdol/miniRT.git && cd miniRT && make
 ``` 
 Execute: `./miniRT scene_name.rt` for showing render image in window or `./miniRT scene_name.rt --save` for save it to bmp.
 
