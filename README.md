@@ -3,8 +3,8 @@
 > A small ray tracing render in C
 
 ![picture alt](screenshot.bmp "42")
-
---- 
+> Example - scenes/42.rt
+---
 
 ## INSTRUCTIONS
 
@@ -163,3 +163,4 @@ py -4.5,2,9   0,-1,0     3          2           255,99,71
  - R,G,B colors in range [0-255]: 255,99,71
 
  ![picture alt](screenshot1.bmp "42")
+> Example - scenes/all_figures.rt
