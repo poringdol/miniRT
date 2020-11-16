@@ -143,7 +143,7 @@ tr 10.0,20.0,10.0 10.0,10.0,20.0  20.0,10.0,10.0  0,0,255
 
 #### Cub:
 ```bash
-сг 2,-2,6     1,0,1   3.2  	 155,99,71
+сu 2,-2,6     1,0,1   3.2  	 155,99,71
 ```
  - identifier: cu
  - x,y,z coordinates of the center of the base of the cylinder: 2,-2,6
