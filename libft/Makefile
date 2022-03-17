@@ -115,6 +115,8 @@ HEADER = ./includes/
 
 all: $(NAME)
 
+# sudo apt-get install libbsd-dev
+
 $(NAME): $(OBJ) $(OBJ_B)
 	@$(AR) $(NAME) $(OBJ) $(OBJ_B)
 	@echo "$(PURPLE)  Library $(NAME) created  $(B&W)"
